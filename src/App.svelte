@@ -29,7 +29,7 @@
   }, 10000); // 10 seconds
   $: currentEzTime = formatUtc(date);
   onMount(() => {
-    document.getElementById("level").value = $level; // this is fucked up but it works
+    document.getElementById("level").value = $level || 0; // this is fucked up but it works
   });
 
   function newForecasts() {

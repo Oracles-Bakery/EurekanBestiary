@@ -113,7 +113,7 @@ export default [
   },
   {
     level: 40,
-    name: "Mega",
+    name: "Mega-gris",
     type: 1,
     elem: "Earth",
     conditions: { day: [], night: [5] },
