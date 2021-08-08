@@ -88,7 +88,7 @@ function hash(seed = getSeed()) {
   return step2 % 100;
 }
 
-function hashSeq(seed = getSeed(), count = 10) {
+function hashSeq(seed = getSeed(), count = 5) {
   const hashes = [];
   for (let i = 0; i < count; ++i) {
     hashes.push(hash(seed + i));
