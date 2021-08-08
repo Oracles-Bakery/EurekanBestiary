@@ -1,16 +1,11 @@
 <script>
   import { level, paWeather, aWeather, hWeather, pyWeather } from "./stores";
   import ew from "./ew";
-  import { onMount } from "svelte";
   import { formatUtc } from "./times";
   import { getMatches } from "./bestiary";
   import day from "dayjs";
   import relativeTime from "dayjs/plugin/relativeTime";
   day.extend(relativeTime);
-
-  onMount(async () => {
-    updateWeatherStores();
-  });
 
   let date = new Date().getTime() * (1440 / 70);
   let matches,
@@ -59,21 +54,24 @@
   }
 
   function newMatches() {
-    let forecast;
-    if ($level >= 20 && $level < 35) {
-      forecast = pagosForecast;
-    } else if ($level >= 35 && $level < 50) {
-      forecast = pyrosForecast;
-    } else if ($level >= 50) {
-      forecast = hydatosForecast;
-    } else {
-      forecast = anemosForecast;
-    }
+    let forecast = getZoneForecast();
     matches = getMatches(forecast, $level).sort((a, b) => a.level < b.level);
 
     upMatches = matches.filter((m) => m.uptime.isUp);
     normalMatches = matches.filter((m) => !m.special);
     otherMatches = matches.filter((m) => m.special && !m.uptime.isUp);
+  }
+
+  function getZoneForecast() {
+    if ($level >= 20 && $level < 35) {
+      return pagosForecast;
+    } else if ($level >= 35 && $level < 50) {
+      return pyrosForecast;
+    } else if ($level >= 50) {
+      return hydatosForecast;
+    } else {
+      return anemosForecast;
+    }
   }
 
   function getWeatherChangeTime() {
@@ -98,9 +96,23 @@
     });
 
     if (i) {
-      return `in ${day(pagosForecast[i + 1].date).fromNow()}`;
+      return `in ${day(getZoneForecast()[i + 1].date).fromNow()}`;
     }
     return "in the far future";
+  }
+
+  function formatUptimeUntil(futures) {
+    let i;
+    futures.find((f, idx) => {
+      if (!f) i = idx;
+      return !f;
+    });
+
+    if (i) {
+      return `until ${day(getZoneForecast()[i + 1].date).fromNow()}`;
+    }
+
+    return "for a long time";
   }
 
   function levelChanged(evt) {
@@ -134,9 +146,8 @@
         {#each upMatches as m (m.name + m.level)}
           <li>
             <em>(Lv{formatLevel(m)})</em> <strong>{m.name}</strong>
-            ({#if m.mutating}mutates{/if}{#if m.augmenting}augments{/if} in {formatWeathers(
-              m.uptime.weathers
-            )})
+            ({#if m.mutating}mutates{/if}{#if m.augmenting}augments{/if}
+            {formatUptimeUntil(m.uptime.futureUptime)})
           </li>
         {/each}
       </ul>
