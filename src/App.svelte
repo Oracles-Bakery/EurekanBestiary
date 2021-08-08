@@ -5,6 +5,7 @@
   import { getMatches } from "./bestiary";
   import day from "dayjs";
   import relativeTime from "dayjs/plugin/relativeTime";
+  import { isNumber } from "util";
   day.extend(relativeTime);
 
   let date = new Date().getTime() * (1440 / 70);
@@ -95,7 +96,7 @@
       return f;
     });
 
-    if (i) {
+    if (typeof i === "number") {
       return `in ${day(getZoneForecast()[i + 1].date).fromNow()}`;
     }
     return "in the far future";
@@ -108,7 +109,7 @@
       return !f;
     });
 
-    if (i) {
+    if (typeof i === "number") {
       return `for another ${day(getZoneForecast()[i + 1].date).fromNow(true)}`;
     }
 
