@@ -1,0 +1,653 @@
+[
+  {
+    "level": 1,
+    "name": "Val Revenant",
+    "type": 0,
+    "elem": "Heartbreak Holt",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 1,
+    "name": "Ignis Fatuus",
+    "type": 0,
+    "elem": "Heartbreak Holt",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 1,
+    "name": "Anemossling",
+    "type": 0,
+    "elem": "Heartbreak Holt",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 1,
+    "name": "Squib",
+    "type": 0,
+    "elem": "Squib Sands",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 2,
+    "name": "Wooly Woodchuck",
+    "type": 0,
+    "elem": "Heartbreak Holt",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 2,
+    "name": "Eurekan Screamer",
+    "type": 0,
+    "elem": "Heartbreak Holt",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 2,
+    "name": "Sea Pugil",
+    "type": 0,
+    "elem": "Squib Sands",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 3,
+    "name": "Heartbroken Ochu",
+    "type": 0,
+    "elem": "Heartbreak Holt",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 3,
+    "name": "Bezoar",
+    "type": 0,
+    "elem": "Heartbreak Holt",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 3,
+    "name": "Lentic",
+    "type": 0,
+    "elem": "Squib Sands",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 3,
+    "name": "Seaboard Angler",
+    "type": 0,
+    "elem": "Squib Sands",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 4,
+    "name": "Valbol",
+    "type": 0,
+    "elem": "Heartbreak Holt",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 4,
+    "name": "Skeleton Noble",
+    "type": 0,
+    "elem": "Night",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 4,
+    "name": "Vesper Bat",
+    "type": 0,
+    "elem": "Squib Sands",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 4,
+    "name": "Seaboard Ogrebon",
+    "type": 0,
+    "elem": "Squib Sands",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 5,
+    "name": "Val Imp",
+    "type": 0,
+    "elem": "Heartbreak Holt",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 5,
+    "name": "Xurble",
+    "type": 0,
+    "elem": "Heartbreak Holt",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 5,
+    "name": "Scape Leech",
+    "type": 0,
+    "elem": "Squib Sands",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 6,
+    "name": "Red Bonnet",
+    "type": 0,
+    "elem": "Heartbreak Holt",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 6,
+    "name": "Mana Bomb",
+    "type": 0,
+    "elem": "Heartbreak Holt",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 6,
+    "name": "Flowering Sabotender (NM)",
+    "type": 0,
+    "elem": "Heartbreak Holt",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 6,
+    "name": "Glade Wivre",
+    "type": 0,
+    "elem": "Squib Sands",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 7,
+    "name": "Migratory Chapuli",
+    "type": 0,
+    "elem": "Heartbreak Holt",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 7,
+    "name": "Irregular Plasmoid",
+    "type": 0,
+    "elem": "The Scape",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 7,
+    "name": "Sea Bishop (NM)",
+    "type": 0,
+    "elem": "The Scape",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 8,
+    "name": "Anemos Flan",
+    "type": 0,
+    "elem": "Heartbreak Holt",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 8,
+    "name": "Hybrid Hog",
+    "type": 0,
+    "elem": "Heartbreak Holt",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 8,
+    "name": "Anemos Harpeia (NM)",
+    "type": 0,
+    "elem": "The Orchard",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 8,
+    "name": "Duskfall Bhoot",
+    "type": 0,
+    "elem": "The Scape/Night",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 9,
+    "name": "Crystal Wolf",
+    "type": 0,
+    "elem": "Heartbreak Holt",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 9,
+    "name": "Black Wolf",
+    "type": 0,
+    "elem": "Heartbreak Holt",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 9,
+    "name": "Mana Grenade",
+    "type": 0,
+    "elem": "Squib Sands",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 9,
+    "name": "Val Biast",
+    "type": 0,
+    "elem": "The Orchard",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 9,
+    "name": "Darner (NM)",
+    "type": 0,
+    "elem": "The Orchard",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 10,
+    "name": "Death Jacket",
+    "type": 0,
+    "elem": "The Orchard",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 10,
+    "name": "Wild Baboulas",
+    "type": 0,
+    "elem": "The Orchard",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 10,
+    "name": "Val Bear (NM)",
+    "type": 0,
+    "elem": "The Orchard",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 10,
+    "name": "Duskfall Skeleton",
+    "type": 0,
+    "elem": "The Orchard",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 11,
+    "name": "Anemos Chaser",
+    "type": 0,
+    "elem": "The Orchard",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 11,
+    "name": "Leopard",
+    "type": 0,
+    "elem": "The Orchard",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 11,
+    "name": "Pneumaflayer (NM)",
+    "type": 0,
+    "elem": "The Orchard",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 12,
+    "name": "Val Leshy",
+    "type": 0,
+    "elem": "The Orchard",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 12,
+    "name": "Bigfoot",
+    "type": 0,
+    "elem": "The Orchard",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 13,
+    "name": "Abraxas (NM)",
+    "type": 0,
+    "elem": "Klauser's Peace",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 13,
+    "name": "Ferromantoise",
+    "type": 0,
+    "elem": "The Orchard",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 13,
+    "name": "Death Mask",
+    "type": 0,
+    "elem": "The Scape/Night",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 13,
+    "name": "Phobosuchus",
+    "type": 0,
+    "elem": "The Scape",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 14,
+    "name": "Stalker Ziz (NM)",
+    "type": 0,
+    "elem": "Klauser's Peace",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 14,
+    "name": "Duskfall Mummy",
+    "type": 0,
+    "elem": "Night",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 14,
+    "name": "Spangencrab",
+    "type": 0,
+    "elem": "Val River Swale",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 14,
+    "name": "Old Goobbue",
+    "type": 0,
+    "elem": "Val River Swale",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 15,
+    "name": "Gardenkeeper",
+    "type": 0,
+    "elem": "Klauser's Peace",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 15,
+    "name": "Quickwater Snake",
+    "type": 0,
+    "elem": "Klauser's Peace",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 15,
+    "name": "Travelling Gourmand (NM)",
+    "type": 0,
+    "elem": "Night",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 15,
+    "name": "Defroster",
+    "type": 0,
+    "elem": "Val River Swale",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 16,
+    "name": "Glacier Golem",
+    "type": 0,
+    "elem": "The Margie",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 16,
+    "name": "Vespid",
+    "type": 0,
+    "elem": "Val River Swale",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 16,
+    "name": "Khor Claw (NM)",
+    "type": 0,
+    "elem": "Val River Swale",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 17,
+    "name": "Henbane (NM)",
+    "type": 0,
+    "elem": "The Margie",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 17,
+    "name": "Lynx",
+    "type": 0,
+    "elem": "Val River Swale",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 17,
+    "name": "Anemos Sanuwa",
+    "type": 0,
+    "elem": "Val River Swale",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 18,
+    "name": "Val Biloko",
+    "type": 0,
+    "elem": "The Margie",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 18,
+    "name": "Val Skatene",
+    "type": 0,
+    "elem": "The Margie",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 18,
+    "name": "Anemos Gremlin",
+    "type": 0,
+    "elem": "The Margie",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 18,
+    "name": "Duskfall Dullahan (NM)",
+    "type": 0,
+    "elem": "The Margie/Night",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 19,
+    "name": "Shadow Wing",
+    "type": 0,
+    "elem": "Anemos Seam",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 19,
+    "name": "Monoeye (NM)",
+    "type": 0,
+    "elem": "Anemos Seam",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 19,
+    "name": "Plantoid",
+    "type": 0,
+    "elem": "Anemos Seam",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 19,
+    "name": "Coffinkeep",
+    "type": 0,
+    "elem": "Anemos Seam/Night",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 20,
+    "name": "Dhalmel of Nightmares",
+    "type": 0,
+    "elem": "Anemos Seam",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 20,
+    "name": "Eurekan Dahak",
+    "type": 0,
+    "elem": "Anemos Seam",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 20,
+    "name": "Old World Zu (NM)",
+    "type": 0,
+    "elem": "Anemos Seam",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 21,
+    "name": "Rockfin",
+    "type": 0,
+    "elem": "Uncanny Valley",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 21,
+    "name": "Anemos Anala (NM)",
+    "type": 0,
+    "elem": "Uncanny Valley",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 21,
+    "name": "Magia Fan",
+    "type": 0,
+    "elem": "Uncanny Valley",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 22,
+    "name": "Val Antlion",
+    "type": 0,
+    "elem": "Uncanny Valley",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 22,
+    "name": "Anemos Pegasus",
+    "type": 0,
+    "elem": "Uncanny Valley",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 22,
+    "name": "Anemos Apa",
+    "type": 0,
+    "elem": "Uncanny Valley",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 22,
+    "name": "Fossil Dragon (NM)",
+    "type": 0,
+    "elem": "Uncanny Valley/Night",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 23,
+    "name": "Mighty Craklaw",
+    "type": 0,
+    "elem": "Newvoid",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 23,
+    "name": "Voidscale (NM)",
+    "type": 0,
+    "elem": "Newvoid",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 23,
+    "name": "Guud Suud",
+    "type": 0,
+    "elem": "Newvoid",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 23,
+    "name": "Four-eyes",
+    "type": 0,
+    "elem": "Newvoid/Night",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 24,
+    "name": "Bitoso Of The Isle",
+    "type": 0,
+    "elem": "Newvoid",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 24,
+    "name": "Arioch Of The Isle",
+    "type": 0,
+    "elem": "Newvoid",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 24,
+    "name": "Val Specter (NM)",
+    "type": 0,
+    "elem": "Newvoid",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 24,
+    "name": "Zuniceratops",
+    "type": 0,
+    "elem": "Newvoid",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 25,
+    "name": "Primelephas",
+    "type": 0,
+    "elem": "Newvoid",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 25,
+    "name": "Tangie",
+    "type": 0,
+    "elem": "Newvoid",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": 25,
+    "name": "Shadow Wraith (NM)",
+    "type": 0,
+    "elem": "Newvoid/Night",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": null,
+    "name": "Typhoon Sprite",
+    "type": 0,
+    "elem": "Any",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": null,
+    "name": "Blizzard Sprite",
+    "type": 0,
+    "elem": "Any",
+    "conditions": { "day": [], "night": [] }
+  },
+  {
+    "level": null,
+    "name": "Rain Sprite",
+    "type": 0,
+    "elem": "Any",
+    "conditions": { "day": [], "night": [] }
+  }
+]
