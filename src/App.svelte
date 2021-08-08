@@ -109,7 +109,7 @@
     });
 
     if (i) {
-      return `until ${day(getZoneForecast()[i + 1].date).fromNow()}`;
+      return `for another ${day(getZoneForecast()[i + 1].date).fromNow(true)}`;
     }
 
     return "for a long time";
@@ -177,18 +177,38 @@
             {#if $level < 20}<strong>Anemos</strong>{:else}Anemos{/if}: {anemosForecast[0]
               .weatherName}
           </li>
+          {#if $level < 20}<ul>
+              {#each [1, 2, 3, 4] as i}<li>
+                  {ew.getWeatherName(getZoneForecast()[i].currWeather)}
+                </li>{/each}
+            </ul>{/if}
           <li class="pure-menu-item">
             {#if $level >= 20 && $level < 35}<strong>Pagos</strong
               >{:else}Pagos{/if}: {pagosForecast[0].weatherName}
           </li>
+          {#if $level >= 20 && $level < 35}<ul>
+              {#each [1, 2, 3, 4] as i}<li>
+                  {ew.getWeatherName(getZoneForecast()[i].currWeather)}
+                </li>{/each}
+            </ul>{/if}
           <li class="pure-menu-item">
             {#if $level >= 35 && $level < 50}<strong>Pyros</strong
               >{:else}Pyros{/if}: {pyrosForecast[0].weatherName}
           </li>
+          {#if $level >= 35 && $level < 500}<ul>
+              {#each [1, 2, 3, 4] as i}<li>
+                  {ew.getWeatherName(getZoneForecast()[i].currWeather)}
+                </li>{/each}
+            </ul>{/if}
           <li class="pure-menu-item">
             {#if $level >= 50}<strong>Hydatos</strong>{:else}Hydatos{/if}: {hydatosForecast[0]
               .weatherName}
           </li>
+          {#if $level >= 50}<ul>
+              {#each [1, 2, 3, 4] as i}<li>
+                  {ew.getWeatherName(getZoneForecast()[i].currWeather)}
+                </li>{/each}
+            </ul>{/if}
         </ul>
       </div>
       <h4>What is this?</h4>
