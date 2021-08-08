@@ -5,7 +5,6 @@
   import { getMatches } from "./bestiary";
   import day from "dayjs";
   import relativeTime from "dayjs/plugin/relativeTime";
-  import { isNumber } from "util";
   day.extend(relativeTime);
 
   let date = new Date().getTime() * (1440 / 70);
@@ -131,7 +130,7 @@
 </header>
 <main class="container">
   <div class="pure-g">
-    <div class="pure-u-3-4">
+    <div class="pure-u-1 pure-u-md-3-4">
       <h2>
         Level: <input
           :value={$level}
@@ -171,7 +170,7 @@
         {/each}
       </ul>
     </div>
-    <div class="pure-u-1-4">
+    <div class="pure-u-1 pure-u-md-1-4">
       <div class="pure-menu">
         <ul class="pure-menu-list">
           <li class="pure-menu-item">

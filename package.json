@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "prestart": "cp node_modules/purecss/build/pure-min.css public/pure.css",
+    "prestart": "cp node_modules/purecss/build/pure-min.css public/pure.css && cp node_modules/purecss/build/grids-responsive-min.css public/pure-responsive-grid.css",
     "prebuild": "npm run prestart",
     "start": "snowpack dev",
     "build": "snowpack build",
