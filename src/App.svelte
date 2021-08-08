@@ -86,7 +86,7 @@
     });
 
     if (typeof i === "number") {
-      return `in ${day(getZoneForecast()[i + 1].date).fromNow()}`;
+      return `in ${day(getZoneForecast()[i + 1].date).fromNow(true)}`;
     }
     return "in the far future";
   }
@@ -99,7 +99,7 @@
     });
 
     if (typeof i === "number") {
-      return `for another ${day(getZoneForecast()[i + 1].date).fromNow(true)}`;
+      return `for ${day(getZoneForecast()[i + 1].date).fromNow(true)}`;
     }
 
     return "for a long time";
