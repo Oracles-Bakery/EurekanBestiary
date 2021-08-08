@@ -2,7 +2,7 @@ import { writable } from "svelte/store";
 
 const localStorage = window.localStorage;
 
-export const level = localStorageStore(0);
+export const level = localStorageStore(1);
 export const aWeather = writable();
 export const paWeather = writable();
 export const pyWeather = writable();

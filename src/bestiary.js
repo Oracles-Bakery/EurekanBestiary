@@ -6,14 +6,24 @@ import day from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
 day.extend(isBetween);
 
+const bestiaries = {
+  pagos: pagosB,
+  anemos: anemosB,
+  pyros: pyrosB,
+  hydatos: hydatosB,
+};
+
 export function getMatches(forecast, level) {
-  const amalgam = hydatosB.concat(pyrosB.concat(pagosB.concat(anemosB)));
   let res = [];
-  amalgam.forEach((b) => {
-    if (b.level >= level && b.level - 2 <= level) {
+  bestiaries[forecast[0].zone].forEach((b) => {
+    if (
+      (b.level >= level && b.level - 2 <= level) ||
+      (b.levelRange && b.levelRange[0] - 2 <= level && b.levelRange[1] >= level)
+    ) {
       res.push({
         name: b.name,
         level: b.level,
+        levelRange: b.levelRange,
         elem: b.elem,
         special: b.type > 0,
         mutating: b.type === 1,

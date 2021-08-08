@@ -30,15 +30,8 @@
   setInterval(() => {
     newForecasts();
     newMatches();
-  }, 300000); // 5 minutes
+  }, 10000); // 10 seconds
   $: currentEzTime = formatUtc(date);
-
-  function updateWeatherStores() {
-    paWeather.set(ew.forecast(ew.PAGOS_WEATHER));
-    pyWeather.set(ew.forecast(ew.PYROS_WEATHER));
-    hWeather.set(ew.forecast(ew.HYDATOS_WEATHER));
-    aWeather.set(ew.forecast(ew.ANEMOS_WEATHER));
-  }
 
   function formatWeathers(weathers) {
     if (weathers.length === 1) {
@@ -55,10 +48,10 @@
   }
 
   function newForecasts() {
-    anemosForecast = ew.forecast(ew.ANEMOS_WEATHER);
-    pagosForecast = ew.forecast(ew.PAGOS_WEATHER);
-    pyrosForecast = ew.forecast(ew.PYROS_WEATHER);
-    hydatosForecast = ew.forecast(ew.HYDATOS_WEATHER);
+    anemosForecast = ew.forecast(ew.ANEMOS_WEATHER, "anemos");
+    pagosForecast = ew.forecast(ew.PAGOS_WEATHER, "pagos");
+    pyrosForecast = ew.forecast(ew.PYROS_WEATHER, "pyros");
+    hydatosForecast = ew.forecast(ew.HYDATOS_WEATHER, "hydatos");
     paWeather.set(pagosForecast);
     pyWeather.set(pyrosForecast);
     hWeather.set(hydatosForecast);
@@ -81,6 +74,15 @@
     upMatches = matches.filter((m) => m.uptime.isUp);
     normalMatches = matches.filter((m) => !m.special);
     otherMatches = matches.filter((m) => m.special && !m.uptime.isUp);
+  }
+
+  function formatLevel(m) {
+    if (m.level) {
+      return m.level;
+    } else if (m.levelRange) {
+      return `${m.levelRange[0]}-${m.levelRange[1]}`;
+    }
+    return "??";
   }
 
   function formatNextUptime(futures) {
@@ -113,7 +115,7 @@
     <div class="pure-u-3-4">
       <h2>
         Level: <input
-          bind:value={$level}
+          :value={$level}
           on:change={levelChanged}
           type="number"
           min="1"
@@ -125,7 +127,7 @@
       <ul>
         {#each upMatches as m (m.name + m.level)}
           <li>
-            <em>(Lv{m.level})</em> <strong>{m.name}</strong>
+            <em>(Lv{formatLevel(m)})</em> <strong>{m.name}</strong>
             ({#if m.mutating}mutates{/if}{#if m.augmenting}augments{/if} in {formatWeathers(
               m.uptime.weathers
             )})
@@ -136,7 +138,7 @@
       <h5>regular enemies</h5>
       <ul>
         {#each normalMatches as m (m.name + m.level)}
-          <li><em>(Lv{m.level})</em> <strong>{m.name}</strong></li>
+          <li><em>(Lv{formatLevel(m)})</em> <strong>{m.name}</strong></li>
         {/each}
       </ul>
 
@@ -144,7 +146,7 @@
       <ul>
         {#each otherMatches as m (m.name + m.level)}
           <li>
-            <em>(Lv{m.level})</em> <strong>{m.name}</strong>
+            <em>(Lv{formatLevel(m)})</em> <strong>{m.name}</strong>
             ({#if m.mutating}mutates{/if}{#if m.augmenting}augments{/if}
             {formatNextUptime(m.uptime.futureUptime)})
           </li>

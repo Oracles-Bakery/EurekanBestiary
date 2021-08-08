@@ -57,6 +57,7 @@
   },
   {
     "level": null,
+    "levelRange": [20, 23],
     "name": "Zombie Brobinyak",
     "type": 2,
     "elem": "Earth",
@@ -127,6 +128,7 @@
   },
   {
     "level": null,
+    "levelRange": [24, 27],
     "name": "Demon of the Incunable",
     "type": 2,
     "elem": "Wind",
@@ -232,6 +234,7 @@
   },
   {
     "level": null,
+    "levelRange": [28, 31],
     "name": "Geshunpest",
     "type": 2,
     "elem": "Thunder",
@@ -295,6 +298,7 @@
   },
   {
     "level": null,
+    "levelRange": [32, 35],
     "name": "Haunt",
     "type": 2,
     "elem": "Water",
@@ -337,6 +341,7 @@
   },
   {
     "level": null,
+    "levelRange": [36, 39],
     "name": "Val Corpse",
     "type": 2,
     "elem": "Ice",

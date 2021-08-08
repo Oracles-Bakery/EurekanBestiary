@@ -106,7 +106,7 @@ function getWeather(rates, hash = hashSeed()) {
   return WEATHER.FAIR;
 }
 
-function forecast(rates, seed = getSeed(), count = 10) {
+function forecast(rates, name, seed = getSeed(), count = 10) {
   const res = [];
   let prevHash = hash(seed - 1);
   let prevWeather = getWeather(rates, prevHash);
@@ -115,6 +115,7 @@ function forecast(rates, seed = getSeed(), count = 10) {
     const currHash = hash(seed);
     const currWeather = getWeather(rates, currHash);
     res.push({
+      zone: name,
       prevWeather,
       currWeather,
       weatherName: getWeatherName(currWeather),
