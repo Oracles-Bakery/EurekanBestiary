@@ -1,7 +1,7 @@
-import pagosB from "./pagos.bestiary.json";
-import anemosB from "./anemos.bestiary.json";
-import pyrosB from "./pyros.bestiary.json";
-import hydatosB from "./hydatos.bestiary.json";
+import pagosB from "./pagos.bestiary";
+import anemosB from "./anemos.bestiary";
+import pyrosB from "./pyros.bestiary";
+import hydatosB from "./hydatos.bestiary";
 import day from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
 day.extend(isBetween);

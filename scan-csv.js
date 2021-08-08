@@ -28,8 +28,8 @@ async function parse(fpath, zone) {
     })
     .on("end", () => {
       fs.writeFileSync(
-        path.resolve(__dirname, `src/${zone}.bestiary.json`),
-        JSON.stringify(res),
+        path.resolve(__dirname, `src/${zone}.bestiary.js`),
+        `export default const ${JSON.stringify(res)}`,
         { encoding: "utf8" }
       );
       console.log("Done!");

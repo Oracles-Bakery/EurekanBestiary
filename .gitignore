@@ -1,6 +1,6 @@
 .snowpack
 build
 node_modules
-public/pure*.css
+public/pure*
 csv/*
 !csv/.gitkeep
