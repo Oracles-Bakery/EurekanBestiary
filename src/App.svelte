@@ -215,7 +215,9 @@
       </p>
       <hr />
       <p>
-        Created by Raiah Belse (Twintania)<br />
+        Created by Raiah Belse (Twintania)<br /><br />
+        Message anastasie#2293 on Discord if you find any bugs or wrong/missing data!<br
+        />
         <a href="https://git.tilde.institute/anastasie/eureka-marks/">Source</a>
       </p>
     </div>
