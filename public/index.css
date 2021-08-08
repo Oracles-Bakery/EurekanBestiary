@@ -26,3 +26,10 @@ header ul li {
 .container {
   margin: 20px;
 }
+
+#level {
+  border: 0;
+  border-bottom: 1px solid black;
+  font-weight: bold;
+  color: tomato;
+}

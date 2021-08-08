@@ -5,6 +5,7 @@
   import { getMatches } from "./bestiary";
   import day from "dayjs";
   import relativeTime from "dayjs/plugin/relativeTime";
+  import { onMount } from "svelte";
   day.extend(relativeTime);
 
   let date = new Date().getTime() * (1440 / 70);
@@ -27,6 +28,9 @@
     newMatches();
   }, 10000); // 10 seconds
   $: currentEzTime = formatUtc(date);
+  onMount(() => {
+    document.getElementById("level").value = $level; // this is fucked up but it works
+  });
 
   function newForecasts() {
     anemosForecast = ew.forecast(ew.ANEMOS_WEATHER, "anemos");
@@ -119,6 +123,7 @@
     <div class="pure-u-1 pure-u-md-3-4">
       <h2>
         Level: <input
+          id="level"
           :value={$level}
           on:change={levelChanged}
           type="number"
