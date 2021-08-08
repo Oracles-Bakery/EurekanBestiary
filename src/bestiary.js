@@ -18,7 +18,6 @@ export function getMatches(forecast, level) {
       });
     }
   });
-  console.log(res);
   return res;
 }
 
