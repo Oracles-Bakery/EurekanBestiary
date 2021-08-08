@@ -46,7 +46,7 @@ function findForecastMatch(forecast, conditions) {
     isUp: forecastMatches(forecast, conditions[dn], 0),
     weathers: conditions[dn],
     futureUptime: [1, 2, 3, 4].map((i) => {
-      return forecastMatches(forecast, conditions[dn], i);
+      return futureForecastMatches(forecast, conditions, i);
     }),
   };
 }
@@ -54,4 +54,13 @@ function findForecastMatch(forecast, conditions) {
 function forecastMatches(forecast, condition, index) {
   const currWeather = forecast[index].currWeather;
   return condition.some((c) => c === currWeather);
+}
+
+function futureForecastMatches(forecast, conditions, index) {
+  const fc = forecast[index];
+  const fcTime = day((fc.date.getTime() * 1440) / 70);
+  const dn = day(fcTime).isBetween(fcTime.hour(8), fcTime.hour(18))
+    ? "day"
+    : "night";
+  return conditions[dn].some((c) => c === fc.currWeather);
 }

@@ -28,20 +28,6 @@
   }, 10000); // 10 seconds
   $: currentEzTime = formatUtc(date);
 
-  function formatWeathers(weathers) {
-    if (weathers.length === 1) {
-      return ew.getWeatherName(weathers[0]);
-    }
-    return weathers
-      .map((w, i) => {
-        if (i + 1 === weathers.length) {
-          return `and ${ew.getWeatherName(w)}`;
-        }
-        return `${ew.getWeatherName(w)}, `;
-      })
-      .join("");
-  }
-
   function newForecasts() {
     anemosForecast = ew.forecast(ew.ANEMOS_WEATHER, "anemos");
     pagosForecast = ew.forecast(ew.PAGOS_WEATHER, "pagos");
