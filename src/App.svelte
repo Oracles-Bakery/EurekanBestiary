@@ -76,6 +76,11 @@
     otherMatches = matches.filter((m) => m.special && !m.uptime.isUp);
   }
 
+  function getWeatherChangeTime() {
+    // Doesn't matter which forecast
+    return day(anemosForecast[1].date).fromNow();
+  }
+
   function formatLevel(m) {
     if (m.level) {
       return m.level;
@@ -108,6 +113,7 @@
   <ul>
     <li><strong>Eureka Mark Tracker</strong></li>
     <li>ET: {currentEzTime}</li>
+    <li>Next weather change {getWeatherChangeTime()}</li>
   </ul>
 </header>
 <main class="container">
