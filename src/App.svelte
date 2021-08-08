@@ -123,7 +123,7 @@
 
       <h5>matches</h5>
       <ul>
-        {#each upMatches as m (m.name)}
+        {#each upMatches as m (m.name + m.level)}
           <li>
             <em>(Lv{m.level})</em> <strong>{m.name}</strong>
             ({#if m.mutating}mutates{/if}{#if m.augmenting}augments{/if} in {formatWeathers(
@@ -135,14 +135,14 @@
 
       <h5>regular enemies</h5>
       <ul>
-        {#each normalMatches as m (m.name)}
+        {#each normalMatches as m (m.name + m.level)}
           <li><em>(Lv{m.level})</em> <strong>{m.name}</strong></li>
         {/each}
       </ul>
 
       <h5>special enemies that do not mutate/augment right now</h5>
       <ul>
-        {#each otherMatches as m (m.name)}
+        {#each otherMatches as m (m.name + m.level)}
           <li>
             <em>(Lv{m.level})</em> <strong>{m.name}</strong>
             ({#if m.mutating}mutates{/if}{#if m.augmenting}augments{/if}
@@ -155,12 +155,20 @@
       <div class="pure-menu">
         <ul class="pure-menu-list">
           <li class="pure-menu-item">
-            Anemos: {anemosForecast[0].weatherName}
+            {#if $level < 20}<strong>Anemos</strong>{:else}Anemos{/if}: {anemosForecast[0]
+              .weatherName}
           </li>
-          <li class="pure-menu-item">Pagos: {pagosForecast[0].weatherName}</li>
-          <li class="pure-menu-item">Pyros: {pyrosForecast[0].weatherName}</li>
           <li class="pure-menu-item">
-            Hydatos: {hydatosForecast[0].weatherName}
+            {#if $level >= 20 && $level < 35}<strong>Pagos</strong
+              >{:else}Pagos{/if}: {pagosForecast[0].weatherName}
+          </li>
+          <li class="pure-menu-item">
+            {#if $level >= 35 && $level < 50}<strong>Pyros</strong
+              >{:else}Pyros{/if}: {pyrosForecast[0].weatherName}
+          </li>
+          <li class="pure-menu-item">
+            {#if $level >= 50}<strong>Hydatos</strong>{:else}Hydatos{/if}: {hydatosForecast[0]
+              .weatherName}
           </li>
         </ul>
       </div>

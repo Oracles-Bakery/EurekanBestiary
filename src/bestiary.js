@@ -1,12 +1,16 @@
 import pagosB from "./pagos.bestiary.json";
+import anemosB from "./anemos.bestiary.json";
+import pyrosB from "./pyros.bestiary.json";
+import hydatosB from "./hydatos.bestiary.json";
 import day from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
 day.extend(isBetween);
 
 export function getMatches(forecast, level) {
+  const amalgam = hydatosB.concat(pyrosB.concat(pagosB.concat(anemosB)));
   let res = [];
-  pagosB.forEach((b) => {
-    if (b.level >= level && b.level - 2 < level) {
+  amalgam.forEach((b) => {
+    if (b.level >= level && b.level - 2 <= level) {
       res.push({
         name: b.name,
         level: b.level,
