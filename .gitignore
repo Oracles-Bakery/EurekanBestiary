@@ -6,3 +6,4 @@ csv/*
 !csv/.gitkeep
 
 .vercel
+.DS_Store
