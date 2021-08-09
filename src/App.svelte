@@ -186,7 +186,7 @@
             {#if $level >= 35 && $level < 50}<strong>Pyros</strong
               >{:else}Pyros{/if}: {pyrosForecast[0].weatherName}
           </li>
-          {#if $level >= 35 && $level < 500}<ul>
+          {#if $level >= 35 && $level < 50}<ul>
               {#each [1, 2, 3, 4] as i}<li>
                   {ew.getWeatherName(getZoneForecast()[i].currWeather)}
                 </li>{/each}
