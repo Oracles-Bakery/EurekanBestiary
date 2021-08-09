@@ -123,7 +123,7 @@ export default [
     name: "Mechanoguardian ",
     type: 2,
     elem: null,
-    conditions: { day: [0, 4, 3, 5], night: [] },
+    conditions: { day: [0, 4, 3, 5], night: [5] },
   },
   {
     level: 40,

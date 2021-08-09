@@ -15,6 +15,7 @@ The site always runs on the latest released version.
 
 - Added level ranges for enemies in Hydatos that needed them.
 - Fixed Mammet #013BL's name not being displayed correctly.
+- Various condition changes for monsters.
 
 ## [1.0.0] - 2021-08-09
 
