@@ -9,6 +9,8 @@ The site always runs on the latest released version.
 
 ## [Unreleased]
 
+## [1.0.1] - 2021-08-09
+
 ### Fixed
 
 - Added level ranges for enemies in Hydatos that needed them.
