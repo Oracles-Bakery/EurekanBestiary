@@ -25,6 +25,29 @@ export const logograms = {
   OBSCURE: 8,
 };
 
+export function getLogogramName(logogram) {
+  switch (logogram) {
+    case 0:
+      return "Conceptual";
+    case 1:
+      return "Fundamental";
+    case 2:
+      return "Offensive";
+    case 3:
+      return "Protective";
+    case 4:
+      return "Curative";
+    case 5:
+      return "Tactical";
+    case 6:
+      return "Inmical";
+    case 7:
+      return "Mitigative";
+    case 8:
+      return "Obscure";
+  }
+}
+
 export function getMatches(forecast, level) {
   let res = [];
   bestiaries[forecast[0].zone].forEach((b) => {
@@ -40,6 +63,7 @@ export function getMatches(forecast, level) {
         special: b.type > 0,
         mutating: b.type === 1,
         augmenting: b.type === 2,
+        logogram: typeof b.logogram === "number" && getLogogramName(b.logogram),
         spawning:
           !b.spawnConditions ||
           b.spawnConditions.includes(forecast[0].currWeather),

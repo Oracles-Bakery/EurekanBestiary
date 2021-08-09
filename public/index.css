@@ -38,3 +38,7 @@ header ul li {
   text-decoration: line-through;
   color: gray;
 }
+
+.highlight {
+  color: green;
+}

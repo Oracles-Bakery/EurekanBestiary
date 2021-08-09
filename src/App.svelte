@@ -3,6 +3,7 @@
   import ew from "./ew";
   import { formatUtc } from "./times";
   import { getMatches } from "./bestiary";
+  import EnemyList from "./EnemyList.svelte";
   import day from "dayjs";
   import relativeTime from "dayjs/plugin/relativeTime";
   import { onMount } from "svelte";
@@ -52,7 +53,7 @@
     otherMatches = matches.filter((m) => m.special && !m.uptime.isUp);
   }
 
-  function getZoneForecast() {
+  export function getZoneForecast() {
     if ($level >= 20 && $level < 35) {
       return pagosForecast;
     } else if ($level >= 35 && $level < 50) {
@@ -133,56 +134,13 @@
       </h2>
 
       <h5>matches</h5>
-      <ul>
-        {#each upMatches as m (m.name + m.level)}
-          <li>
-            <span class={!m.spawning && "strikethrough"}>
-              <em>(Lv{formatLevel(m)})</em> <strong>{m.name}</strong>
-              ({#if m.mutating}mutates{/if}{#if m.augmenting}augments{/if}
-              {formatUptimeUntil(m.uptime.futureUptime)})
-            </span>
-            {#if !m.spawning}
-              &nbsp;(next spawns {m.nextSpawn
-                ? day(m.nextSpawn.date).fromNow()
-                : "in a long time"}
-            {/if}
-          </li>
-        {/each}
-      </ul>
+      <EnemyList matches={upMatches} type={0} />
 
       <h5>regular enemies</h5>
-      <ul>
-        {#each normalMatches as m (m.name + m.level)}
-          <li>
-            <span class={!m.spawning && "strikethrough"}>
-              <em>(Lv{formatLevel(m)})</em> <strong>{m.name}</strong>
-            </span>
-            {#if !m.spawning}
-              &nbsp;(next spawns {m.nextSpawn
-                ? day(m.nextSpawn.date).fromNow()
-                : "in a long time"})
-            {/if}
-          </li>
-        {/each}
-      </ul>
+      <EnemyList matches={normalMatches} type={2} />
 
       <h5>special enemies that do not mutate/augment right now</h5>
-      <ul>
-        {#each otherMatches as m (m.name + m.level)}
-          <li>
-            <span class={!m.spawning && "strikethrough"}>
-              <em>(Lv{formatLevel(m)})</em> <strong>{m.name}</strong>
-              ({#if m.mutating}mutates{/if}{#if m.augmenting}augments{/if}
-              {formatNextUptime(m.uptime.futureUptime)})
-            </span>
-            {#if !m.spawning}
-              &nbsp;(next spawns {m.nextSpawn
-                ? day(m.nextSpawn.date).fromNow()
-                : "in a long time"})
-            {/if}
-          </li>
-        {/each}
-      </ul>
+      <EnemyList matches={otherMatches} type={1} />
     </div>
     <div class="pure-u-1 pure-u-md-1-4">
       <div class="pure-menu">

@@ -13,6 +13,9 @@ The site always runs on the latest released version.
 
 - Sprites now know about their spawn time, and will tell you if they're not
   spawning due to a missing weather condition.
+- Sprites now also show the logogram they drop, give they drop any. This
+  currently only works with Pyros sprites, I don't have enough data about
+  Hydatos sprites at the moment.
 
 ## [1.0.1] - 2021-08-09
 
