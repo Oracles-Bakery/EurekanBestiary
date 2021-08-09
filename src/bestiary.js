@@ -94,7 +94,7 @@ function findForecastMatch(forecast, conditions) {
 
 function findNextSpawn(forecast, spawnConditions) {
   return forecast.find((f) => {
-    return spawnConditions.includes(forecast.currWeather);
+    return spawnConditions.includes(f.currWeather);
   });
 }
 
