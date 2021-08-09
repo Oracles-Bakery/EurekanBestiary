@@ -148,7 +148,7 @@ export default [
   },
   {
     level: 58,
-    name: "Mammet ",
+    name: "Mammet #013BL",
     type: 1,
     elem: "Ice",
     conditions: { day: [], night: [0, 1, 7, 5, 6] },
