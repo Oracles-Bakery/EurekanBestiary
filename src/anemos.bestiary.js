@@ -636,6 +636,7 @@ export default [
     type: 0,
     elem: "Any",
     conditions: { day: [], night: [] },
+    spawnConditions: [2],
   },
   {
     level: null,
@@ -643,6 +644,7 @@ export default [
     type: 0,
     elem: "Any",
     conditions: { day: [], night: [] },
+    spawnConditions: [3],
   },
   {
     level: null,
@@ -650,5 +652,6 @@ export default [
     type: 0,
     elem: "Any",
     conditions: { day: [], night: [] },
+    spawnConditions: [1],
   },
 ];

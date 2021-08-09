@@ -125,6 +125,7 @@ export default [
     type: 1,
     elem: "Thunder",
     conditions: { day: [5], night: [5] },
+    spawnCondition: [5],
   },
   {
     level: null,
@@ -154,6 +155,7 @@ export default [
     type: 1,
     elem: "Water",
     conditions: { day: [8], night: [8] },
+    spawnCondition: [8],
   },
   {
     level: 26,
@@ -182,6 +184,7 @@ export default [
     type: 1,
     elem: "Fire",
     conditions: { day: [4], night: [4] },
+    spawnCondition: [4],
   },
   {
     level: 28,
@@ -274,6 +277,7 @@ export default [
     type: 1,
     elem: "Ice",
     conditions: { day: [7, 3], night: [7, 3] },
+    spawnCondition: [7, 3],
   },
   {
     level: 33,
@@ -295,6 +299,7 @@ export default [
     type: 1,
     elem: "Thunder",
     conditions: { day: [5], night: [5] },
+    spawnCondition: [5],
   },
   {
     level: null,

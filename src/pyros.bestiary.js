@@ -418,6 +418,7 @@ export default [
     type: 0,
     elem: null,
     conditions: { day: [], night: [] },
+    spawnConditions: [9],
   },
   {
     level: 36,
@@ -425,6 +426,7 @@ export default [
     type: 0,
     elem: null,
     conditions: { day: [], night: [] },
+    spawnConditions: [5],
   },
   {
     level: 37,
@@ -432,6 +434,7 @@ export default [
     type: 0,
     elem: null,
     conditions: { day: [], night: [] },
+    spawnConditions: [5],
   },
   {
     level: 38,
@@ -439,6 +442,7 @@ export default [
     type: 0,
     elem: null,
     conditions: { day: [], night: [] },
+    spawnConditions: [4],
   },
   {
     level: 39,
@@ -446,6 +450,7 @@ export default [
     type: 0,
     elem: null,
     conditions: { day: [], night: [] },
+    spawnConditions: [4],
   },
   {
     level: 40,
@@ -453,6 +458,7 @@ export default [
     type: 0,
     elem: null,
     conditions: { day: [], night: [] },
+    spawnConditions: [9],
   },
   {
     level: 41,
@@ -460,6 +466,7 @@ export default [
     type: 0,
     elem: null,
     conditions: { day: [], night: [] },
+    spawnConditions: [5],
   },
   {
     level: 42,
@@ -467,6 +474,7 @@ export default [
     type: 0,
     elem: null,
     conditions: { day: [], night: [] },
+    spawnConditions: [9],
   },
   {
     level: 43,
@@ -474,6 +482,7 @@ export default [
     type: 2,
     elem: null,
     conditions: { day: [4], night: [4] },
+    spawnConditions: [4],
   },
   {
     level: 44,
@@ -481,6 +490,7 @@ export default [
     type: 2,
     elem: null,
     conditions: { day: [4], night: [4] },
+    spawnConditions: [4],
   },
   {
     level: 45,
@@ -488,6 +498,7 @@ export default [
     type: 0,
     elem: null,
     conditions: { day: [], night: [] },
+    spawnConditions: [9],
   },
   {
     level: 46,
@@ -495,6 +506,7 @@ export default [
     type: 2,
     elem: null,
     conditions: { day: [5], night: [5] },
+    spawnConditions: [5],
   },
   {
     level: 47,
@@ -502,6 +514,7 @@ export default [
     type: 0,
     elem: null,
     conditions: { day: [], night: [] },
+    spawnConditions: [3, 7],
   },
   {
     level: 48,
@@ -509,6 +522,7 @@ export default [
     type: 0,
     elem: null,
     conditions: { day: [], night: [] },
+    spawnConditions: [9],
   },
   {
     level: 49,
@@ -516,6 +530,7 @@ export default [
     type: 0,
     elem: null,
     conditions: { day: [], night: [] },
+    spawnConditions: [9],
   },
   {
     level: 50,
@@ -523,6 +538,7 @@ export default [
     type: 0,
     elem: null,
     conditions: { day: [], night: [] },
+    spawnConditions: [3, 7],
   },
   {
     level: 51,
@@ -530,6 +546,7 @@ export default [
     type: 0,
     elem: null,
     conditions: { day: [], night: [] },
+    spawnConditions: [3, 7],
   },
   {
     level: 52,
@@ -537,6 +554,7 @@ export default [
     type: 2,
     elem: null,
     conditions: { day: [7, 3], night: [7, 3] },
+    spawnConditions: [3, 7],
   },
   {
     level: 53,
@@ -544,6 +562,7 @@ export default [
     type: 0,
     elem: null,
     conditions: { day: [], night: [] },
+    spawnConditions: [4],
   },
   {
     level: 54,
@@ -551,6 +570,7 @@ export default [
     type: 2,
     elem: null,
     conditions: { day: [5], night: [5] },
+    spawnConditions: [5],
   },
   {
     level: 55,
@@ -558,6 +578,7 @@ export default [
     type: 2,
     elem: null,
     conditions: { day: [9], night: [9] },
+    spawnConditions: [9],
   },
   {
     level: 55,
