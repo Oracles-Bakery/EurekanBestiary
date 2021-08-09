@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 The site always runs on the latest released version.
 
+## [Unreleased]
+
+### Fixed
+
+- Added level ranges for enemies in Hydatos that needed them.
+
 ## [1.0.0] - 2021-08-09
 
 ### Added

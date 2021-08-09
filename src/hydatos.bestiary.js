@@ -267,6 +267,7 @@ export default [
   },
   {
     level: null,
+    levelRange: [50, 52],
     name: "Soulless Researcher",
     type: 2,
     elem: "Ice",
@@ -274,6 +275,7 @@ export default [
   },
   {
     level: null,
+    levelRange: [53, 55],
     name: "Soulless Adventurer",
     type: 0,
     elem: null,
@@ -288,6 +290,7 @@ export default [
   },
   {
     level: null,
+    levelRange: [59, 61],
     name: "Hydatos Wraith",
     type: 2,
     elem: "Fire",
@@ -295,6 +298,7 @@ export default [
   },
   {
     level: null,
+    levelRange: [62, 65],
     name: "Samurai Corpse",
     type: 2,
     elem: "Ice",

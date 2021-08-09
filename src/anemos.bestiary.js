@@ -629,6 +629,7 @@ export default [
     elem: "Newvoid/Night",
     conditions: { day: [], night: [] },
   },
+  // TODO Figure these out
   {
     level: null,
     name: "Typhoon Sprite",
