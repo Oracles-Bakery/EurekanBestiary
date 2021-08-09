@@ -33,3 +33,8 @@ header ul li {
   font-weight: bold;
   color: tomato;
 }
+
+.strikethrough {
+  text-decoration: line-through;
+  color: gray;
+}

@@ -13,6 +13,18 @@ const bestiaries = {
   hydatos: hydatosB,
 };
 
+export const logograms = {
+  CONCEPTUAL: 0,
+  FUNDAMENTAL: 1,
+  OFFENSIVE: 2,
+  PROTECTIVE: 3,
+  CURATIVE: 4,
+  TACTICAL: 5,
+  INMICAL: 6,
+  MITIGATIVE: 7,
+  OBSCURE: 8,
+};
+
 export function getMatches(forecast, level) {
   let res = [];
   bestiaries[forecast[0].zone].forEach((b) => {
@@ -21,13 +33,18 @@ export function getMatches(forecast, level) {
       (b.levelRange && b.levelRange[0] - 2 <= level && b.levelRange[1] >= level)
     ) {
       res.push({
-        name: b.name,
+        name: b.name.trim(),
         level: b.level,
         levelRange: b.levelRange,
         elem: b.elem,
         special: b.type > 0,
         mutating: b.type === 1,
         augmenting: b.type === 2,
+        spawning:
+          !b.spawnConditions ||
+          b.spawnConditions.includes(forecast[0].currWeather),
+        nextSpawn:
+          !b.spawnConditions || findNextSpawn(forecast, b.spawnConditions),
         uptime: findForecastMatch(forecast, b.conditions),
       });
     }
@@ -49,6 +66,12 @@ function findForecastMatch(forecast, conditions) {
       return futureForecastMatches(forecast, conditions, i);
     }),
   };
+}
+
+function findNextSpawn(forecast, spawnConditions) {
+  return forecast.find((f) => {
+    return spawnConditions.includes(forecast.currWeather);
+  });
 }
 
 function forecastMatches(forecast, condition, index) {

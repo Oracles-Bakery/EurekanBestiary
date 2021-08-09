@@ -136,9 +136,16 @@
       <ul>
         {#each upMatches as m (m.name + m.level)}
           <li>
-            <em>(Lv{formatLevel(m)})</em> <strong>{m.name}</strong>
-            ({#if m.mutating}mutates{/if}{#if m.augmenting}augments{/if}
-            {formatUptimeUntil(m.uptime.futureUptime)})
+            <span class={!m.spawning && "strikethrough"}>
+              <em>(Lv{formatLevel(m)})</em> <strong>{m.name}</strong>
+              ({#if m.mutating}mutates{/if}{#if m.augmenting}augments{/if}
+              {formatUptimeUntil(m.uptime.futureUptime)})
+            </span>
+            {#if !m.spawning}
+              &nbsp;(next spawns {m.nextSpawn
+                ? day(m.nextSpawn.date).fromNow()
+                : "in a long time"}
+            {/if}
           </li>
         {/each}
       </ul>
@@ -146,7 +153,16 @@
       <h5>regular enemies</h5>
       <ul>
         {#each normalMatches as m (m.name + m.level)}
-          <li><em>(Lv{formatLevel(m)})</em> <strong>{m.name}</strong></li>
+          <li>
+            <span class={!m.spawning && "strikethrough"}>
+              <em>(Lv{formatLevel(m)})</em> <strong>{m.name}</strong>
+            </span>
+            {#if !m.spawning}
+              &nbsp;(next spawns {m.nextSpawn
+                ? day(m.nextSpawn.date).fromNow()
+                : "in a long time"})
+            {/if}
+          </li>
         {/each}
       </ul>
 
@@ -154,9 +170,16 @@
       <ul>
         {#each otherMatches as m (m.name + m.level)}
           <li>
-            <em>(Lv{formatLevel(m)})</em> <strong>{m.name}</strong>
-            ({#if m.mutating}mutates{/if}{#if m.augmenting}augments{/if}
-            {formatNextUptime(m.uptime.futureUptime)})
+            <span class={!m.spawning && "strikethrough"}>
+              <em>(Lv{formatLevel(m)})</em> <strong>{m.name}</strong>
+              ({#if m.mutating}mutates{/if}{#if m.augmenting}augments{/if}
+              {formatNextUptime(m.uptime.futureUptime)})
+            </span>
+            {#if !m.spawning}
+              &nbsp;(next spawns {m.nextSpawn
+                ? day(m.nextSpawn.date).fromNow()
+                : "in a long time"})
+            {/if}
           </li>
         {/each}
       </ul>

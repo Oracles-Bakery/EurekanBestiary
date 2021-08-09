@@ -9,6 +9,11 @@ The site always runs on the latest released version.
 
 ## [Unreleased]
 
+## Added
+
+- Sprites now know about their spawn time, and will tell you if they're not
+  spawning due to a missing weather condition.
+
 ## [1.0.1] - 2021-08-09
 
 ### Fixed
