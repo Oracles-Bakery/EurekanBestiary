@@ -9,6 +9,8 @@ The site always runs on the latest released version.
 
 ## [Unreleased]
 
+## [1.1.0] - 2021-08-09
+
 ## Added
 
 - Sprites now know about their spawn time, and will tell you if they're not
