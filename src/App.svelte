@@ -199,7 +199,7 @@
         Created by Raiah Belse (Twintania)<br /><br />
         Message anastasie#2293 on Discord if you find any bugs or wrong/missing data!<br
         />
-        <a href="https://git.tilde.institute/anastasie/eureka-marks/">Source</a>
+        <a href="https://git.sr.ht/~ana/eureka-marks">Source</a>
       </p>
     </div>
   </div>
