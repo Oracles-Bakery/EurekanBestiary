@@ -9,6 +9,12 @@ The site always runs on the latest released version.
 
 ## [Unreleased]
 
+## [1.1.1] - 2021-08-19
+
+## Changed
+
+- Changed the source URL.
+
 ## [1.1.0] - 2021-08-09
 
 ## Added
