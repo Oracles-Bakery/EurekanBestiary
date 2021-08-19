@@ -14,6 +14,15 @@ If you want to change anything, it's best to send a patch that edits
 the `src/[zone].bestiary.json` files. Regenerating those files via
 the included script would undo many manual formatting and content edits.
 
+## Sending Patches
+
+You can send patches with improvements, fixes or new features to
+`~ana/general-patches@lists.sr.ht`. Be sure to prefix your email
+title with `[eureka-marks]` so I know what project it's related to.
+
+If it's your first time sending a Git patch via email, this website
+may help: https://git-send-email.io.
+
 ## Available Scripts
 
 ### npm start
