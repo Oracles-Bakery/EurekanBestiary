@@ -70,6 +70,7 @@ export function getMatches(forecast, level) {
         nextSpawn:
           !b.spawnConditions || findNextSpawn(forecast, b.spawnConditions),
         uptime: findForecastMatch(forecast, b.conditions),
+        nocturnal: !!b.nocturnal,
       });
     }
   });

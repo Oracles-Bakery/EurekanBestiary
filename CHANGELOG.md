@@ -9,6 +9,14 @@ The site always runs on the latest released version.
 
 ## [Unreleased]
 
+## Added
+
+- Text describing monsters that was previously in brackets is now in little badge elements.
+
+## Changed
+
+- Nocturnal monsters (wraiths, ghosts, and so on) now correctly display as not spawning during daytime.
+
 ## [1.1.1] - 2021-08-19
 
 ## Changed

@@ -159,6 +159,7 @@ export default [
     type: 0,
     elem: null,
     conditions: { day: [], night: [] },
+    nocturnal: true,
   },
   {
     level: 42,

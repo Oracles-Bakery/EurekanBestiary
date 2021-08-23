@@ -2,6 +2,7 @@
   export let matches;
   export let type;
   import { level, paWeather, pyWeather, hWeather, aWeather } from "./stores";
+  import { isNight, getNextNight } from "./times";
   import day from "dayjs";
   import relativeTime from "dayjs/plugin/relativeTime";
   day.extend(relativeTime);
@@ -11,6 +12,21 @@
     DOWN: 1,
     NO_UPTIME: 2,
   };
+
+  function isSpawning(enemy) {
+    if (enemy.nocturnal && !isNight()) return false;
+    return enemy.spawning;
+  }
+
+  function getNextSpawn(enemy) {
+    if (enemy.nocturnal) {
+      return getNextNight().fromNow();
+    } else {
+      return enemy.nextSpawn
+        ? day(enemy.nextSpawn.date).fromNow()
+        : "in a long time";
+    }
+  }
 
   function formatLevel(m) {
     if (m.level) {
@@ -63,23 +79,25 @@
 
 <ul>
   {#each matches as m (m.name + m.level)}
-    <li>
-      <span class={!m.spawning && "strikethrough"}>
-        <em>(Lv{formatLevel(m)})</em> <strong>{m.name}</strong>
-        {#if type !== 2}({#if m.mutating}mutates{/if}{#if m.augmenting}augments{/if}
-          {#if type === TYPES.UP}
-            {formatUptimeUntil(m.uptime.futureUptime)})
-          {:else if type === TYPES.DOWN}
-            {formatNextUptime(m.uptime.futureUptime)})
-          {/if}{/if}
+    <li class="list-item">
+      <span class={!isSpawning(m) && "strikethrough"}>
+        <span class="label label-normal-size">Lv{formatLevel(m)}</span>
+        <strong>{m.name}</strong>
+        {#if type !== TYPES.NO_UPTIME}
+          <span class="label label-{type === TYPES.UP ? 'red' : 'gray'}"
+            >{#if m.mutating}mutates{/if}{#if m.augmenting}augments{/if}
+            {#if type === TYPES.UP}
+              {formatUptimeUntil(m.uptime.futureUptime)}
+            {:else if type === TYPES.DOWN}
+              {formatNextUptime(m.uptime.futureUptime)}
+            {/if}</span
+          >{/if}
       </span>
-      {#if !m.spawning}
-        &nbsp;(next spawns {m.nextSpawn
-          ? day(m.nextSpawn.date).fromNow()
-          : "in a long time"})
+      {#if !isSpawning(m)}
+        <span class="label label-green">next spawns {getNextSpawn(m)}</span>
       {/if}
       {#if m.logogram}
-        <span class="highlight">✶ {m.logogram} logogram</span>
+        <span class="label label-black">drops ✶ {m.logogram} logogram</span>
       {/if}
     </li>
   {/each}

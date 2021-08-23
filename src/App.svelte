@@ -9,6 +9,7 @@
   import { onMount } from "svelte";
   day.extend(relativeTime);
 
+  const VERSION = "1.1.1";
   let date = new Date().getTime() * (1440 / 70);
   let matches,
     upMatches,
@@ -200,6 +201,9 @@
         Message anastasie#2293 on Discord if you find any bugs or wrong/missing data!<br
         />
         <a href="https://git.sr.ht/~ana/eureka-marks">Source</a>
+      </p>
+      <p>
+        <small class="version">v{VERSION}</small>
       </p>
     </div>
   </div>
