@@ -45,6 +45,10 @@ header ul li {
   margin-top: 5px;
 }
 
+.dim-link {
+  color: #aaa;
+}
+
 .version {
   color: #aaa;
 }

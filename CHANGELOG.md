@@ -9,6 +9,10 @@ The site always runs on the latest released version.
 
 ## [Unreleased]
 
+## Added
+
+- Added a link to this changelog to the site.
+
 ## Fixed
 
 - The "next weather change in" timer now updates every second. Previously it only updated every

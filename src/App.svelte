@@ -203,7 +203,14 @@
         <a href="https://git.sr.ht/~ana/eureka-marks">Source</a>
       </p>
       <p>
-        <small class="version">v{VERSION}</small>
+        <small class="version"
+          >v{VERSION} &bull;
+          <a
+            class="dim-link"
+            href="https://git.sr.ht/~ana/eureka-marks/tree/main/item/CHANGELOG.md"
+            >changelog</a
+          ></small
+        >
       </p>
     </div>
   </div>
