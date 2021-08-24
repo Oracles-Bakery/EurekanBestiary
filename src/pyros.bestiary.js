@@ -5,6 +5,7 @@ export default [
     type: 0,
     elem: null,
     conditions: { day: [], night: [] },
+    nocturnal: true,
   },
   {
     level: 35,
@@ -176,11 +177,13 @@ export default [
     conditions: { day: [0, 7, 5], night: [5] },
   },
   {
-    level: 42,
+    level: null,
+    levelRange: [42, 43],
     name: "Val Wraith",
     type: 1,
     elem: "Ice",
     conditions: { day: [], night: [0, 4, 7, 9] },
+    nocturnal: true,
   },
   {
     level: 43,
@@ -209,6 +212,14 @@ export default [
     type: 1,
     elem: "Ice",
     conditions: { day: [7, 3], night: [7, 3] },
+  },
+  {
+    level: null,
+    levelRange: [44, 45],
+    type: 1,
+    elem: "Earth",
+    conditions: { day: [], night: [] },
+    nocturnal: true,
   },
   {
     level: 45,
@@ -265,6 +276,7 @@ export default [
     type: 2,
     elem: null,
     conditions: { day: [], night: [] },
+    nocturnal: true,
   },
   {
     level: 48,
@@ -286,6 +298,7 @@ export default [
     type: 1,
     elem: "Thunder",
     conditions: { day: [], night: [5] },
+    nocturnal: true,
   },
   {
     level: 49,
@@ -328,6 +341,7 @@ export default [
     type: 2,
     elem: null,
     conditions: { day: [], night: [3] },
+    nocturnal: true,
   },
   {
     level: 51,
@@ -377,6 +391,7 @@ export default [
     type: 2,
     elem: null,
     conditions: { day: [], night: [0, 4, 7, 5, 9] },
+    nocturnal: true,
   },
   {
     level: 54,
@@ -407,11 +422,21 @@ export default [
     conditions: { day: [9], night: [9] },
   },
   {
+    level: 54,
+    name: "Soulless Pathfinder",
+    type: 1,
+    elem: "Ice",
+    // This one doesn't adapt at level 54
+    conditions: { day: [], night: [] },
+    nocturnal: true,
+  },
+  {
     level: 55,
     name: "Soulless Pathfinder",
     type: 1,
     elem: "Ice",
     conditions: { day: [], night: [5] },
+    nocturnal: true,
   },
   {
     level: 35,

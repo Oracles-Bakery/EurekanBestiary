@@ -272,6 +272,7 @@ export default [
     type: 2,
     elem: "Ice",
     conditions: { day: [], night: [7] },
+    nocturnal: true,
   },
   {
     level: null,
@@ -280,6 +281,7 @@ export default [
     type: 0,
     elem: null,
     conditions: { day: [], night: [] },
+    nocturnal: true,
   },
   {
     level: 58,
@@ -287,6 +289,7 @@ export default [
     type: 2,
     elem: "Wind",
     conditions: { day: [], night: [1] },
+    nocturnal: true,
   },
   {
     level: null,
@@ -295,6 +298,7 @@ export default [
     type: 2,
     elem: "Fire",
     conditions: { day: [], night: [] },
+    nocturnal: true,
   },
   {
     level: null,
@@ -303,6 +307,7 @@ export default [
     type: 2,
     elem: "Ice",
     conditions: { day: [], night: [1, 7] },
+    nocturnal: true,
   },
   {
     level: 57,

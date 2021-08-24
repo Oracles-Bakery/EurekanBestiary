@@ -62,6 +62,7 @@ export default [
     type: 2,
     elem: "Earth",
     conditions: { day: [], night: [8] },
+    nocturnal: true,
   },
   {
     level: 23,
@@ -134,6 +135,7 @@ export default [
     type: 2,
     elem: "Wind",
     conditions: { day: [], night: [4, 7, 3, 5, 8] },
+    nocturnal: true,
   },
   {
     level: 26,
@@ -242,6 +244,7 @@ export default [
     type: 2,
     elem: "Thunder",
     conditions: { day: [], night: [7, 3, 8] },
+    nocturnal: true,
   },
   {
     level: 31,
@@ -308,6 +311,7 @@ export default [
     type: 2,
     elem: "Water",
     conditions: { day: [], night: [0, 4, 7, 3, 5, 8] },
+    nocturnal: true,
   },
   {
     level: 34,
@@ -351,6 +355,7 @@ export default [
     type: 2,
     elem: "Ice",
     conditions: { day: [], night: [0, 7, 8] },
+    nocturnal: true,
   },
   {
     level: 36,
