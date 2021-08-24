@@ -9,7 +9,7 @@ export function formatUtc(date) {
 export function isNight() {
   const date = new Date().getTime() * (1440 / 70);
   const hour = day.utc(date).hour();
-  return hour > 19 && hour < 9;
+  return hour > 19 || hour < 9;
 }
 
 export function getNextNight() {
