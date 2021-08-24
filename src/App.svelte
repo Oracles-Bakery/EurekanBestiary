@@ -24,11 +24,11 @@
   newMatches();
   setInterval(() => {
     date = new Date().getTime() * (1440 / 70);
-  }, 1000);
+  }, 500); // half a second
   setInterval(() => {
     newForecasts();
     newMatches();
-  }, 10000); // 10 seconds
+  }, 1000); // one second
   $: currentEzTime = formatUtc(date);
   onMount(() => {
     document.getElementById("level").value = $level || 0; // this is fucked up but it works

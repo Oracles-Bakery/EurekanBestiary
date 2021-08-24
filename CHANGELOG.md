@@ -9,6 +9,14 @@ The site always runs on the latest released version.
 
 ## [Unreleased]
 
+## Fixed
+
+- The "next weather change in" timer now updates every second. Previously it only updated every
+  10 seconds, which caused a weird bit of desync with the other site features.
+- Similarly, the Eorzea Time clock now updates twice a second. Because Eorzean minutes are not
+  exactly a second, this should hopefully cause the clock to not lag behind the in-game clock's
+  intervals _too_ much.
+
 ## [1.2.0] - 2021-08-24
 
 ## Added
