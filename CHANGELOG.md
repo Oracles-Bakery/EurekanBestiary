@@ -9,6 +9,8 @@ The site always runs on the latest released version.
 
 ## [Unreleased]
 
+## [1.2.1] - 2021-08-24
+
 ## Added
 
 - Added a link to this changelog to the site.
