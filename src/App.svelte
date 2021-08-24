@@ -134,7 +134,7 @@
         />
       </h2>
 
-      <h5>matches</h5>
+      <h5>mutates/augments</h5>
       <EnemyList matches={upMatches} type={0} />
 
       <h5>regular enemies</h5>
@@ -197,7 +197,7 @@
       </p>
       <hr />
       <p>
-        Created by Raiah Belse (Twintania)<br /><br />
+        Created by Raiah Belse (Zodiark)<br /><br />
         Message anastasie#2293 on Discord if you find any bugs or wrong/missing data!<br
         />
         <a href="https://git.sr.ht/~ana/eureka-marks">Source</a>

@@ -16,6 +16,7 @@ The site always runs on the latest released version.
 ## Changed
 
 - Nocturnal monsters (wraiths, ghosts, and so on) now correctly display as not spawning during daytime.
+- The "matches" header has been changed to "mutates/augments".
 
 ## [1.1.1] - 2021-08-19
 
