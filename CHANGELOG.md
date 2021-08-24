@@ -9,6 +9,8 @@ The site always runs on the latest released version.
 
 ## [Unreleased]
 
+## [1.2.0] - 2021-08-24
+
 ## Added
 
 - Text describing monsters that was previously in brackets is now in little badge elements.
