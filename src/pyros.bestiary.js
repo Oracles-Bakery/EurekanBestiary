@@ -216,6 +216,7 @@ export default [
   {
     level: null,
     levelRange: [44, 45],
+    name: "Dark Troubador",
     type: 1,
     elem: "Earth",
     conditions: { day: [], night: [] },
