@@ -9,6 +9,12 @@ The site always runs on the latest released version.
 
 ## [Unreleased]
 
+## [1.2.2] - 2021-09-01
+
+## Fixed
+
+- Mechanoguardian spawns at Blizzards during night.
+
 ## [1.2.1] - 2021-08-24
 
 ## Added
