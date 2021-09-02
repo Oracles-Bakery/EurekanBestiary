@@ -9,6 +9,12 @@ The site always runs on the latest released version.
 
 ## [Unreleased]
 
+## [1.2.3] - 2021-09-02
+
+## Fixed
+
+- Adjusted nighttime to start at 18:00 and end at 8:00 (some enemies just spawn later).
+
 ## [1.2.2] - 2021-09-01
 
 ## Fixed

@@ -9,7 +9,7 @@
   import { onMount } from "svelte";
   day.extend(relativeTime);
 
-  const VERSION = "1.2.2";
+  const VERSION = "1.2.3";
   let date = new Date().getTime() * (1440 / 70);
   let matches,
     upMatches,
