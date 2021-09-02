@@ -71,42 +71,6 @@
     return day(anemosForecast[1].date).fromNow();
   }
 
-  function formatLevel(m) {
-    if (m.level) {
-      return m.level;
-    } else if (m.levelRange) {
-      return `${m.levelRange[0]}-${m.levelRange[1]}`;
-    }
-    return "??";
-  }
-
-  function formatNextUptime(futures) {
-    let i;
-    futures.find((f, idx) => {
-      if (f) i = idx;
-      return f;
-    });
-
-    if (typeof i === "number") {
-      return `in ${day(getZoneForecast()[i + 1].date).fromNow(true)}`;
-    }
-    return "in the far future";
-  }
-
-  function formatUptimeUntil(futures) {
-    let i;
-    futures.find((f, idx) => {
-      if (!f) i = idx;
-      return !f;
-    });
-
-    if (typeof i === "number") {
-      return `for ${day(getZoneForecast()[i + 1].date).fromNow(true)}`;
-    }
-
-    return "for a long time";
-  }
-
   function levelChanged(evt) {
     level.set(Number(evt.target.value));
     newMatches();
