@@ -164,14 +164,14 @@
         Created by Raiah Belse (Zodiark)<br /><br />
         Message anastasie#2293 on Discord if you find any bugs or wrong/missing data!<br
         />
-        <a href="https://git.sr.ht/~ana/eureka-marks">Source</a>
+        <a href="https://codeberg.org/mokou/eureka-marks">Source</a>
       </p>
       <p>
         <small class="version"
           >v{VERSION} &bull;
           <a
             class="dim-link"
-            href="https://git.sr.ht/~ana/eureka-marks/tree/main/item/CHANGELOG.md"
+            href="https://codeberg.org/mokou/eureka-marks/src/branch/main/CHANGELOG.md"
             >changelog</a
           ></small
         >
