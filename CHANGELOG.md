@@ -7,7 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 The site always runs on the latest released version.
 
-## [Unreleased]
+## [1.2.4] - 2021-12-22
+
+## Added
+
+- Added a banner that notifies users of the URL change, only shown when redirecting from
+  the old URL.
 
 ## [1.2.3] - 2021-09-02
 

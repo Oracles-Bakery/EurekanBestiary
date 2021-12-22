@@ -9,7 +9,8 @@
   import { onMount } from "svelte";
   day.extend(relativeTime);
 
-  const VERSION = "1.2.3";
+  const VERSION = "1.2.4";
+  const isRedirected = window.location.hash == "#redirect";
   let date = new Date().getTime() * (1440 / 70);
   let matches,
     upMatches,
@@ -77,6 +78,11 @@
   }
 </script>
 
+{#if isRedirected}
+  <div style="text-align: center; background-color: #FF4136; color: white; padding: 10px 0;">
+    <strong>Notice:</strong> The website URL has changed to eureka.fernehalwes.org! Please update your bookmarks.
+  </div>
+{/if}
 <header>
   <ul>
     <li><strong>Eureka Mark Tracker</strong></li>
