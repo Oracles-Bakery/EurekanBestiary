@@ -162,7 +162,7 @@
       <hr />
       <p>
         Created by Raiah Belse (Zodiark)<br /><br />
-        Message anastasie#2293 on Discord if you find any bugs or wrong/missing data!<br
+        Message mokou#2293 on Discord if you find any bugs or wrong/missing data!<br
         />
         <a href="https://codeberg.org/mokou/eureka-marks">Source</a>
       </p>
