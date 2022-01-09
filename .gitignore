@@ -4,6 +4,7 @@ node_modules
 public/pure*
 csv/*
 !csv/.gitkeep
+.log
 
 .vercel
 .DS_Store
