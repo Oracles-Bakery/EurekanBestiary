@@ -4,8 +4,9 @@
     <input id="name" type="text" bind:value={name} />
   </fieldset>
   <fieldset>
-    <label for="level">Level</label>
-    <input id="level" type="number" max="60" bind:value={level} />
+    <label for="level">Level (from - to)</label>
+    <input id="level" type="number" max="60" bind:value={level[0]} />
+    <input id="levelTo" type="number" max="60" bind:value={level[1]} />
   </fieldset>
   <fieldset>
     <label for="element">Element</label>
@@ -40,36 +41,60 @@
       </select>
     </fieldset>
     <fieldset>
+      <label for="changeElement">Element after change</label>
+      <select id="changeElement" bind:value={change.element}>
+        <option value="fire">Fire</option>
+        <option value="water">Water</option>
+        <option value="earth">Earth</option>
+        <option value="lightning">Lightning</option>
+        <option value="ice">Ice</option>
+        <option value="wind">Wind</option>
+      </select>
+
+    </fieldset>
+    <fieldset>
       <label for="changeDay">Change weathers DAY</label>
       <select multiple id="changeDay" bind:value={change.day}>
-        <option value="0">Fair</option>
-        <option value="1">Showers</option>
-        <option value="2">Gales</option>
-        <option value="3">Blizzards</option>
-        <option value="4">Heat</option>
-        <option value="5">Thunder</option>
-        <option value="6">Gloom</option>
-        <option value="7">Snow</option>
-        <option value="8">Fog</option>
-        <option value="9">Umbral Wind</option>
+        <option value=0>Fair</option>
+        <option value=1>Showers</option>
+        <option value=2>Gales</option>
+        <option value=3>Blizzards</option>
+        <option value=4>Heat</option>
+        <option value=5>Thunder</option>
+        <option value=6>Gloom</option>
+        <option value=7>Snow</option>
+        <option value=8>Fog</option>
+        <option value=9>Umbral Wind</option>
       </select>
     </fieldset>
     <fieldset>
       <label for="changeNight">Change weathers NIGHT</label>
       <select multiple id="changeNight" bind:value={change.night}>
-        <option value="0">Fair</option>
-        <option value="1">Showers</option>
-        <option value="2">Gales</option>
-        <option value="3">Blizzards</option>
-        <option value="4">Heat</option>
-        <option value="5">Thunder</option>
-        <option value="6">Gloom</option>
-        <option value="7">Snow</option>
-        <option value="8">Fog</option>
-        <option value="9">Umbral Wind</option>
+        <option value=0>Fair</option>
+        <option value=1>Showers</option>
+        <option value=2>Gales</option>
+        <option value=3>Blizzards</option>
+        <option value=4>Heat</option>
+        <option value=5>Thunder</option>
+        <option value=6>Gloom</option>
+        <option value=7>Snow</option>
+        <option value=8>Fog</option>
+        <option value=9>Umbral Wind</option>
       </select>
     </fieldset>
   {/if}
+  <fieldset>
+    <input id="undead" type="checkbox" bind:checked={undead} />
+    <label for="undead">Is undead?</label>
+  </fieldset>
+  <fieldset>
+    <input id="sprite" type="checkbox" bind:checked={sprite} />
+    <label for="sprite">Is sprite?</label>
+  </fieldset>
+  <fieldset>
+    <label for="drops">Drops something?</label>
+    <input type="text" id="drops" bind:value={drops} />
+  </fieldset>
   <fieldset>
     <label for="accuracy">How sure are we?</label>
     <select id="accuracy" bind:value={accuracy}>
@@ -87,12 +112,16 @@ export let data;
 export let saveFn;
 export let isUpdate = false;
 
-let { level, name, id, element, change, area, accuracy } = data
+let { level, name, id, element, change, area, accuracy, undead, sprite, drops } = data
 
 if (!id) {
    id = nanoid()
 }
 
+if (!level)
+ {
+   level = [0, 0]
+ }
 function prepareChangeFields (evt) {
    if (evt.target.checked) {
      // prepare the necessary data structure for the checked key
@@ -112,7 +141,19 @@ function save (evt) {
     element,
     change,
     area,
+    undead,
+    sprite,
     accuracy: Number(accuracy)
   })
+
+  if (!isUpdate) {
+    level = [0,0]
+    name = undefined
+    id = nanoid()
+    element = undefined
+    change = undefined
+    area = undefined
+    accuracy = undefined
+  }
 }
 </script>
