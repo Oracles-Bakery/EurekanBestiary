@@ -7,14 +7,18 @@
     "test": "echo \"This template does not include a test runner by default.\" && exit 1"
   },
   "devDependencies": {
-    "@snowpack/plugin-svelte": "^3.7.0",
-    "snowpack": "^3.3.7"
+    "@snowpack/plugin-svelte": "~3.7",
+    "snowpack": "~3.8"
   },
   "dependencies": {
-    "dayjs": "^1.10.6",
-    "fast-csv": "^4.3.6",
-    "minimist": "^1.2.5",
-    "purecss": "^2.0.6",
-    "svelte": "^3.42.1"
+    "@snowpack/plugin-postcss": "~1.4.3",
+    "autoprefixer": "~10.4.1",
+    "dayjs": "~1.10",
+    "fast-csv": "~4.3",
+    "minimist": "~1.2",
+    "postcss": "~8.4.5",
+    "purecss": "~2",
+    "svelte": "~3.44",
+    "tailwindcss": "~3.0.9"
   }
 }

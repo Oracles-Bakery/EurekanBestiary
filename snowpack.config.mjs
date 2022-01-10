@@ -4,7 +4,7 @@ export default {
     public: "/",
     src: "/dist",
   },
-  plugins: ["@snowpack/plugin-svelte"],
+  plugins: ["@snowpack/plugin-svelte", "@snowpack/plugin-postcss"],
   optimize: {
     bundle: true,
     minify: true,
