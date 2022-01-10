@@ -98,9 +98,9 @@
   <fieldset>
     <label for="accuracy">How sure are we?</label>
     <select id="accuracy" bind:value={accuracy}>
-      <option value="0">Not sure at all</option>
-      <option value="1">Reasonably sure</option>
-      <option value="2">Very sure</option>
+      <option value=0>Not sure at all</option>
+      <option value=1>Reasonably sure</option>
+      <option value=2>Very sure</option>
     </select>
   </fieldset>
   <button on:click={save}>Finish</button>
@@ -143,7 +143,7 @@ function save (evt) {
     area,
     undead,
     sprite,
-    accuracy: Number(accuracy)
+    accuracy,
   })
 
   if (!isUpdate) {
@@ -154,6 +154,8 @@ function save (evt) {
     change = undefined
     area = undefined
     accuracy = undefined
+    undead = undefined
+    sprite = undefined
   }
 }
 </script>

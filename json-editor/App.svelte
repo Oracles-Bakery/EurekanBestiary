@@ -15,6 +15,9 @@
     {#each json as entry, i (entry.id)}
       <li>
         <h4>{entry.name}</h4>
+        <p>
+          Lv. {entry.level[0]}-{entry.level[1]}, {entry.area}
+        </p>
         <button on:click={toggleEdit(i)}>edit</button>
         <button on:click={del(i)}>delete</button>
         {#if editing.includes(i)}
