@@ -1,56 +1,11 @@
-import pagosB from "./pagos.bestiary";
-import anemosB from "./anemos.bestiary";
-import pyrosB from "./pyros.bestiary";
-import hydatosB from "./hydatos.bestiary";
 import day from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
+
 day.extend(isBetween);
 
-const bestiaries = {
-  pagos: pagosB,
-  anemos: anemosB,
-  pyros: pyrosB,
-  hydatos: hydatosB,
-};
-
-export const logograms = {
-  CONCEPTUAL: 0,
-  FUNDAMENTAL: 1,
-  OFFENSIVE: 2,
-  PROTECTIVE: 3,
-  CURATIVE: 4,
-  TACTICAL: 5,
-  INMICAL: 6,
-  MITIGATIVE: 7,
-  OBSCURE: 8,
-};
-
-export function getLogogramName(logogram) {
-  switch (logogram) {
-    case 0:
-      return "Conceptual";
-    case 1:
-      return "Fundamental";
-    case 2:
-      return "Offensive";
-    case 3:
-      return "Protective";
-    case 4:
-      return "Curative";
-    case 5:
-      return "Tactical";
-    case 6:
-      return "Inmical";
-    case 7:
-      return "Mitigative";
-    case 8:
-      return "Obscure";
-  }
-}
-
-export function getMatches(forecast, level) {
+export function getMatches(data, forecast, level) {
   let res = [];
-  bestiaries[forecast[0].zone].forEach((b) => {
+  data[forecast[0].zone].forEach((b) => {
     if (
       (b.level >= level && b.level - 2 <= level) ||
       (b.levelRange && b.levelRange[0] - 2 <= level && b.levelRange[1] >= level)

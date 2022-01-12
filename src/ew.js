@@ -1,6 +1,4 @@
-import { aWeather, paWeather, pyWeather, hWeather } from "./stores";
-
-const WEATHER = {
+export const WEATHER = {
   FAIR: 0,
   SHOWERS: 1,
   GALES: 2,
@@ -14,7 +12,7 @@ const WEATHER = {
 };
 
 // Anemos: 30/Fair, 30/Gales, 30/Showers, 10/Snowy
-const ANEMOS_WEATHER = [
+export const ANEMOS_WEATHER = [
   [WEATHER.FAIR, 30],
   [WEATHER.GALES, 30],
   [WEATHER.SHOWERS, 30],
@@ -22,7 +20,7 @@ const ANEMOS_WEATHER = [
 ];
 
 // Pagos: 10/Fair, 18/Fog, 18/Heat, 18/Snow, 18/Thunder, 18/Blizzards
-const PAGOS_WEATHER = [
+export const PAGOS_WEATHER = [
   [WEATHER.FAIR, 10],
   [WEATHER.FOG, 18],
   [WEATHER.HEAT, 18],
@@ -32,7 +30,7 @@ const PAGOS_WEATHER = [
 ];
 
 // Pyros: 10/Fair, 18/Heat, 18/Thunder, 18/Blizzards, 18/Umbral Wind, 18/Snow
-const PYROS_WEATHER = [
+export const PYROS_WEATHER = [
   [WEATHER.FAIR, 10],
   [WEATHER.HEAT, 18],
   [WEATHER.THUNDER, 18],
@@ -42,7 +40,7 @@ const PYROS_WEATHER = [
 ];
 
 // Hydatos: 12/Fair, 22/Showers, 22/Gloom, 22/Thunder, 22/Snow
-const HYDATOS_WEATHER = [
+export const HYDATOS_WEATHER = [
   [WEATHER.FAIR, 12],
   [WEATHER.SHOWERS, 22],
   [WEATHER.GLOOM, 22],
@@ -50,7 +48,7 @@ const HYDATOS_WEATHER = [
   [WEATHER.SNOW, 22],
 ];
 
-function getWeatherName(weather) {
+export function getWeatherName(weather) {
   switch (weather) {
     case 0:
       return "Fair";
@@ -96,7 +94,7 @@ function hashSeq(seed = getSeed(), count = 5) {
   return hashes;
 }
 
-function getWeather(rates, hash = hashSeed()) {
+export function getWeather(rates, hash = hashSeed()) {
   let total = 0;
   for (const [weather, chance] of rates) {
     if ((total += chance) > hash) {
@@ -106,7 +104,7 @@ function getWeather(rates, hash = hashSeed()) {
   return WEATHER.FAIR;
 }
 
-function forecast(rates, name, seed = getSeed(), count = 10) {
+export function forecast(rates, name, seed = getSeed(), count = 10) {
   const res = [];
   let prevHash = hash(seed - 1);
   let prevWeather = getWeather(rates, prevHash);
@@ -130,13 +128,22 @@ function forecast(rates, name, seed = getSeed(), count = 10) {
   return res;
 }
 
-export default {
-  WEATHER,
-  ANEMOS_WEATHER,
-  PAGOS_WEATHER,
-  PYROS_WEATHER,
-  HYDATOS_WEATHER,
-  getWeather,
-  forecast,
-  getWeatherName,
-};
+export function matchSpriteName(name) {
+  switch (name) {
+    case "Thunderstorm Sprite":
+      return [WEATHER.THUNDER];
+      break;
+    case "Snowstorm Sprite":
+      return [WEATHER.SNOW, WEATHER.BLIZZARDS];
+      break;
+    case "Typhoon Sprite":
+      return [WEATHER.GALES];
+      break;
+    case "Ember Sprite":
+      return [WEATHER.HEAT];
+      break;
+    case "Snowmelt Sprite":
+      return [WEATHER.SHOWERS];
+      break;
+  }
+}

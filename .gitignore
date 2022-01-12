@@ -5,6 +5,7 @@ public/pure*
 csv/*
 !csv/.gitkeep
 .log
+.idea
 
 .vercel
 .DS_Store

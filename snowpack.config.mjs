@@ -12,4 +12,7 @@ export default {
     sourcemap: false,
     target: "es2018",
   },
+  devOptions: {
+    tailwindConfig: "./tailwind.config.js",
+  },
 };
