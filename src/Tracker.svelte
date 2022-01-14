@@ -1,6 +1,6 @@
 <script>
   import day from "dayjs";
-  import { data, weather, time } from "./stores";
+  import { data, weather, time, filters, sort } from "./stores";
   import isBetween from "dayjs/plugin/isBetween";
   import { matchSpriteName } from "./ew";
   import relativeTime from "dayjs/plugin/relativeTime";
@@ -11,16 +11,6 @@
   day.extend(isBetween);
   day.extend(relativeTime);
   day.extend(utc);
-
-  let filters = {
-    zones: ["pagos", "anemos", "pyros", "hydatos"],
-    level: null,
-  };
-  let sort = {
-    level: "asc",
-    name: null,
-    maTop: true,
-  };
 
   let matches = [];
   data.subscribe(d => {
@@ -33,23 +23,23 @@
 
   function newMatches(data) {
     return data.filter(entry => {
-      if (!filters.zones.includes(entry.area)) {
+      if (!$filters.zones.includes(entry.area)) {
         return false;
       }
-      if (filters.level) {
-        return entry.level[0] - 2 <= filters.level && entry.level[1] >= filters.level;
+      if ($filters.level) {
+        return entry.level[0] - 2 <= $filters.level && entry.level[1] >= $filters.level;
       }
       return true;
     }).sort((a, b) => {
-      if (sort.maTop && a.change && !b.change) {
+      if ($sort.maTop && a.change && !b.change) {
         return -1;
-      } else if (sort.maTop && !a.change && b.change) {
+      } else if ($sort.maTop && !a.change && b.change) {
         return 1;
-      } else if (sort.level === "asc" && a.level[0] < b.level[0]) {
+      } else if ($sort.level === "asc" && a.level[0] < b.level[0]) {
         return -1;
-      } else if (sort.level === "desc" && a.level[0] > b.level[0]) {
+      } else if ($sort.level === "desc" && a.level[0] > b.level[0]) {
         return -1;
-      } else if (sort.name === "asc" && a.name < b.name) {
+      } else if ($sort.name === "asc" && a.name < b.name) {
         return -1;
       } else if (sort.name === "desc" && a.name > b.name) {
         return -1;
@@ -165,20 +155,24 @@
   }
 
   const toggleZoneFilter = (zone) => () => {
-    const exists = filters.zones.includes(zone);
+    const exists = $filters.zones.includes(zone);
+    const newFilters = $filters;
 
     if (exists) {
-      filters["zones"] = filters.zones.filter(z => z !== zone);
+      newFilters["zones"] = newFilters.zones.filter(z => z !== zone);
     } else {
-      filters["zones"] = [...filters.zones, zone];
+      newFilters["zones"] = [...newFilters.zones, zone];
     }
+    filters.set(newFilters);
     matches = newMatches($data);
   };
 
   const setSort = (type, direction) => () => {
-    sort.level = null;
-    sort.name = null;
-    sort[type] = direction;
+    const newSort = $sort;
+    newSort.level = null;
+    newSort.name = null;
+    newSort[type] = direction;
+    sort.set(newSort);
   };
 </script>
 
@@ -243,55 +237,55 @@
     <div class="flex font-bold justify-between">
       <div class="border border-gray-300 rounded-l py-1 px-3">Level</div>
       <button class="block w-full border-y border-gray-300 py-1 px-2"
-              class:bg-black={sort.level === "asc"}
-              class:text-white={sort.level === "asc"}
+              class:bg-black={$sort.level === "asc"}
+              class:text-white={$sort.level === "asc"}
               on:click={setSort("level", "asc")}>Asc
       </button>
       <button class="block w-full border border-gray-300 rounded-r py-1 px-2"
-              class:bg-black={sort.level === "desc"}
-              class:text-white={sort.level === "desc"}
+              class:bg-black={$sort.level === "desc"}
+              class:text-white={$sort.level === "desc"}
               on:click={setSort("level", "desc")}>Desc
       </button>
     </div>
     <div class="flex font-bold justify-between mt-1">
       <div class="border border-gray-300 rounded-l py-1 px-3">Name</div>
       <button class="block w-full border-y border-gray-300 py-1 px-2"
-              class:bg-black={sort.name === "asc"}
-              class:text-white={sort.name === "asc"}
+              class:bg-black={$sort.name === "asc"}
+              class:text-white={$sort.name === "asc"}
               on:click={setSort("name", "asc")}>Asc
       </button>
       <button class="block w-full border border-gray-300 rounded-r py-1 px-2"
-              class:bg-black={sort.name === "desc"}
-              class:text-white={sort.name === "desc"}
+              class:bg-black={$sort.name === "desc"}
+              class:text-white={$sort.name === "desc"}
               on:click={setSort("name", "desc")}>Desc
       </button>
     </div>
     <div class="my-2">
-      <input id="maFirst" bind:checked={sort.maTop} type="checkbox"/>
+      <input id="maFirst" bind:checked={$sort.maTop} type="checkbox"/>
       <label for="maFirst">Sort changing monsters first?</label>
     </div>
     <h2 class="text-xl font-bold mb-3">Filters</h2>
     <button class="block mb-2 rounded-3xl bg-gradient-to-r text-white px-6 py-2 from-green-600 to-lime-600"
-            class:ring-2={filters.zones.includes("anemos")}
-            class:ring-black={filters.zones.includes("anemos")}
+            class:ring-2={$filters.zones.includes("anemos")}
+            class:ring-black={$filters.zones.includes("anemos")}
             on:click={toggleZoneFilter("anemos")}>
       Anemos
     </button>
     <button class="block mb-2 rounded-3xl bg-gradient-to-r text-black px-6 py-2 from-teal-300 to-cyan-300"
-            class:ring-2={filters.zones.includes("pagos")}
-            class:ring-black={filters.zones.includes("pagos")}
+            class:ring-2={$filters.zones.includes("pagos")}
+            class:ring-black={$filters.zones.includes("pagos")}
             on:click={toggleZoneFilter("pagos")}>
       Pagos
     </button>
     <button class="block mb-2 rounded-3xl bg-gradient-to-r text-white px-6 py-2 from-pink-600 to-rose-600"
-            class:ring-2={filters.zones.includes("pyros")}
-            class:ring-black={filters.zones.includes("pyros")}
+            class:ring-2={$filters.zones.includes("pyros")}
+            class:ring-black={$filters.zones.includes("pyros")}
             on:click={toggleZoneFilter("pyros")}>
       Pyros
     </button>
     <button class="block mb-2 rounded-3xl bg-gradient-to-r text-white px-6 py-2 from-sky-600 to-blue-600"
-            class:ring-2={filters.zones.includes("hydatos")}
-            class:ring-black={filters.zones.includes("hydatos")}
+            class:ring-2={$filters.zones.includes("hydatos")}
+            class:ring-black={$filters.zones.includes("hydatos")}
             on:click={toggleZoneFilter("hydatos")}>
       Hydatos
     </button>
@@ -303,7 +297,7 @@
                min="1"
                max="60"
                id="level"
-               bind:value={filters.level}
+               bind:value={$filters.level}
                class="focus:ring-indigo-500 focus:border-indigo-500 block w-full border p-2 border-gray-300 rounded-md"
                placeholder="Between 1 and 60"/>
       </div>

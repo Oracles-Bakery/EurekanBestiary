@@ -1,7 +1,5 @@
 {
   "scripts": {
-    "prestart": "cp node_modules/purecss/build/pure-min.css public/pure.css && cp node_modules/purecss/build/grids-responsive-min.css public/pure-responsive-grid.css",
-    "prebuild": "npm run prestart",
     "start": "snowpack dev",
     "build": "snowpack build",
     "test": "echo \"This template does not include a test runner by default.\" && exit 1"

@@ -9,7 +9,15 @@ import {
 
 const localStorage = window.localStorage;
 
-export const level = localStorageStore(1);
+export const filters = localStorageStore("eb-filters", {
+  zones: ["anemos", "pagos", "pyros", "hydatos"],
+  level: null,
+});
+export const sort = localStorageStore("eb-sort", {
+  level: "asc",
+  name: null,
+  maTop: true,
+});
 export const time = writable(new Date().getTime() * (1440 / 70), (set) => {
   const interval = setInterval(() => {
     set(new Date().getTime() * (1440 / 70));
@@ -51,9 +59,12 @@ export const data = readable([], (set) => {
   };
 });
 
-function localStorageStore(key) {
+function localStorageStore(key, initial) {
   const item = localStorage.getItem(key);
-  const {subscribe, set} = writable(JSON.parse(item) || null);
+  const {subscribe, set} = writable(JSON.parse(item) || initial || null);
+  if (!item && initial) {
+    localStorage.setItem(key, JSON.stringify(initial));
+  }
 
   return {
     subscribe,
