@@ -186,48 +186,53 @@
             class:border-b={i === matches.length - 1}
             class:border-t={i === 0}
             class:bg-gray-200={!match.spawns[0]}>
-          <div>
-            <h1 class="block font-bold text-xl mb-1 flex items-center">
-              <div class="border rounded-sm px-1 inline-block text-sm font-mono align-middle mr-1">
-                Lv.{formatLevel(match.level)}</div>
-              <div class="flex items-center">
-                <div class="mr-2">{match.name}</div>
-                {#if match.change && match.change.type === "mutates"}
-                  <Icon name="mutates"/>
-                {/if}
-                {#if match.change && match.change.type === "augments"}
-                  <Icon name="augments"/>
-                {/if}
-                <div class="text-xs font-normal ml-1">{match.change ? match.change.type : ""}</div>
-              </div>
-            </h1>
-            <div class="flex">
-              {#if match.undead}
-                <div class="rounded-2xl text-xs px-2 py-1 bg-red-200 font-bold text-red-700">Undead</div>
-              {/if}
-              {#if match.sprite}
-                <div class="rounded-2xl text-xs px-2 py-1 bg-blue-200 font-bold text-blue-700">Sprite</div>
-              {/if}
-              <div class="rounded-2xl ml-1 text-xs px-2 py-1 bg-gray-100 font-bold text-gray-600">
-                {formatNextUpOrDowntime(match)}
-              </div>
-              {#if match.change}
-                {#if isChanging(match)}
-                  <div class="rounded-2xl ml-1 text-xs px-2 py-1 bg-amber-100 font-bold text-amber-600">
-                    Stops changing {day(getNextChangeTime(match, false) / (1440 / 70)).fromNow()}
-                  </div>
-                {:else}
-                  <div class="rounded-2xl ml-1 text-xs px-2 py-1 bg-fuchsia-100 font-bold text-fuchsia-600">
-                    {capitalize(match.change.type)} {day(getNextChangeTime(match, true) / (1440 / 70)).fromNow()}
-                  </div>
-                {/if}
-              {:else}
-                <div class="rounded-2xl ml-1 text-xs px-2 py-1 bg-gray-100 font-bold text-gray-600">
-                  Does not change
+          <a href="/entry/{match.id}" class="flex justify-between">
+            <div>
+              <h1 class="block font-bold text-xl mb-1 flex items-center">
+                <div class="border rounded-sm px-1 inline-block text-sm font-mono align-middle mr-1">
+                  Lv.{formatLevel(match.level)}</div>
+                <div class="flex items-center">
+                  <div class="mr-2">{match.name}</div>
+                  {#if match.change && match.change.type === "mutates"}
+                    <Icon name="mutates"/>
+                  {/if}
+                  {#if match.change && match.change.type === "augments"}
+                    <Icon name="augments"/>
+                  {/if}
+                  <div class="text-xs font-normal ml-1">{match.change ? match.change.type : ""}</div>
                 </div>
-              {/if}
+              </h1>
+              <div class="flex">
+                {#if match.undead}
+                  <div class="rounded-2xl text-xs px-2 py-1 bg-red-200 font-bold text-red-700">Undead</div>
+                {/if}
+                {#if match.sprite}
+                  <div class="rounded-2xl text-xs px-2 py-1 bg-blue-200 font-bold text-blue-700">Sprite</div>
+                {/if}
+                <div class="rounded-2xl ml-1 text-xs px-2 py-1 bg-gray-100 font-bold text-gray-600">
+                  {formatNextUpOrDowntime(match)}
+                </div>
+                {#if match.change}
+                  {#if isChanging(match)}
+                    <div class="rounded-2xl ml-1 text-xs px-2 py-1 bg-amber-100 font-bold text-amber-600">
+                      Stops changing {day(getNextChangeTime(match, false) / (1440 / 70)).fromNow()}
+                    </div>
+                  {:else}
+                    <div class="rounded-2xl ml-1 text-xs px-2 py-1 bg-fuchsia-100 font-bold text-fuchsia-600">
+                      {capitalize(match.change.type)} {day(getNextChangeTime(match, true) / (1440 / 70)).fromNow()}
+                    </div>
+                  {/if}
+                {:else}
+                  <div class="rounded-2xl ml-1 text-xs px-2 py-1 bg-gray-100 font-bold text-gray-600">
+                    Does not change
+                  </div>
+                {/if}
+              </div>
             </div>
-          </div>
+            <div class="self-center text-gray-400">
+              <Icon name="chevron"/>
+            </div>
+          </a>
         </li>
       {/each}
     </ul>
