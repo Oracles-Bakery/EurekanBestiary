@@ -1,9 +1,9 @@
 <script>
-  import { weather } from "../../stores";
-  import { getWeatherName } from "../../ew";
+  import { weather } from "../stores";
+  import { getWeatherName } from "../ew";
   import day from "dayjs";
 
-  export let zone;
+  export let zone = [];
   const capitalizedZone = zone[0].toUpperCase() + zone.slice(1);
 </script>
 

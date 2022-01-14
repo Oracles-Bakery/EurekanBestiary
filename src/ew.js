@@ -86,14 +86,6 @@ function hash(seed = getSeed()) {
   return step2 % 100;
 }
 
-function hashSeq(seed = getSeed(), count = 5) {
-  const hashes = [];
-  for (let i = 0; i < count; ++i) {
-    hashes.push(hash(seed + i));
-  }
-  return hashes;
-}
-
 export function getWeather(rates, hash = hashSeed()) {
   let total = 0;
   for (const [weather, chance] of rates) {
@@ -132,18 +124,13 @@ export function matchSpriteName(name) {
   switch (name) {
     case "Thunderstorm Sprite":
       return [WEATHER.THUNDER];
-      break;
     case "Snowstorm Sprite":
       return [WEATHER.SNOW, WEATHER.BLIZZARDS];
-      break;
     case "Typhoon Sprite":
       return [WEATHER.GALES];
-      break;
     case "Ember Sprite":
       return [WEATHER.HEAT];
-      break;
     case "Snowmelt Sprite":
       return [WEATHER.SHOWERS];
-      break;
   }
 }

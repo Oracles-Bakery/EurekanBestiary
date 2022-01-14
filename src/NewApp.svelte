@@ -3,10 +3,10 @@
   import { time, weather } from "./stores.js";
   import Tracker from "./Tracker.svelte";
   import ZoneWeather from "./components/ZoneWeather.svelte";
-  import { formatUtc } from "./times";
   import day from "dayjs";
   import relativeTime from "dayjs/plugin/relativeTime";
-  import ZoneForecast from "./components/components/ZoneForecast.svelte";
+  import ZoneForecast from "./components/ZoneForecast.svelte";
+  import { formatUtc } from "./util";
 
   day.extend(relativeTime);
 
