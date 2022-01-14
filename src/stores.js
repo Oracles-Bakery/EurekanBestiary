@@ -13,7 +13,7 @@ export const level = localStorageStore(1);
 export const time = writable(new Date().getTime() * (1440 / 70), (set) => {
   const interval = setInterval(() => {
     set(new Date().getTime() * (1440 / 70));
-  });
+  }, 1000);
 
   return function destroy() {
     clearInterval(interval);
