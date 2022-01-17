@@ -7,6 +7,13 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 The site always runs on the latest released version.
 
+## [2.0.1] - 2022-01-17
+
+## Fixed
+
+- Added a proper URL rewrite configuration.
+- Renamed "augments" to "adapts" - that's the terminology used in game.
+
 ## [2.0.0] - 2022-01-17
 
 ## Added

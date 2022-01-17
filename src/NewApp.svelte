@@ -11,7 +11,7 @@
 
   day.extend(relativeTime);
 
-  const VERSION = "2.0.0";
+  const VERSION = "2.0.1";
   const isRedirected = window.location.hash === "#redirect";
   $: ezTime = formatUtc($time);
 </script>
