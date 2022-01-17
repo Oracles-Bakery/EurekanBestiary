@@ -264,25 +264,25 @@
       <label for="maFirst">Sort changing monsters first?</label>
     </div>
     <h2 class="text-xl font-bold mb-3">Filters</h2>
-    <button class="block mb-2 rounded-3xl bg-gradient-to-r text-white px-6 py-2 from-green-600 to-lime-600"
+    <button class="block w-full mb-2 rounded-3xl bg-gradient-to-r text-white px-6 py-2 from-green-600 to-lime-600"
             class:ring-2={$filters.zones.includes("anemos")}
             class:ring-black={$filters.zones.includes("anemos")}
             on:click={toggleZoneFilter("anemos")}>
       Anemos
     </button>
-    <button class="block mb-2 rounded-3xl bg-gradient-to-r text-black px-6 py-2 from-teal-300 to-cyan-300"
+    <button class="block w-full mb-2 rounded-3xl bg-gradient-to-r text-black px-6 py-2 from-teal-300 to-cyan-300"
             class:ring-2={$filters.zones.includes("pagos")}
             class:ring-black={$filters.zones.includes("pagos")}
             on:click={toggleZoneFilter("pagos")}>
       Pagos
     </button>
-    <button class="block mb-2 rounded-3xl bg-gradient-to-r text-white px-6 py-2 from-pink-600 to-rose-600"
+    <button class="block w-full mb-2 rounded-3xl bg-gradient-to-r text-white px-6 py-2 from-pink-600 to-rose-600"
             class:ring-2={$filters.zones.includes("pyros")}
             class:ring-black={$filters.zones.includes("pyros")}
             on:click={toggleZoneFilter("pyros")}>
       Pyros
     </button>
-    <button class="block mb-2 rounded-3xl bg-gradient-to-r text-white px-6 py-2 from-sky-600 to-blue-600"
+    <button class="block w-full mb-2 rounded-3xl bg-gradient-to-r text-white px-6 py-2 from-sky-600 to-blue-600"
             class:ring-2={$filters.zones.includes("hydatos")}
             class:ring-black={$filters.zones.includes("hydatos")}
             on:click={toggleZoneFilter("hydatos")}>
