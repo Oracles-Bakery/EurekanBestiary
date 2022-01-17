@@ -63,7 +63,7 @@
         {/if}
       </div>
 
-      <h4 class="font-bold mt-4">Mutation/Augmentation Conditions</h4>
+      <h4 class="font-bold mt-4">Mutation/Adaption Conditions</h4>
       {#if entry.change}
         {#if !entry.undead}
           <div class="flex mt-2 border border-amber-500 justify-between items-center">

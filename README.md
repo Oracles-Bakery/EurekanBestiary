@@ -1,7 +1,7 @@
 # Eurekan Bestiary
 
 A website to find out what monsters in FFXIV's Eureka instances spawn when, and what they drop, and when they mutate or
-augment.
+adapt.
 
 ## Updating Sources
 

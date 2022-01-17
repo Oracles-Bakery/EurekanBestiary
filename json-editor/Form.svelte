@@ -1,12 +1,12 @@
 <form>
   <fieldset>
     <label for="name">Name</label>
-    <input id="name" type="text" bind:value={name} />
+    <input id="name" type="text" bind:value={name}/>
   </fieldset>
   <fieldset>
     <label for="level">Level (from - to)</label>
-    <input id="level" type="number" max="60" bind:value={level[0]} />
-    <input id="levelTo" type="number" max="60" bind:value={level[1]} />
+    <input id="level" type="number" max="60" bind:value={level[0]}/>
+    <input id="levelTo" type="number" max="60" bind:value={level[1]}/>
   </fieldset>
   <fieldset>
     <label for="element">Element</label>
@@ -29,15 +29,15 @@
     </select>
   </fieldset>
   <fieldset>
-    <input id="change" type="checkbox" checked={!!change} on:click={prepareChangeFields} />
-    <label for="change">Changes? (mutates/augments)</label>
+    <input id="change" type="checkbox" checked={!!change} on:click={prepareChangeFields}/>
+    <label for="change">Changes? (mutates/adapts)</label>
   </fieldset>
   {#if change}
     <fieldset>
       <label for="changeType">Change type</label>
       <select id="changeType" bind:value={change.type}>
         <option value="mutates">Mutates</option>
-        <option value="augments">Augments</option>
+        <option value="augments">Adapts</option>
       </select>
     </fieldset>
     <fieldset>
@@ -84,16 +84,16 @@
     </fieldset>
   {/if}
   <fieldset>
-    <input id="undead" type="checkbox" bind:checked={undead} />
+    <input id="undead" type="checkbox" bind:checked={undead}/>
     <label for="undead">Is undead?</label>
   </fieldset>
   <fieldset>
-    <input id="sprite" type="checkbox" bind:checked={sprite} />
+    <input id="sprite" type="checkbox" bind:checked={sprite}/>
     <label for="sprite">Is sprite?</label>
   </fieldset>
   <fieldset>
     <label for="drops">Drops something?</label>
-    <input type="text" id="drops" bind:value={drops} />
+    <input type="text" id="drops" bind:value={drops}/>
   </fieldset>
   <fieldset>
     <label for="accuracy">How sure are we?</label>
@@ -107,55 +107,56 @@
 </form>
 
 <script>
-import { nanoid } from 'nanoid';
-export let data;
-export let saveFn;
-export let isUpdate = false;
+  import { nanoid } from "nanoid";
 
-let { level, name, id, element, change, area, accuracy, undead, sprite, drops } = data
+  export let data;
+  export let saveFn;
+  export let isUpdate = false;
 
-if (!id) {
-   id = nanoid()
-}
+  let {level, name, id, element, change, area, accuracy, undead, sprite, drops} = data;
 
-if (!level)
- {
-   level = [0, 0]
- }
-function prepareChangeFields (evt) {
-   if (evt.target.checked) {
-     // prepare the necessary data structure for the checked key
-     change = { type: 'mutates', day: [], night: [] }
-   } else {
-     change = false
-   }
-}
-
-function save (evt) {
-   evt.preventDefault()
-
-  saveFn({
-    name,
-    level,
-    id,
-    element,
-    change,
-    area,
-    undead,
-    sprite,
-    accuracy,
-  })
-
-  if (!isUpdate) {
-    level = [0,0]
-    name = undefined
-    id = nanoid()
-    element = undefined
-    change = undefined
-    area = undefined
-    accuracy = undefined
-    undead = undefined
-    sprite = undefined
+  if (!id) {
+    id = nanoid();
   }
-}
+
+  if (!level) {
+    level = [0, 0];
+  }
+
+  function prepareChangeFields(evt) {
+    if (evt.target.checked) {
+      // prepare the necessary data structure for the checked key
+      change = {type: "mutates", day: [], night: []};
+    } else {
+      change = false;
+    }
+  }
+
+  function save(evt) {
+    evt.preventDefault();
+
+    saveFn({
+      name,
+      level,
+      id,
+      element,
+      change,
+      area,
+      undead,
+      sprite,
+      accuracy,
+    });
+
+    if (!isUpdate) {
+      level = [0, 0];
+      name = undefined;
+      id = nanoid();
+      element = undefined;
+      change = undefined;
+      area = undefined;
+      accuracy = undefined;
+      undead = undefined;
+      sprite = undefined;
+    }
+  }
 </script>
