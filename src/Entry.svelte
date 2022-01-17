@@ -68,7 +68,7 @@
         {#if !entry.undead}
           <div class="flex mt-2 border border-amber-500 justify-between items-center">
             {#each getZoneWeatherTypes(entry.area) as weather}
-              <div class="py-2 grow text-center px-3 h-full"
+              <div class="py-2 grow text-center px-1 lg:px-3 h-full"
                    class:bg-green-300={doesChangeDuring(weather, "day")}>
                 <div class="flex justify-center">
                   <Icon name={getWeatherName(weather).toLowerCase()}/>
@@ -80,7 +80,7 @@
         {/if}
         <div class="flex mt-2 border border-blue-500 justify-between items-center">
           {#each getZoneWeatherTypes(entry.area) as weather}
-            <div class="py-2 grow text-center px-3 h-full"
+            <div class="py-2 grow text-center px-1 lg:px-3 h-full"
                  class:bg-green-300={doesChangeDuring(weather, "night")}>
               <div class="flex justify-center">
                 <Icon name={getWeatherName(weather).toLowerCase()}/>
@@ -97,7 +97,7 @@
       <code class="bg-gray-200 px-2 py-1">{window.location}</code>
     </div>
     <div>
-      <h4 class="font-bold">Element:
+      <h4 class="font-bold mt-3 lg:mt-0">Element:
         <Element name={entry.element}/>
       </h4>
       <p class="mt-2">

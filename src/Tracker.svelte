@@ -170,7 +170,7 @@
   };
 </script>
 
-<div class="grid grid-cols-3 gap-1">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-1">
   <div class="col-span-2">
     <ul class="list-none divide-y shadow-lg">
       {#each matches as match, i (match.id)}
@@ -231,7 +231,7 @@
       {/each}
     </ul>
   </div>
-  <div class="ml-4">
+  <div class="ml-4 row-start-1 lg:row-start-auto">
     <h2 class="text-xl font-bold mb-3">Sort</h2>
     <div class="flex font-bold justify-between">
       <div class="border border-gray-300 rounded-l py-1 px-3">Level</div>
