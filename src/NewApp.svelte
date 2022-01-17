@@ -11,6 +11,7 @@
 
   day.extend(relativeTime);
 
+  const VERSION = "2.0.0";
   $: ezTime = formatUtc($time);
 </script>
 
@@ -52,7 +53,11 @@
       <ZoneForecast zone="pagos"/>
       <ZoneForecast zone="pyros"/>
       <ZoneForecast zone="hydatos"/>
-      <div class="mt-2">Created by Raiah Belse (Zodiark).</div>
+      <div class="mt-2">
+        Created by Raiah Belse (Zodiark).<br/>
+        <a href="https://codeberg.org/mokou/eurekan-bestiary" class="underline text-blue-600">Website Source</a>
+        &bull; Version {VERSION}
+      </div>
     </div>
   </footer>
 </div>
