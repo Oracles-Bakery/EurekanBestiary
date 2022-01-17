@@ -1,12 +1,16 @@
 <script>
   import Element from "./components/Element.svelte";
   import Icon from "./components/Icon.svelte";
+  import { revert } from "url-slug";
   import { getWeatherName, getZoneWeatherTypes, matchSpriteName } from "./ew";
   import { data } from "./stores";
   import { capitalize, findOffensiveElement, formatLevel } from "./util";
 
   export let meta;
-  $: entry = $data.find(d => d.id === meta.params.id);
+  $: entry = $data.find(d => {
+    const {zone, slug} = meta.params;
+    return d.area === zone && revert(slug).toLowerCase() === d.name.toLowerCase();
+  });
 
   function doesChangeDuring(weather, dn) {
     return entry.change[dn].includes(String(weather));
@@ -88,6 +92,9 @@
       {:else}
         <div class="text-gray-700 italic">This monster does not change.</div>
       {/if}
+
+      <h4 class="font-bold mt-4">Permalink</h4>
+      <code class="bg-gray-200 px-2 py-1">{window.location}</code>
     </div>
     <div>
       <h4 class="font-bold">Element:

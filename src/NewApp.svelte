@@ -41,7 +41,7 @@
     <Route path="/">
       <Tracker/>
     </Route>
-    <Route path="/entry/:id" let:meta>
+    <Route path="/:zone/:slug" let:meta>
       <Entry meta={meta}/>
     </Route>
   </div>

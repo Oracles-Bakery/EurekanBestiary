@@ -2,6 +2,7 @@
   import day from "dayjs";
   import { data, weather, time, filters, sort } from "./stores";
   import isBetween from "dayjs/plugin/isBetween";
+  import { convert } from "url-slug";
   import { matchSpriteName } from "./ew";
   import relativeTime from "dayjs/plugin/relativeTime";
   import Icon from "./components/Icon.svelte";
@@ -179,7 +180,7 @@
             class:border-b={i === matches.length - 1}
             class:border-t={i === 0}
             class:bg-gray-200={!match.spawns[0]}>
-          <a href="/entry/{match.id}" class="flex justify-between">
+          <a href="/{match.area}/{convert(match.name)}" class="flex justify-between">
             <div>
               <h1 class="block font-bold text-xl mb-1 flex items-center">
                 <div class="border rounded-sm px-1 inline-block text-sm font-mono align-middle mr-1">
