@@ -48,6 +48,21 @@ export const HYDATOS_WEATHER = [
   [WEATHER.SNOW, 22],
 ];
 
+export function getZoneWeatherTypes(zone) {
+  let v
+  if (zone === "anemos") {
+    v = ANEMOS_WEATHER
+  } else if (zone === "pagos") {
+    v = PAGOS_WEATHER
+  } else if (zone === "pyros") {
+    v = PYROS_WEATHER
+  } else if (zone === "hydatos") {
+    v = HYDATOS_WEATHER
+  }
+
+  return v.map(w => w[0])
+}
+
 export function getWeatherName(weather) {
   switch (weather) {
     case 0:

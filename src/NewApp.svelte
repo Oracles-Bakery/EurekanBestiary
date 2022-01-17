@@ -1,5 +1,6 @@
 <script>
   import { Route } from "tinro";
+  import Entry from "./Entry.svelte";
   import { time, weather } from "./stores.js";
   import Tracker from "./Tracker.svelte";
   import ZoneWeather from "./components/ZoneWeather.svelte";
@@ -39,6 +40,9 @@
   <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-4">
     <Route path="/">
       <Tracker/>
+    </Route>
+    <Route path="/entry/:id" let:meta>
+      <Entry meta={meta}/>
     </Route>
   </div>
   <footer>

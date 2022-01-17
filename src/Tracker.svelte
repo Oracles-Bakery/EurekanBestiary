@@ -6,7 +6,7 @@
   import relativeTime from "dayjs/plugin/relativeTime";
   import Icon from "./components/Icon.svelte";
   import utc from "dayjs/plugin/utc";
-  import { capitalize } from "./util";
+  import { capitalize, formatLevel } from "./util";
 
   day.extend(isBetween);
   day.extend(relativeTime);
@@ -145,13 +145,6 @@
       return `Despawns ${day($weather[match.area][match.spawns.indexOf(false)].date).fromNow()}`;
     }
     return `Spawns ${day($weather[match.area][match.spawns.indexOf(true)].date).fromNow()}`;
-  }
-
-  function formatLevel(level) {
-    if (level[0] !== level[1]) {
-      return `${level[0]}-${level[1]}`;
-    }
-    return level[0];
   }
 
   const toggleZoneFilter = (zone) => () => {

@@ -49,7 +49,7 @@ export const weather = writable({}, (set) => {
   };
 });
 export const data = readable([], (set) => {
-  fetch("dist/bestiary.json")
+  fetch("/dist/bestiary.json")
     .then((data) => data.json())
     .then((data) => {
       set(data);
