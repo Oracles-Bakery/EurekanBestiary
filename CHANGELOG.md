@@ -2,17 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres
+to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 The site always runs on the latest released version.
+
+## [2.0.0] - 2022-01-17
+
+## Added
+
+- Redesigned the site.
+- Monsters can now be filtered by a variety of factors.
+- Added separate entry pages for every monster.
+- Switched the JSON source from multiple files to one single file.
+- Added a JSON editor for easy editing of the source file.
 
 ## [1.2.4] - 2021-12-22
 
 ## Added
 
-- Added a banner that notifies users of the URL change, only shown when redirecting from
-  the old URL.
+- Added a banner that notifies users of the URL change, only shown when redirecting from the old URL.
 
 ## [1.2.3] - 2021-09-02
 
@@ -34,11 +43,10 @@ The site always runs on the latest released version.
 
 ## Fixed
 
-- The "next weather change in" timer now updates every second. Previously it only updated every
-  10 seconds, which caused a weird bit of desync with the other site features.
-- Similarly, the Eorzea Time clock now updates twice a second. Because Eorzean minutes are not
-  exactly a second, this should hopefully cause the clock to not lag behind the in-game clock's
-  intervals _too_ much.
+- The "next weather change in" timer now updates every second. Previously it only updated every 10 seconds, which caused
+  a weird bit of desync with the other site features.
+- Similarly, the Eorzea Time clock now updates twice a second. Because Eorzean minutes are not exactly a second, this
+  should hopefully cause the clock to not lag behind the in-game clock's intervals _too_ much.
 
 ## [1.2.0] - 2021-08-24
 
@@ -61,11 +69,9 @@ The site always runs on the latest released version.
 
 ## Added
 
-- Sprites now know about their spawn time, and will tell you if they're not
-  spawning due to a missing weather condition.
-- Sprites now also show the logogram they drop, give they drop any. This
-  currently only works with Pyros sprites, I don't have enough data about
-  Hydatos sprites at the moment.
+- Sprites now know about their spawn time, and will tell you if they're not spawning due to a missing weather condition.
+- Sprites now also show the logogram they drop, give they drop any. This currently only works with Pyros sprites, I
+  don't have enough data about Hydatos sprites at the moment.
 
 ## [1.0.1] - 2021-08-09
 
