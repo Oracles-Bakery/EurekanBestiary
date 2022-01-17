@@ -74,7 +74,7 @@
     }
   }
 
-  // Returns, given an entry, the next timestamp when that entry will mutate/augment.
+  // Returns, given an entry, the next timestamp when that entry will mutate/adapt.
   function getNextChangeTime(entry, spawning) {
     if (!entry.change) {
       return false;
@@ -190,8 +190,8 @@
                   {#if match.change && match.change.type === "mutates"}
                     <Icon name="mutates"/>
                   {/if}
-                  {#if match.change && match.change.type === "augments"}
-                    <Icon name="augments"/>
+                  {#if match.change && match.change.type === "adapts"}
+                    <Icon name="adapts"/>
                   {/if}
                   <div class="text-xs font-normal ml-1">{match.change ? match.change.type : ""}</div>
                 </div>

@@ -37,7 +37,7 @@
       <label for="changeType">Change type</label>
       <select id="changeType" bind:value={change.type}>
         <option value="mutates">Mutates</option>
-        <option value="augments">Adapts</option>
+        <option value="adapts">Adapts</option>
       </select>
     </fieldset>
     <fieldset>
