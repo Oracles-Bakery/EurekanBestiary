@@ -1,37 +1,22 @@
-# Eureka Marks
+# Eurekan Bestiary
 
-A website to find out what monsters in FFXIV's Eureka instances
-spawn when, and what they drop, and when they mutate or augment.
+A website to find out what monsters in FFXIV's Eureka instances spawn when, and what they drop, and when they mutate or
+augment.
 
 ## Updating Sources
 
-Almost all structured information on the site is sourced from the
-Bestiary JSON files. These are initially converted from an auto-exported
-CSV file, sourced from a copy of the official Eurekan Bestiary document
-that I changed so that its CSV export is machine-readable ([link](https://docs.google.com/spreadsheets/d/1f22zAQuSEWysOMB-yzUk-WZe0FdKk8S34-xlDT1qRyk/edit?usp=sharing)).
-
-If you want to change anything, it's best to send a patch that edits
-the `src/[zone].bestiary.json` files. Regenerating those files via
-the included script would undo many manual formatting and content edits.
-
-## Sending Patches
-
-You can send patches with improvements, fixes or new features to
-`~ana/general-patches@lists.sr.ht`. Be sure to prefix your email
-title with `[eureka-marks]` so I know what project it's related to.
-
-If it's your first time sending a Git patch via email, this website
-may help: https://git-send-email.io.
+Almost all structured information on the site is sourced from the Bestiary JSON file. They're manually updated and keep
+in loose cadence with the bestiary sheet. I've made it fairly easy to update them manually without having to edit a
+bunch of JSON manually - see the
+`json-editor` subfolder for more information.
 
 ## Available Scripts
 
 ### npm start
 
-Runs the app in the development mode.
-Open http://localhost:8080 to view it in the browser.
+Runs the app in the development mode. Open http://localhost:8080 to view it in the browser.
 
-The page will reload if you make edits.
-You will also see any lint errors in the console.
+The page will reload if you make edits. You will also see any lint errors in the console.
 
 ### npm run build
 

@@ -1,24 +1,17 @@
-# New Project
+# json-editor
 
-> ✨ Bootstrapped with Create Snowpack App (CSA).
+This is a supporting component of the Eurekan Bestiary. It's a barebones website that allows you to directly edit the
+Bestiary JSON file.
 
-## Available Scripts
+## Setup
 
-### npm start
+In a terminal:
 
-Runs the app in the development mode.
-Open http://localhost:8080 to view it in the browser.
+```shell
+npm install
+npm start
+```
 
-The page will reload if you make edits.
-You will also see any lint errors in the console.
-
-### npm run build
-
-Builds a static copy of your site to the `build/` folder.
-Your app is ready to be deployed!
-
-**For the best production performance:** Add a build bundler plugin like [@snowpack/plugin-webpack](https://github.com/snowpackjs/snowpack/tree/main/plugins/plugin-webpack) or [snowpack-plugin-rollup-bundle](https://github.com/ParamagicDev/snowpack-plugin-rollup-bundle) to your `snowpack.config.mjs` config file.
-
-### Q: What about Eject?
-
-No eject needed! Snowpack guarantees zero lock-in, and CSA strives for the same.
+This will open the website locally. You need to copy the JSON as it currently exists and paste it into the textarea when
+beginning to edit, as file access is difficult to do on a website. Edit what you want, and then click "show/hide json
+export", copy what's in there, and replace the contents of the JSON file with it.
