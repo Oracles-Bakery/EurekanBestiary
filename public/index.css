@@ -2,6 +2,23 @@
 
 :root {
   --secondary-color: #7FDBFF;
+  --secondary-color-light: #9fe4ff; 
+}
+
+.border-success {
+  border-color: var(--success-color) !important;
+}
+
+.border-primary {
+  border-color: var(--primary-color) !important;
+}
+
+.border-secondary {
+  border-color: var(--secondary-color) !important;
+}
+
+.border-danger {
+  border-color: var(--danger-color) !important;
 }
 
 @tailwind base;
