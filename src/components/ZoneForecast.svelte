@@ -15,8 +15,8 @@
   });
 
   const mainClass = clsx("card-title p-10 mb-5", {
-    "bg-success": zone === "anemos",
-    "bg-secondary": zone === "pagos",
+    "bg-success text-dark-dm": zone === "anemos",
+    "bg-secondary text-dark-dm": zone === "pagos",
     "bg-danger text-white": zone === "pyros",
     "bg-primary text-white": zone === "hydatos",
   });
