@@ -1,5 +1,9 @@
 @import "halfmoon/css/halfmoon-variables.min.css";
 
+:root {
+  --secondary-color: #7FDBFF;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
