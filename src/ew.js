@@ -48,19 +48,26 @@ export const HYDATOS_WEATHER = [
   [WEATHER.SNOW, 22],
 ];
 
+export const zoneWeathers = {
+  anemos: ANEMOS_WEATHER,
+  pagos: PAGOS_WEATHER,
+  pyros: PYROS_WEATHER,
+  hydatos: HYDATOS_WEATHER,
+};
+
 export function getZoneWeatherTypes(zone) {
-  let v
+  let v;
   if (zone === "anemos") {
-    v = ANEMOS_WEATHER
+    v = ANEMOS_WEATHER;
   } else if (zone === "pagos") {
-    v = PAGOS_WEATHER
+    v = PAGOS_WEATHER;
   } else if (zone === "pyros") {
-    v = PYROS_WEATHER
+    v = PYROS_WEATHER;
   } else if (zone === "hydatos") {
-    v = HYDATOS_WEATHER
+    v = HYDATOS_WEATHER;
   }
 
-  return v.map(w => w[0])
+  return v.map((w) => w[0]);
 }
 
 export function getWeatherName(weather) {
@@ -84,7 +91,7 @@ export function getWeatherName(weather) {
     case 8:
       return "Fog";
     case 9:
-      return "Umbral Wind";
+      return "U. Wind";
     default:
       return "Unknown";
   }

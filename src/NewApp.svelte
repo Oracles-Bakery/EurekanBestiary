@@ -1,12 +1,15 @@
 <script>
-  import { Route } from "tinro";
+  import { Route, active } from "tinro";
+  import halfmoon from "halfmoon";
   import Entry from "./Entry.svelte";
   import { time, weather } from "./stores.js";
   import Tracker from "./Tracker.svelte";
+  import Forecast from "./Forecast.svelte";
   import ZoneWeather from "./components/ZoneWeather.svelte";
   import day from "dayjs";
   import relativeTime from "dayjs/plugin/relativeTime";
   import ZoneForecast from "./components/ZoneForecast.svelte";
+  import Icon from "./components/Icon.svelte";
   import { formatUtc } from "./util";
 
   day.extend(relativeTime);
@@ -16,54 +19,68 @@
   $: ezTime = formatUtc($time);
 </script>
 
-<div class="bg-white">
-  <header class="mx-auto px-2 sm:px-6 lg:px-8 bg-gray-800 lg:drop-shadow-md">
-    <div class="relative flex items-center justify-between h-16">
-      <div class="flex-1 flex items-center justify-start">
-        <div class="flex-shrink-0 flex items-center">
-          <a href="/"><img src="/logoicon.png" alt="logo icon" class="h-12 w-auto"/></a>
-        </div>
-        <a href="/" class="hidden lg:block text-white px-3 py-2 text-sm font-bold text-xl">Eurekan Bestiary</a>
+<div class="page-wrapper with-navbar">
+  <nav class="navbar">
+    <a href="/" class="navbar-brand">
+      <img src="/logoicon.png" alt="logo icon" />
+      Eurekan Bestiary
+    </a>
+    <div class="navbar-content">
+      <strong
+        class="px-10 py-5 d-none d-md-inline rounded bg-primary text-white"
+      >
+        {ezTime} ST
+      </strong>
+      <a href="/" use:active exact class="nav-item text-decoration-none">
+        <a href="/" class="nav-link">Bestiary</a>
+      </a>
+      <a href="/forecast" use:active class="nav-item text-decoration-none">
+        <a href="/forecast" class="nav-link">Forecast</a>
+      </a>
+    </div>
+    <div class="navbar-content ml-auto">
+      <div class="d-none d-lg-block">
+        <ZoneWeather zone="anemos" />
+        <ZoneWeather zone="pagos" extraClasses="ml-5" />
+        <ZoneWeather zone="pyros" extraClasses="ml-5" />
+        <ZoneWeather zone="hydatos" extraClasses="ml-5" />
       </div>
-      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-        <ZoneWeather zone="anemos"/>
-        <ZoneWeather zone="pagos"/>
-        <ZoneWeather zone="pyros"/>
-        <ZoneWeather zone="hydatos"/>
-        <div class="font-bold text-white ml-4 text-center">
-          {ezTime}
-          <div class="text-sm font-normal hidden lg:block">
-            change in {day($weather["anemos"][1].date).fromNow()}
-          </div>
-        </div>
+      <div class="btn ml-5" on:click={() => halfmoon.toggleDarkMode()}>
+        <Icon name="moon" extraClasses="inline-block" />
       </div>
     </div>
-  </header>
-  {#if isRedirected}
-    <div class="text-center bg-red-500 text-white py-2">
-      <strong>Notice:</strong> The website URL has changed to eureka.fernehalwes.org! Please update your bookmarks.
+  </nav>
+  <div class="content-wrapper">
+    {#if isRedirected}
+      <div class="text-center bg-red-500 text-white py-2">
+        <strong>Notice:</strong> The website URL has changed to eureka.fernehalwes.org!
+        Please update your bookmarks.
+      </div>
+    {/if}
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-4">
+      <Route path="/">
+        <Tracker />
+      </Route>
+      <Route path="/forecast">
+        <Forecast />
+      </Route>
+      <Route path="/:zone/:slug" let:meta>
+        <Entry {meta} />
+      </Route>
     </div>
-  {/if}
-  <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-4">
-    <Route path="/">
-      <Tracker/>
-    </Route>
-    <Route path="/:zone/:slug" let:meta>
-      <Entry meta={meta}/>
-    </Route>
+    <footer>
+      <div class="container text-muted">
+        <div class="mt-2">
+          Created by Raiah Belse (Zodiark).<br />
+          <a
+            href="https://codeberg.org/fernehalwes/eurekan-bestiary"
+            class="underline text-blue-600"
+          >
+            Website Source
+          </a>
+          &bull; Version {VERSION}
+        </div>
+      </div>
+    </footer>
   </div>
-  <footer>
-    <hr class="border-gray-300"/>
-    <div class="px-2 py-2 sm:px-6 lg:px-16 text-gray-500">
-      <ZoneForecast zone="anemos"/>
-      <ZoneForecast zone="pagos"/>
-      <ZoneForecast zone="pyros"/>
-      <ZoneForecast zone="hydatos"/>
-      <div class="mt-2">
-        Created by Raiah Belse (Zodiark).<br/>
-        <a href="https://codeberg.org/mokou/eurekan-bestiary" class="underline text-blue-600">Website Source</a>
-        &bull; Version {VERSION}
-      </div>
-    </div>
-  </footer>
 </div>

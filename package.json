@@ -4,11 +4,15 @@
     "build": "snowpack build",
     "test": "echo \"This template does not include a test runner by default.\" && exit 1"
   },
+  "prettier": {
+    "singleAttributePerLine": false
+  },
   "devDependencies": {
     "@snowpack/plugin-postcss": "~1.4.3",
     "@snowpack/plugin-svelte": "~3.7",
     "autoprefixer": "~10.4.1",
     "postcss": "~8.4.5",
+    "postcss-import": "~14.1.0",
     "snowpack": "~3.8"
   },
   "dependencies": {

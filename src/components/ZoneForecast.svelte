@@ -1,23 +1,81 @@
 <script>
-  import { weather } from "../stores";
-  import { getWeatherName } from "../ew";
+  import { weather, time } from "../stores";
+  import { getWeatherName, zoneWeathers } from "../ew";
+  import { capitalize } from "../util";
+  import Icon from "./Icon.svelte";
+  import clsx from "clsx";
   import day from "dayjs";
+  import relativeTime from "dayjs/plugin/relativeTime";
+  day.extend(relativeTime);
 
-  export let zone = [];
-  const capitalizedZone = zone[0].toUpperCase() + zone.slice(1);
+  export let zone = "";
+  let percentUntil = 0;
+  time.subscribe((newTime) => {
+    percentUntil = recalcPercent($weather, newTime);
+  });
+
+  const mainClass = clsx("card-title p-10 mb-5", {
+    "bg-success": zone === "anemos",
+    "bg-secondary": zone === "pagos",
+    "bg-danger text-white": zone === "pyros",
+    "bg-primary text-white": zone === "hydatos",
+  });
+
+  function recalcPercent(weather, time) {
+    const curDate = weather[zone][0].date;
+    const nextDate = weather[zone][1].date;
+    const realTime = time / (1440 / 70);
+    return (
+      ((realTime - curDate.getTime()) /
+        (nextDate.getTime() - curDate.getTime())) *
+      100
+    );
+  }
 </script>
 
-<div class="flex justify-between items-center">
-  <div>{capitalizedZone} Forecast:</div>
-  {#each $weather[zone] as w, i}
-    <div class="{i === 0 && 'font-bold text-green-700'}">
-      <div class="text-center">{getWeatherName(w.currWeather)}</div>
-      <div class="text-xs text-center">{day(w.date).format("HH:mm")}</div>
+<div class="card p-0 mx-0">
+  <div class={mainClass}>{capitalize(zone)}</div>
+  <div class="px-5">
+    <div class="progress h-25 mt-10">
+      <div class="progress-bar py-10" style={`width: ${percentUntil}%;`}>
+        {#if percentUntil > 30}
+          {getWeatherName($weather[zone][0].currWeather)}
+          for {day($weather[zone][1].date).fromNow(true)}
+        {/if}
+      </div>
     </div>
-    {#if $weather[zone].length !== i + 1}
-      <div>➔</div>
-    {/if}
-  {/each}
+
+    <hr class="border-top mt-10" />
+    <div class="row">
+      {#each zoneWeathers[zone] as [zoneWeather, _]}
+        <div
+          class={clsx("col-sm text-center py-5", {
+            "bg-primary text-white":
+              $weather[zone][0].currWeather === zoneWeather,
+          })}
+        >
+          <div class="font-size-20">
+            <span class="inline-block"
+              ><Icon name={getWeatherName(zoneWeather).toLowerCase()} /></span
+            >
+            {getWeatherName(zoneWeather)}
+          </div>
+          {#if $weather[zone][0].currWeather === zoneWeather}
+            Happening now!
+          {:else if $weather[zone].find((f) => f.currWeather === zoneWeather)}
+            Next in {day(
+              $weather[zone].find((f) => f.currWeather === zoneWeather).date
+            ).fromNow(true)}
+            <span class="block text-muted font-size-14">
+              {day(
+                $weather[zone].find((f) => f.currWeather === zoneWeather).date
+              ).format("HH:mm")}
+            </span>
+          {:else}
+            In the far future...
+          {/if}
+        </div>
+      {/each}
+    </div>
+  </div>
 </div>
-
-
