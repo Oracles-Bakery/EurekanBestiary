@@ -11,10 +11,20 @@ The site always runs on the latest released version.
 
 ## Added
 
-- Migrated the site to use [Halfmoon](https://gethalfmoon.com).
+- Migrated the site to use [Halfmoon](https://gethalfmoon.com). This brings us a better
+  design and dark mode support without me really having to do any extra work.
 - Added a new "forecast" page that replaces the previous footer, allowing you to get a
   quick overview of the current and upcoming weather for all zones.
 - Elements are now displayed alongside enemy names on the tracker page.
+
+## Fixed
+
+- Some enemies were showing "Mutates/Adapts in NaN" before, this was a bug and is fixed now.
+- I _think_ I fixed a bug where it would sometimes show "Adapts 16 minutes ago" or something.
+  This was related to how weather cycles work in this game, there's 3 cycles, from 8:00 to 16:00,
+  16:00 to 0:00, and 0:00 to 8:00. Since day/night is from 8:00 to 18:00, the latter 2 weather cycles
+  include both night time and day time, which my algorithm previously accounted for, but in a broken
+  way. Hopefully, this works now.
 
 ## [2.0.1] - 2022-01-17
 
