@@ -9,7 +9,12 @@ The site always runs on the latest released version.
 
 ## Unreleased
 
-- Migrate the site to use [Halfmoon](https://gethalfmoon.com).
+## Added
+
+- Migrated the site to use [Halfmoon](https://gethalfmoon.com).
+- Added a new "forecast" page that replaces the previous footer, allowing you to get a
+  quick overview of the current and upcoming weather for all zones.
+- Elements are now displayed alongside enemy names on the tracker page.
 
 ## [2.0.1] - 2022-01-17
 
