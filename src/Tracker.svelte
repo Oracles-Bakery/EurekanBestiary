@@ -250,96 +250,99 @@
     </ul>
   </div>
   <div class="col-3">
-    <h2 class="font-size-18 font-weight-bold mb-5">Sort</h2>
-    <div class="input-group mb-5">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Level</span>
+    <div style="position: fixed; margin-right: 30px;">
+      <h2 class="font-size-18 font-weight-bold mb-5">Sort</h2>
+      <div class="input-group mb-5">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Level</span>
+        </div>
+        <div class="input-group-append flex-grow-1">
+          <button
+            class="btn btn-block"
+            class:btn-primary={$sort.level === "asc"}
+            on:click={setSort("level", "asc")}>Asc</button
+          >
+        </div>
+        <div class="input-group-append flex-grow-1">
+          <button
+            class="btn btn-block"
+            class:btn-primary={$sort.level === "desc"}
+            on:click={setSort("level", "desc")}>Desc</button
+          >
+        </div>
       </div>
-      <div class="input-group-append flex-grow-1">
-        <button
-          class="btn btn-block"
-          class:btn-primary={$sort.level === "asc"}
-          on:click={setSort("level", "asc")}>Asc</button
-        >
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Name</span>
+        </div>
+        <div class="input-group-append flex-grow-1">
+          <button
+            class="btn btn-block"
+            class:btn-primary={$sort.name === "asc"}
+            on:click={setSort("name", "asc")}>Asc</button
+          >
+        </div>
+        <div class="input-group-append flex-grow-1">
+          <button
+            class="btn btn-block"
+            class:btn-primary={$sort.name === "desc"}
+            on:click={setSort("name", "desc")}>Desc</button
+          >
+        </div>
       </div>
-      <div class="input-group-append flex-grow-1">
-        <button
-          class="btn btn-block"
-          class:btn-primary={$sort.level === "desc"}
-          on:click={setSort("level", "desc")}>Desc</button
-        >
+      <div class="my-2">
+        <input id="maFirst" bind:checked={$sort.maTop} type="checkbox" />
+        <label for="maFirst">Sort changing monsters first?</label>
       </div>
-    </div>
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Name</span>
-      </div>
-      <div class="input-group-append flex-grow-1">
-        <button
-          class="btn btn-block"
-          class:btn-primary={$sort.name === "asc"}
-          on:click={setSort("name", "asc")}>Asc</button
-        >
-      </div>
-      <div class="input-group-append flex-grow-1">
-        <button
-          class="btn btn-block"
-          class:btn-primary={$sort.name === "desc"}
-          on:click={setSort("name", "desc")}>Desc</button
-        >
-      </div>
-    </div>
-    <div class="my-2">
-      <input id="maFirst" bind:checked={$sort.maTop} type="checkbox" />
-      <label for="maFirst">Sort changing monsters first?</label>
-    </div>
-    <h2 class="font-size-18 font-weight-bold mb-5">Zone Filters</h2>
-    <button
-      class="btn btn-lg btn-block btn-no-click mb-5"
-      class:btn-success={$filters.zones.includes("anemos")}
-      on:click={toggleZoneFilter("anemos")}
-    >
-      Anemos
-    </button>
-    <button
-      class="btn btn-lg btn-block btn-no-click mb-5"
-      class:btn-secondary={$filters.zones.includes("pagos")}
-      on:click={toggleZoneFilter("pagos")}
-    >
-      Pagos
-    </button>
-    <button
-      class="btn btn-lg btn-block btn-no-click mb-5"
-      class:btn-danger={$filters.zones.includes("pyros")}
-      on:click={toggleZoneFilter("pyros")}
-    >
-      Pyros
-    </button>
-    <button
-      class="btn btn-lg btn-block btn-no-click"
-      class:btn-primary={$filters.zones.includes("hydatos")}
-      on:click={toggleZoneFilter("hydatos")}
-    >
-      Hydatos
-    </button>
-
-    <div class="mt-2">
-      <label for="level" class="font-size-18 font-weight-bold">Your Level</label
+      <h2 class="font-size-18 font-weight-bold mb-5">Zone Filters</h2>
+      <button
+        class="btn btn-lg btn-block btn-no-click mb-5"
+        class:btn-success={$filters.zones.includes("anemos")}
+        on:click={toggleZoneFilter("anemos")}
       >
-      <input
-        type="number"
-        min="1"
-        max="60"
-        id="level"
-        bind:value={$filters.level}
-        class="form-control"
-        placeholder="Between 1 and 60"
-      />
-      <p class="text-muted font-size-12 mt-5">
-        This will only select the enemies that are up to 2 levels above your
-        level. It's recommended to focus enemies 2 levels above you for maximum
-        EXP gain.
-      </p>
+        Anemos
+      </button>
+      <button
+        class="btn btn-lg btn-block btn-no-click mb-5"
+        class:btn-secondary={$filters.zones.includes("pagos")}
+        on:click={toggleZoneFilter("pagos")}
+      >
+        Pagos
+      </button>
+      <button
+        class="btn btn-lg btn-block btn-no-click mb-5"
+        class:btn-danger={$filters.zones.includes("pyros")}
+        on:click={toggleZoneFilter("pyros")}
+      >
+        Pyros
+      </button>
+      <button
+        class="btn btn-lg btn-block btn-no-click"
+        class:btn-primary={$filters.zones.includes("hydatos")}
+        on:click={toggleZoneFilter("hydatos")}
+      >
+        Hydatos
+      </button>
+
+      <div class="mt-2">
+        <label for="level" class="font-size-18 font-weight-bold"
+          >Your Level</label
+        >
+        <input
+          type="number"
+          min="1"
+          max="60"
+          id="level"
+          bind:value={$filters.level}
+          class="form-control"
+          placeholder="Between 1 and 60"
+        />
+        <p class="text-muted font-size-12 mt-5">
+          This will only select the enemies that are up to 2 levels above your
+          level. It's recommended to focus enemies 2 levels above you for
+          maximum EXP gain.
+        </p>
+      </div>
     </div>
   </div>
 </div>
