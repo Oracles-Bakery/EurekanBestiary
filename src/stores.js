@@ -18,6 +18,7 @@ export const sort = localStorageStore("eb-sort", {
   name: null,
   maTop: true,
 });
+export const hasSeenIntro = localStorageStore("eb-intro-complete", false);
 export const time = writable(new Date().getTime() * (1440 / 70), (set) => {
   const interval = setInterval(() => {
     set(new Date().getTime() * (1440 / 70));
@@ -55,13 +56,12 @@ export const data = readable([], (set) => {
       set(data);
     });
 
-  return function stop() {
-  };
+  return function stop() {};
 });
 
 function localStorageStore(key, initial) {
   const item = localStorage.getItem(key);
-  const {subscribe, set} = writable(JSON.parse(item) || initial || null);
+  const { subscribe, set } = writable(JSON.parse(item) || initial || null);
   if (!item && initial) {
     localStorage.setItem(key, JSON.stringify(initial));
   }

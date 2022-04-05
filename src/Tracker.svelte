@@ -1,6 +1,6 @@
 <script>
   import day from "dayjs";
-  import { data, weather, time, filters, sort } from "./stores";
+  import { data, weather, time, filters, sort, hasSeenIntro } from "./stores";
   import isBetween from "dayjs/plugin/isBetween";
   import { convert } from "url-slug";
   import { matchSpriteName } from "./ew";
@@ -197,6 +197,32 @@
 
 <div class="container-fluid row mt-10">
   <div class="col-9 px-15">
+    {#if !$hasSeenIntro}
+      <div class="alert alert-primary mb-5">
+        <h5 class="alert-heading">Welcome to the Eurekan Bestiary!</h5>
+        This is a website designed to help you do the following:
+        <ul style="list-style: disc; margin-left: 15px;">
+          <li class="m-0">
+            Track adaption/mutation times for certain monsters in Eureka.
+            Defeating mutating or adapting monsters nets you a substantial XP
+            bonus.
+          </li>
+          <li class="m-0">
+            Help you keep track of the current weather in Eureka zones.
+          </li>
+          <li class="m-0">
+            In general, we're trying to catalogue each and every enemy you can
+            meet in Eureka.
+          </li>
+        </ul>
+        You can use the controls on the right to help filter enemies. Have fun!
+
+        <button
+          class="btn block mt-5 btn-sm"
+          on:click={() => hasSeenIntro.set(true)}>Dismiss</button
+        >
+      </div>
+    {/if}
     <ul>
       {#each matches as match, i (match.id)}
         <li

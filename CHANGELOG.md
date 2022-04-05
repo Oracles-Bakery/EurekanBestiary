@@ -16,6 +16,7 @@ The site always runs on the latest released version.
 - Added a new "forecast" page that replaces the previous footer, allowing you to get a
   quick overview of the current and upcoming weather for all zones.
 - Elements are now displayed alongside enemy names on the tracker page.
+- Added a little intro that can be dismissed.
 
 ## Fixed
 
