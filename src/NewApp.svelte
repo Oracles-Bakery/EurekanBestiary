@@ -8,7 +8,6 @@
   import ZoneWeather from "./components/ZoneWeather.svelte";
   import day from "dayjs";
   import relativeTime from "dayjs/plugin/relativeTime";
-  import ZoneForecast from "./components/ZoneForecast.svelte";
   import Icon from "./components/Icon.svelte";
   import { formatUtc } from "./util";
 
@@ -52,9 +51,15 @@
   </nav>
   <div class="content-wrapper">
     {#if isRedirected}
-      <div class="text-center bg-red-500 text-white py-2">
-        <strong>Notice:</strong> The website URL has changed to eureka.fernehalwes.org!
-        Please update your bookmarks.
+      <div class="container mt-15">
+        <div class="alert alert-danger">
+          <h4 class="alert-heading">Notice</h4>
+          The website URL has changed to
+          <a
+            href="https://eureka.fernehalwes.org"
+            class="alert-link font-weight-bold">eureka.fernehalwes.org</a
+          >! Please update your bookmarks.
+        </div>
       </div>
     {/if}
     <div class="container">
