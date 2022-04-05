@@ -12,6 +12,7 @@ The site always runs on the latest released version.
 ## Changed
 
 - The forecast page now uses a 4-column layout on larger screens.
+- When sorting by changing monsters, it now prioritizes the ones that are currently changing.
 
 ## [2.1.0] - 2022-04-05
 

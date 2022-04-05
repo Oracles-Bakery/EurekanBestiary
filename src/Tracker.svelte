@@ -39,7 +39,13 @@
         return true;
       })
       .sort((a, b) => {
-        if ($sort.maTop && a.change && !b.change) {
+        const changeA = a.change && isChanging(a);
+        const changeB = b.change && isChanging(b);
+        if ($sort.maTop && changeA && !changeB) {
+          return -1;
+        } else if ($sort.maTop && !changeA && changeB) {
+          return 1;
+        } else if ($sort.maTop && a.change && !b.change) {
           return -1;
         } else if ($sort.maTop && !a.change && b.change) {
           return 1;
