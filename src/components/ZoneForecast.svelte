@@ -49,7 +49,7 @@
     <div class="row">
       {#each zoneWeathers[zone] as [zoneWeather, _]}
         <div
-          class={clsx("col-sm text-center py-5", {
+          class={clsx("col col-md-12 text-center py-5", {
             "bg-primary text-white":
               $weather[zone][0].currWeather === zoneWeather,
           })}

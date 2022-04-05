@@ -7,6 +7,12 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 The site always runs on the latest released version.
 
+## Unreleased
+
+## Changed
+
+- The forecast page now uses a 4-column layout on larger screens.
+
 ## [2.1.0] - 2022-04-05
 
 ## Added

@@ -4,7 +4,17 @@
 
 <h1 class="font-size-24 font-weight-bold">Forecast for Eureka</h1>
 
-<ZoneForecast zone="anemos" />
-<ZoneForecast zone="pagos" />
-<ZoneForecast zone="pyros" />
-<ZoneForecast zone="hydatos" />
+<div class="row">
+  <div class="col-12 col-md-3">
+    <ZoneForecast zone="anemos" />
+  </div>
+  <div class="col-12 col-md-3">
+    <ZoneForecast zone="pagos" />
+  </div>
+  <div class="col-12 col-md-3">
+    <ZoneForecast zone="pyros" />
+  </div>
+  <div class="col-12 col-md-3">
+    <ZoneForecast zone="hydatos" />
+  </div>
+</div>
