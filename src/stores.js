@@ -18,6 +18,7 @@ export const sort = localStorageStore("eb-sort", {
   name: null,
   maTop: true,
 });
+export const search = localStorageStore("eb-search", "");
 export const hasSeenIntro = localStorageStore("eb-intro-complete", false);
 export const time = writable(new Date().getTime() * (1440 / 70), (set) => {
   const interval = setInterval(() => {

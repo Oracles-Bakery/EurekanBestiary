@@ -1,6 +1,14 @@
 <script>
   import day from "dayjs";
-  import { data, weather, time, filters, sort, hasSeenIntro } from "./stores";
+  import {
+    data,
+    weather,
+    time,
+    filters,
+    sort,
+    hasSeenIntro,
+    search,
+  } from "./stores";
   import isBetween from "dayjs/plugin/isBetween";
   import { convert } from "url-slug";
   import { matchSpriteName } from "./ew";
@@ -9,6 +17,7 @@
   import Element from "./components/Element.svelte";
   import utc from "dayjs/plugin/utc";
   import clsx from "clsx";
+  import Fuse from "fuse.js";
   import { capitalize, formatLevel } from "./util";
 
   day.extend(isBetween);
@@ -25,7 +34,7 @@
   });
 
   function newMatches(data) {
-    return data
+    const filtered = data
       .filter((entry) => {
         if (!$filters.zones.includes(entry.area)) {
           return false;
@@ -66,6 +75,13 @@
           ...entry,
         };
       });
+    if (!$search || $search.length === 0) {
+      return filtered;
+    }
+    const fuse = new Fuse(filtered, {
+      keys: ["name"],
+    });
+    return fuse.search($search).map((r) => r.item);
   }
 
   function isUp(entry, weather) {
@@ -297,7 +313,14 @@
   </div>
   <div class="col-3">
     <div style="position: fixed; margin-right: 30px;">
-      <h2 class="font-size-18 font-weight-bold mb-5">Sort</h2>
+      <h2 class="font-size-18 font-weight-bold mb-5">Search</h2>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="Search by name..."
+        bind:value={$search}
+      />
+      <h2 class="font-size-18 font-weight-bold my-5">Sort</h2>
       <div class="input-group mb-5">
         <div class="input-group-prepend">
           <span class="input-group-text">Level</span>
