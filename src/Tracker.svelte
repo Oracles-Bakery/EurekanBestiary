@@ -107,7 +107,10 @@
 
       // 16:00 has two hours of day, and 6 hours of nighttime.
       if (date.hour() === 16) {
-        if (entry.change.day.includes(String(w.currWeather))) {
+        if (
+          entry.change.day.includes(String(w.currWeather)) &&
+          day($time).isBefore(date.set("hour", 18))
+        ) {
           match = date.toDate();
           return spawning;
         } else if (entry.change.night.includes(String(w.currWeather))) {
@@ -118,7 +121,10 @@
 
       // 0:00 has 6 hours of night, and 2 hours of daytime.
       if (date.hour() === 0) {
-        if (entry.change.night.includes(String(w.currWeather))) {
+        if (
+          entry.change.night.includes(String(w.currWeather)) &&
+          day($time).isBefore(date.add(6, "hour"))
+        ) {
           match = date.toDate();
           return spawning;
         } else if (entry.change.day.includes(String(w.currWeather))) {
@@ -235,9 +241,13 @@
                   {:else}
                     <div class="badge border-success">
                       {capitalize(match.change.type)}
-                      {day(
-                        getNextChangeTime(match, true) / (1440 / 70)
-                      ).fromNow()}
+                      {#if getNextChangeTime(match, true) instanceof Date}
+                        {day(
+                          getNextChangeTime(match, true) / (1440 / 70)
+                        ).fromNow()}
+                      {:else}
+                        in the far future...
+                      {/if}
                     </div>
                   {/if}
                 {:else}
