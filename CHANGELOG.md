@@ -13,10 +13,6 @@ The site always runs on the latest released version.
 
 - Added a search bar to the tracker page to filter down results even further.
 
-## Fixed
-
-- Removed the old CSS framework completely.
-
 ## [2.1.1] - 2022-04-05
 
 ## Changed
