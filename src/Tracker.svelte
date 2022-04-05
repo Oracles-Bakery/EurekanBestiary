@@ -6,6 +6,7 @@
   import { matchSpriteName } from "./ew";
   import relativeTime from "dayjs/plugin/relativeTime";
   import Icon from "./components/Icon.svelte";
+  import Element from "./components/Element.svelte";
   import utc from "dayjs/plugin/utc";
   import clsx from "clsx";
   import { capitalize, formatLevel } from "./util";
@@ -206,6 +207,9 @@
               <h1 class="d-flex align-items-center font-size-20">
                 <div class="badge font-mono px-5 mr-5">
                   Lv.{formatLevel(match.level)}
+                </div>
+                <div class="mr-5">
+                  <Element name={match.element} iconOnly={true} />
                 </div>
                 <div class="flex items-center">
                   <div class="mr-2">{match.name}</div>
