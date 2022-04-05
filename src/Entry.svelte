@@ -2,14 +2,17 @@
   import Element from "./components/Element.svelte";
   import Icon from "./components/Icon.svelte";
   import { revert } from "url-slug";
+  import clsx from "clsx";
   import { getWeatherName, getZoneWeatherTypes, matchSpriteName } from "./ew";
   import { data } from "./stores";
   import { capitalize, findOffensiveElement, formatLevel } from "./util";
 
   export let meta;
-  $: entry = $data.find(d => {
-    const {zone, slug} = meta.params;
-    return d.area === zone && revert(slug).toLowerCase() === d.name.toLowerCase();
+  $: entry = $data.find((d) => {
+    const { zone, slug } = meta.params;
+    return (
+      d.area === zone && revert(slug).toLowerCase() === d.name.toLowerCase()
+    );
   });
 
   function doesChangeDuring(weather, dn) {
@@ -17,117 +20,132 @@
   }
 </script>
 
+<div class="mt-15" />
+
 {#if entry !== undefined}
-  <div class="grid grid-cols-1 lg:grid-cols-5">
-    <div class="col-span-1">
+  {#if entry.accuracy === "1"}
+    <div class="alert mb-10" role="alert">
+      <h4 class="alert-heading">Note</h4>
+      Some details about this enemy have been confirmed, but there may be discrepancies
+      between the catalogued state and how it behaves in the game. Corrections and
+      further review may be required.
+    </div>
+  {/if}
+  {#if entry.accuracy === "0"}
+    <div class="alert alert-danger mb-10" role="alert">
+      <h4 class="alert-heading">Caveat empor!</h4>
+      Large parts of the information about this monster are missing. Any help in
+      researching this monster's attributes is appreciated.
+    </div>
+  {/if}
+
+  <div class="row">
+    <div class="col-12 col-md-2">
       <i>Placeholder for an image.</i>
     </div>
-    <div class="col-span-3 lg:px-7">
-      <h1 class="font-extrabold text-5xl my-2">{entry.name}</h1>
-      <div class="rounded-2xl font-medium text-sm inline-block px-2 py-1 border border-gray-300">
-        Lv.{formatLevel(entry.level)}</div>
-      <div class="rounded-2xl font-medium text-sm inline-block px-2 py-1 border border-gray-300">{capitalize(entry.area)}</div>
+    <div class="col-12 col-md-8 px-15">
+      <h1 class="font-size-34 font-weight-bolder">{entry.name}</h1>
+      <div class="badge">
+        Lv.{formatLevel(entry.level)}
+      </div>
+      <div class="badge">
+        {capitalize(entry.area)}
+      </div>
       {#if entry.undead}
-        <div class="rounded-2xl font-medium text-sm inline-block px-2 py-1 bg-red-200 text-red-700">Undead
-        </div>
+        <div class="badge border-color-secondary">Undead</div>
       {/if}
       {#if entry.sprite}
-        <div class="rounded-2xl font-medium text-sm inline-block px-2 py-1 bg-blue-200 font-bold text-blue-700">Sprite
-        </div>
+        <div class="badge border-color-secondary">Sprite</div>
       {/if}
       {#if entry.change}
-        <div class="rounded-2xl font-medium text-sm inline-block px-2 py-1 bg-green-200 font-bold text-green-700">
+        <div class="badge badge-success">
           {capitalize(entry.change.type)}
         </div>
       {/if}
 
-      <h4 class="font-bold mt-3">Spawning Conditions</h4>
-      <div class="flex items-center p-2 gap-1 mt-2 border border-green-500 shadow-lg justify-center">
-        {#if entry.undead}
-          <Icon name="moon"/>
-          Only spawns at night
-        {/if}
-        {#if entry.sprite}
-          <div class="flex items-center flex-col">
-            {#each matchSpriteName(entry.name) as weather}
-              <div class="flex items-center gap-2">
-                <Icon name={getWeatherName(weather).toLowerCase()}/>
-                Spawns during {getWeatherName(weather)}
-              </div>
-            {/each}
-          </div>
-        {/if}
-        {#if !entry.sprite && !entry.undead}
-          <Icon name="check"/>
-          Spawns at all times
-        {/if}
+      <h4 class="font-size-20 font-weight-bold my-3">Spawning Conditions</h4>
+      <div class="card flex justify-content-center py-10 px-0 m-0">
+        <div class="flex align-items-center">
+          {#if entry.undead}
+            <Icon name="moon" extraClasses="mr-5" />
+            Only spawns at night
+          {/if}
+          {#if entry.sprite}
+            <div class="flex align-items-center flex-col">
+              {#each matchSpriteName(entry.name) as weather}
+                <div class="flex align-items-center">
+                  <Icon
+                    name={getWeatherName(weather).toLowerCase()}
+                    extraClasses="mr-5"
+                  />
+                  Spawns during {getWeatherName(weather)}
+                </div>
+              {/each}
+            </div>
+          {/if}
+          {#if !entry.sprite && !entry.undead}
+            <Icon name="check" extraClasses="mr-5" />
+            Spawns at all times
+          {/if}
+        </div>
       </div>
 
-      <h4 class="font-bold mt-4">Mutation/Adaption Conditions</h4>
+      <h4 class="font-size-20 font-weight-bold mt-10 mb-5">
+        Mutation/Adaption Conditions
+      </h4>
       {#if entry.change}
         {#if !entry.undead}
-          <div class="flex mt-2 border border-amber-500 justify-between items-center">
+          <h5 class="font-size-18">Day</h5>
+          <div class="card p-0 flex m-0">
             {#each getZoneWeatherTypes(entry.area) as weather}
-              <div class="py-2 grow text-center px-1 lg:px-3 h-full"
-                   class:bg-green-300={doesChangeDuring(weather, "day")}>
-                <div class="flex justify-center">
-                  <Icon name={getWeatherName(weather).toLowerCase()}/>
+              <div
+                class={clsx("py-5 flex-grow-1 text-center", {
+                  "bg-success text-dark": doesChangeDuring(weather, "day"),
+                })}
+              >
+                <div class="flex justify-content-center">
+                  <Icon name={getWeatherName(weather).toLowerCase()} />
                 </div>
                 {getWeatherName(weather)}
               </div>
             {/each}
           </div>
         {/if}
-        <div class="flex mt-2 border border-blue-500 justify-between items-center">
+        <h5 class="font-size-18 mt-10">Night</h5>
+        <div class="card p-0 flex m-0">
           {#each getZoneWeatherTypes(entry.area) as weather}
-            <div class="py-2 grow text-center px-1 lg:px-3 h-full"
-                 class:bg-green-300={doesChangeDuring(weather, "night")}>
-              <div class="flex justify-center">
-                <Icon name={getWeatherName(weather).toLowerCase()}/>
+            <div
+              class={clsx("py-5 flex-grow-1 text-center", {
+                "bg-success text-dark": doesChangeDuring(weather, "night"),
+              })}
+            >
+              <div class="flex justify-content-center">
+                <Icon name={getWeatherName(weather).toLowerCase()} />
               </div>
               {getWeatherName(weather)}
             </div>
           {/each}
         </div>
       {:else}
-        <div class="text-gray-700 italic">This monster does not change.</div>
+        <div class="text-muted">This monster does not change.</div>
       {/if}
 
-      <h4 class="font-bold mt-4">Permalink</h4>
-      <code class="bg-gray-200 px-2 py-1">{window.location}</code>
+      <h4 class="font-weight-bold font-size-20 mt-10">Permalink</h4>
+      <code class="bg-gray monospace">{window.location}</code>
     </div>
-    <div>
-      <h4 class="font-bold mt-3 lg:mt-0">Element:
-        <Element name={entry.element}/>
+    <div class="col-12 col-md-2">
+      <h4 class="font-weight-bold flex align-items-center">
+        <div class="mr-5">Element:</div>
+        <Element name={entry.element} />
       </h4>
-      <p class="mt-2">
-        Offensive magia:
-        <Element name={findOffensiveElement(entry.element)}/>
-      </p>
-      <p class="mt-2">
-        Defensive magia:
-        <Element name={entry.element}/>
-      </p>
-
-      <h4 class="font-bold mt-4">Accuracy</h4>
-      <div class="rounded-2xl px-3 py-1 mt-1 font-bold text-center bg-black text-white">
-        {#if entry.accuracy === "2"}Very Sure{/if}
-        {#if entry.accuracy === "1"}Mostly Sure{/if}
-        {#if entry.accuracy === "0"}Unsure{/if}
+      <div class="flex align-items-center mt-5">
+        <div class="mr-5">Offensive magia:</div>
+        <Element name={findOffensiveElement(entry.element)} />
       </div>
-
-      <p class="text-sm mt-2">
-        {#if entry.accuracy === "2"}
-          This monster's details have been thoroughly reviewed and confirmed.
-        {/if}
-        {#if entry.accuracy === "1"}
-          Some details have been confirmed, but there may be discrepancies between the catalogued state and how it
-          behaves in the game. Corrections and further review may be required.
-        {/if}
-        {#if entry.accuracy === "0"}
-          Large parts of the information about this monster are missing. Any help is appreciated.
-        {/if}
-      </p>
+      <div class="mt-5 flex align-items-center">
+        <div class="mr-5">Defensive magia:</div>
+        <Element name={entry.element} />
+      </div>
     </div>
   </div>
 {/if}

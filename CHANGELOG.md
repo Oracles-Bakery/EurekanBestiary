@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 The site always runs on the latest released version.
 
+## Unreleased
+
+- Migrate the site to use [Halfmoon](https://gethalfmoon.com).
+
 ## [2.0.1] - 2022-01-17
 
 ## Fixed
