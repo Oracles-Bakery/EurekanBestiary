@@ -73,7 +73,7 @@
         <Entry {meta} />
       </Route>
     </div>
-    <footer class="mt-10">
+    <footer class="my-15">
       <div class="container text-muted">
         <div class="mt-2">
           Created by Raiah Belse (Zodiark).<br />

@@ -15,6 +15,7 @@
   import relativeTime from "dayjs/plugin/relativeTime";
   import Icon from "./components/Icon.svelte";
   import Element from "./components/Element.svelte";
+  import Map from "./components/Map.svelte";
   import utc from "dayjs/plugin/utc";
   import clsx from "clsx";
   import Fuse from "fuse.js";
@@ -267,6 +268,21 @@
                 </div>
                 <div class="flex items-center">
                   <div class="mr-2">{match.name}</div>
+                  {#if match.pos && match.pos.length > 0}
+                    <div class="dropdown dropright toggle-on-hover">
+                      <div
+                        data-toggle="dropdown"
+                        id={`${match.id}-map`}
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        <Icon name="map" extraClasses="h-5" />
+                      </div>
+                      <div class="dropdown-menu" style="width: 200px;">
+                        <Map entry={match} />
+                      </div>
+                    </div>
+                  {/if}
                 </div>
               </h1>
               <div class="d-flex">

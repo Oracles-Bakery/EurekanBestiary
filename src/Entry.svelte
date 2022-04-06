@@ -1,6 +1,7 @@
 <script>
   import Element from "./components/Element.svelte";
   import Icon from "./components/Icon.svelte";
+  import Map from "./components/Map.svelte";
   import { revert } from "url-slug";
   import clsx from "clsx";
   import { getWeatherName, getZoneWeatherTypes, matchSpriteName } from "./ew";
@@ -41,7 +42,7 @@
 
   <div class="row">
     <div class="col-12 col-md-2">
-      <i>Placeholder for an image.</i>
+      <Map {entry} />
     </div>
     <div class="col-12 col-md-8 px-15">
       <h1 class="font-size-34 font-weight-bolder">{entry.name}</h1>
