@@ -12,6 +12,7 @@ The site always runs on the latest released version.
 ## Added
 
 - Most Ovni phases (except for when it spawns) now auto-transition once the timer is up.
+- Added a reset button to Ovni timer.
 
 ## Changed
 

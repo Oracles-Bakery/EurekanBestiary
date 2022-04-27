@@ -102,6 +102,11 @@
       logState(newState, logText);
     }, time * 60 * 1000);
   }
+
+  function reset() {
+    log = [];
+    cur = states.ASLEEP;
+  }
 </script>
 
 <div class="row mt-10">
@@ -232,6 +237,11 @@
         {/each}
       </ul>
     {/if}
+
+    <div class="mt-20">
+      New instance? The timing is off?
+      <button class="btn btn-sm" on:click={() => reset()}>Reset timer</button>
+    </div>
   </div>
   <div class="col mt-5">
     {#if cur === states.ASLEEP}
