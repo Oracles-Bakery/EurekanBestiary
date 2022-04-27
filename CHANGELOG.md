@@ -7,7 +7,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 The site always runs on the latest released version.
 
-## Unreleased
+## [2.4.0] - 2022-04-27
 
 ## Added
 
