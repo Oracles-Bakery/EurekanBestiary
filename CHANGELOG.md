@@ -7,6 +7,12 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 The site always runs on the latest released version.
 
+## Unreleased
+
+## Changed
+
+- Ovni timer units now use MM:SS instead of relative time.
+
 ## [2.3.0] - 2022-04-27
 
 ## Added

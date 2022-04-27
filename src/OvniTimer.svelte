@@ -68,6 +68,15 @@
     cur = newState;
     isIndeterminate = true;
   }
+
+  function minDiff(minutes, time) {
+    const plusTime = log[0][1].add(minutes, "minutes");
+    const secs = plusTime.diff(day(time), "s");
+    const mins = Math.floor(secs / 60);
+    return `${String(mins).padStart(2, "0")}:${String(
+      secs - mins * 60
+    ).padStart(2, "0")}`;
+  }
 </script>
 
 <div class="row mt-10">
@@ -136,15 +145,13 @@
     {/if}
     {#if cur === states.COOLDOWN}
       <div class="font-size-34">
-        The next Ovni will spawn
-        <strong>{log[0][1].add(20, "minutes").from(day(curTime))}</strong>.
+        The next Ovni will spawn in
+        <strong>{minDiff(20, curTime)}</strong>.
       </div>
     {/if}
     {#if cur === states.KILLED}
       <div class="font-size-34">
-        Blue portals will spawn <strong
-          >{log[0][1].add(3, "minutes").from(day(curTime))}</strong
-        >.
+        Blue portals will spawn in <strong>{minDiff(3, curTime)}</strong>.
       </div>
 
       <p>
@@ -161,9 +168,7 @@
     {/if}
     {#if cur === states.BLUE_SPAWNED}
       <div class="font-size-34">
-        Red portals will spawn <strong
-          >{log[0][1].add(3, "minutes").from(day(curTime))}</strong
-        >.
+        Red portals will spawn in <strong>{minDiff(3, curTime)}</strong>.
       </div>
 
       <p>
@@ -178,9 +183,7 @@
     {/if}
     {#if cur === states.RED_SPAWNED}
       <div class="font-size-34">
-        Red portals will be up for <strong
-          >{log[0][1].add(4, "minutes").from(day(curTime), true)}</strong
-        >.
+        Red portals will be up for <strong>{minDiff(4, curTime)}</strong>.
       </div>
 
       <p>After this time, the Ovni FATE buff will expire.</p>
