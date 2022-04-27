@@ -5,6 +5,7 @@
   import { time, weather } from "./stores.js";
   import Tracker from "./Tracker.svelte";
   import Forecast from "./Forecast.svelte";
+  import OvniTimer from "./OvniTimer.svelte";
   import ZoneWeather from "./components/ZoneWeather.svelte";
   import day from "dayjs";
   import relativeTime from "dayjs/plugin/relativeTime";
@@ -28,13 +29,16 @@
       <strong
         class="px-10 py-5 d-none d-md-inline rounded bg-primary text-white"
       >
-        {ezTime} ST
+        {ezTime} ET
       </strong>
       <a href="/" use:active exact class="nav-item text-decoration-none">
         <a href="/" class="nav-link">Bestiary</a>
       </a>
       <a href="/forecast" use:active class="nav-item text-decoration-none">
         <a href="/forecast" class="nav-link">Forecast</a>
+      </a>
+      <a href="/ovnitimer" use:active class="nav-item text-decoration-none">
+        <a href="/ovnitimer" class="nav-link">Ovni Timer</a>
       </a>
     </div>
     <div class="navbar-content ml-auto">
@@ -72,13 +76,16 @@
       <Route path="/:zone/:slug" let:meta>
         <Entry {meta} />
       </Route>
+      <Route path="/ovnitimer">
+        <OvniTimer />
+      </Route>
     </div>
     <footer class="my-15">
       <div class="container text-muted">
         <div class="mt-2">
           Created by Raiah Belse (Zodiark).<br />
           <a
-            href="https://codeberg.org/fernehalwes/eurekan-bestiary"
+            href="https://src.orran.net/eurekan-bestiary"
             class="underline text-blue-600"
           >
             Website Source

@@ -7,6 +7,12 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 The site always runs on the latest released version.
 
+## [2.3.0] - 2022-04-27
+
+## Added
+
+- Added an Ovni timer page.
+
 ## [2.2.0] - 2022-04-05
 
 ## Added
