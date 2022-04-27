@@ -7,16 +7,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 The site always runs on the latest released version.
 
-## Unreleased
-
-## Added
-
-- Added a map display so you can see where enemies spawn.
-
 ## [2.2.0] - 2022-04-05
 
 ## Added
 
+- Added a map display so you can see where enemies spawn.
 - Added a search bar to the tracker page to filter down results even further.
 
 ## [2.1.1] - 2022-04-05
