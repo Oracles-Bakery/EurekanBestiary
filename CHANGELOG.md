@@ -9,6 +9,10 @@ The site always runs on the latest released version.
 
 ## Unreleased
 
+## Added
+
+- Most Ovni phases (except for when it spawns) now auto-transition once the timer is up.
+
 ## Changed
 
 - Ovni timer units now use MM:SS instead of relative time.

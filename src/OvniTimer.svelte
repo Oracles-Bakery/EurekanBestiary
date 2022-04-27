@@ -59,6 +59,7 @@
     log = log;
     cur = newState;
     isIndeterminate = false;
+    switchIfNeeded(newState);
   }
 
   function logIndeterminate(newState, logText) {
@@ -67,6 +68,7 @@
     log = log;
     cur = newState;
     isIndeterminate = true;
+    switchIfNeeded(newState);
   }
 
   function minDiff(minutes, time) {
@@ -76,6 +78,29 @@
     return `${String(mins).padStart(2, "0")}:${String(
       secs - mins * 60
     ).padStart(2, "0")}`;
+  }
+
+  function switchIfNeeded(newState) {
+    switch (newState) {
+      case states.BLUE_SPAWNED:
+        switchIn(states.RED_SPAWNED, "Red portals have spawned!", 3);
+        break;
+      case states.RED_SPAWNED:
+        switchIn(states.COOLDOWN, "The weather has returned to normal.", 4);
+        break;
+      case states.KILLED:
+        switchIn(states.BLUE_SPAWNED, "Blue portals have spawned!", 3);
+        break;
+      case states.COOLDOWN:
+        switchIn(states.SPAWNED, "Ovni has spawned!", 20);
+        break;
+    }
+  }
+
+  function switchIn(newState, logText, time) {
+    setTimeout(() => {
+      logState(newState, logText);
+    }, time * 60 * 1000);
   }
 </script>
 
