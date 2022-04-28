@@ -52,7 +52,14 @@
   let log = [];
   let isIndeterminate = false;
   let timeout = null;
+  let titleText = "Ovni Timer";
+  let plusMins = null;
   $: curTime = $time / (1440 / 70);
+  $: {
+    if (plusMins) {
+      document.title = `${titleText} ${minDiff(plusMins, curTime)}`;
+    }
+  }
 
   function logState(newState, logText) {
     const time = day();
@@ -74,6 +81,7 @@
   }
 
   function minDiff(minutes, time) {
+    plusMins = minutes;
     const plusTime = log[0][1].add(minutes, "minutes");
     const secs = plusTime.diff(day(time), "s");
     const mins = Math.floor(secs / 60);
@@ -85,16 +93,23 @@
   function switchIfNeeded(newState) {
     switch (newState) {
       case states.BLUE_SPAWNED:
+        titleText = "Red portals spawn in";
         switchIn(states.RED_SPAWNED, "Red portals have spawned!", 3);
         break;
       case states.RED_SPAWNED:
+        titleText = "Ovni weather ends in";
         switchIn(states.COOLDOWN, "The weather has returned to normal.", 4);
         break;
       case states.KILLED:
+        titleText = "Blue portals spawn in";
         switchIn(states.BLUE_SPAWNED, "Blue portals have spawned!", 3);
         break;
       case states.COOLDOWN:
+        titleText = "Ovni spawns in";
         switchIn(states.SPAWNED, "Ovni has spawned!", 20);
+        break;
+      default:
+        titleText = "Ovni Timer - Eurekan Bestiary";
         break;
     }
   }
@@ -107,6 +122,9 @@
 
   function reset() {
     log = [];
+    plusMins = null;
+    document.title = "Ovni Timer - Eurekan Bestiary";
+    isIndeterminate = false;
     cur = states.ASLEEP;
   }
 </script>

@@ -9,9 +9,14 @@ The site always runs on the latest released version.
 
 ## Unreleased
 
+## Added
+
+- Any running timers now show in the tab title.
+
 ## Fixed
 
 - Timeouts for Ovni phases are now cleared when a button to advance is pressed.
+- Resetting also resets indeterminate mode.
 
 ## [2.4.0] - 2022-04-27
 
