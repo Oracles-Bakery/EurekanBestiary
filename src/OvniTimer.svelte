@@ -51,6 +51,7 @@
   let cur = states.ASLEEP;
   let log = [];
   let isIndeterminate = false;
+  let timeout = null;
   $: curTime = $time / (1440 / 70);
 
   function logState(newState, logText) {
@@ -59,6 +60,7 @@
     log = log;
     cur = newState;
     isIndeterminate = false;
+    clearTimeout(timeout);
     switchIfNeeded(newState);
   }
 
@@ -98,7 +100,7 @@
   }
 
   function switchIn(newState, logText, time) {
-    setTimeout(() => {
+    timeout = setTimeout(() => {
       logState(newState, logText);
     }, time * 60 * 1000);
   }

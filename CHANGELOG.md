@@ -7,6 +7,12 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 The site always runs on the latest released version.
 
+## Unreleased
+
+## Fixed
+
+- Timeouts for Ovni phases are now cleared when a button to advance is pressed.
+
 ## [2.4.0] - 2022-04-27
 
 ## Added
