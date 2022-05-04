@@ -27,7 +27,7 @@ wss.on("connection", (ws, req) => {
   ws.on("message", (data, isBinary) => {
     if (isBinary) return;
     const json = JSON.parse(data);
-    if (!data.id || data.id.length !== 6 || !/^[a-zA-Z]+$/.test(data.id))
+    if (!json.id || json.id.length !== 6 || !/^[a-zA-Z]+$/.test(json.id))
       return;
     switch (json.message_type) {
       case "Join":
@@ -61,7 +61,6 @@ async function handle_join(msg, ws, req) {
     );
   } else {
     const new_password = customAlphabet("0123456789ABCDEF", 4)();
-    console.log(new_password);
     await client.set(`ovni:${msg.id}:pwd`, new_password);
     await client.expire(`ovni:${msg.id}:pwd`, 60 * 120); // 2 hours
     await client.del(`ovni:${msg.id}:log`);
