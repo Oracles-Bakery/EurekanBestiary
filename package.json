@@ -25,6 +25,7 @@
     "fuse.js": "~6.5.3",
     "halfmoon": "~1.1.1",
     "lodash.chunk": "~4.2.0",
+    "minimist": "~1.2.6",
     "nanoid": "~3.3.3",
     "redis": "~4.1.0",
     "svelte": "~3.44",

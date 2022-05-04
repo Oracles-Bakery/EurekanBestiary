@@ -1,16 +1,30 @@
 const { WebSocketServer, WebSocket } = require("ws");
 const { createClient } = require("redis");
 const { customAlphabet } = require("nanoid");
+const args = require("minimist")(process.argv.slice(2));
+const fs = require("fs");
+const https = require("https");
 
-const wss = new WebSocketServer({ port: "8344", clientTracking: true });
+let wss, server;
+if (args.https) {
+  if (!(args.keyFile && args.certFile)) {
+    console.log("no key and cert file found!");
+    process.exit(1);
+  }
+  server = https.createServer({
+    cert: fs.readFileSync(args.certFile),
+    key: fs.readFileSync(args.keyFile),
+  });
+  wss = new WebSocketServer({ server, clientTracking: true });
+} else {
+  wss = new WebSocketServer({ port: "8344", clientTracking: true });
+}
 const client = createClient();
 const clientMap = {};
 client.connect();
 
 wss.on("connection", (ws, req) => {
-  console.log("new connection yaaay");
   ws.on("message", (data, isBinary) => {
-    console.log("new message: %s", data);
     if (isBinary) return;
     const json = JSON.parse(data);
     switch (json.message_type) {
@@ -108,4 +122,8 @@ async function handle_update(msg, ws, req, wss) {
       }
     });
   }
+}
+
+if (args.https) {
+  server.listen(8344);
 }
