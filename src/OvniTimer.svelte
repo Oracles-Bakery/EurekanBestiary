@@ -148,6 +148,7 @@
 
   function switchIn(newState, time) {
     timeout = setTimeout(() => {
+      console.log("timeout pop");
       logState(newState);
     }, time * 60 * 1000);
   }
