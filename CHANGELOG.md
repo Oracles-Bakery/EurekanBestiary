@@ -7,6 +7,12 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 The site always runs on the latest released version.
 
+## Unreleased
+
+## Fixed
+
+- The WebSocket URL is correctly being set.
+
 ## [2.6.0] - 2022-05-04
 
 ## Added

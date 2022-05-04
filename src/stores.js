@@ -1,3 +1,4 @@
+import.meta.hot;
 import chunk from "lodash.chunk";
 import { readable, writable } from "svelte/store";
 import day from "dayjs";
@@ -10,6 +11,8 @@ import {
 } from "./ew";
 
 const localStorage = window.localStorage;
+const wsUrl = __SNOWPACK_ENV__.SNOWPACK_PUBLIC_WS_URL || "ws://localhost:8344";
+window.e = __SNOWPACK_ENV__;
 
 export const filters = localStorageStore("eb-filters", {
   zones: ["anemos", "pagos", "pyros", "hydatos"],
@@ -64,7 +67,7 @@ export const data = readable([], (set) => {
 
 export function makeOvniStore(id, pwd = null) {
   const { subscribe, update } = writable({ conn: false, pwd, log: [] });
-  const ws = new WebSocket("ws://localhost:8344");
+  const ws = new WebSocket(wsUrl);
   ws.addEventListener("open", (evt) => {
     console.log("DEBUG: Connection opened!");
     const msg = {

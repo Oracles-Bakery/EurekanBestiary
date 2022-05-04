@@ -4,8 +4,8 @@
     "build": "snowpack build",
     "test": "echo \"This template does not include a test runner by default.\" && exit 1",
     "dev": "run-p start ob:watch",
-    "ob:run": "cargo run --manifest-path ovnibackend/Cargo.toml",
-    "ob:watch": "cargo watch -C ovnibackend/ -x run"
+    "ob:run": "node src/ovnibackend.js",
+    "ob:watch": "watchexec -rw src/ovnibackend.js 'npm run ob:run'"
   },
   "prettier": {
     "singleAttributePerLine": false
@@ -26,9 +26,11 @@
     "halfmoon": "~1.1.1",
     "lodash.chunk": "~4.2.0",
     "nanoid": "~3.3.3",
+    "redis": "~4.1.0",
     "svelte": "~3.44",
     "tailwindcss": "~3.0.9",
     "tinro": "~0.6.10",
-    "url-slug": "~3.0.2"
+    "url-slug": "~3.0.2",
+    "ws": "~8.6.0"
   }
 }
