@@ -76,8 +76,11 @@
       <Route path="/:zone/:slug" let:meta>
         <Entry {meta} />
       </Route>
-      <Route path="/ovnitimer">
-        <OvniTimer />
+      <Route path="/ovnitimer" let:meta>
+        <OvniTimer {meta} />
+      </Route>
+      <Route path="/ovnitimer/:id" let:meta>
+        <OvniTimer {meta} />
       </Route>
     </div>
     <footer class="my-15">

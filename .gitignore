@@ -6,6 +6,7 @@ csv/*
 !csv/.gitkeep
 .log
 .idea
+target/
 
 .vercel
 .DS_Store

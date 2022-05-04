@@ -1,4 +1,6 @@
+import chunk from "lodash.chunk";
 import { readable, writable } from "svelte/store";
+import day from "dayjs";
 import {
   forecast,
   ANEMOS_WEATHER,
@@ -59,6 +61,70 @@ export const data = readable([], (set) => {
 
   return function stop() {};
 });
+
+export function makeOvniStore(id, pwd = null) {
+  const { subscribe, update } = writable({ conn: false, pwd, log: [] });
+  const ws = new WebSocket("ws://localhost:8344");
+  ws.addEventListener("open", (evt) => {
+    console.log("DEBUG: Connection opened!");
+    const msg = {
+      message_type: "Join",
+      id,
+    };
+    ws.send(JSON.stringify(msg));
+    if (pwd) {
+      const msg = {
+        message_type: "Auth",
+        password: pwd,
+        id,
+      };
+      ws.send(JSON.stringify(msg));
+    }
+  });
+  ws.addEventListener("message", (evt) => {
+    const msg = JSON.parse(evt.data);
+    if (!msg.ok) return;
+    update(({ pwd, log }) => ({ conn: true, pwd, log }));
+    console.log("DEBUG: New message: ", msg);
+    if (msg.data) {
+      let chunked = chunk(msg.data, 2);
+      update(({ pwd, conn }) => ({
+        log: chunked.map((c) => [c[0], day(Number(c[1]))]),
+        pwd,
+        conn,
+      }));
+    }
+    if (msg.new_password) {
+      update(({ log, conn }) => ({ pwd: msg.new_password, log, conn }));
+    }
+  });
+  return {
+    subscribe,
+    unshift([state, timestamp], password) {
+      const msg = {
+        message_type: "Update",
+        password,
+        id,
+        update_state: state,
+        timestamp: timestamp.valueOf(),
+      };
+      ws.send(JSON.stringify(msg));
+      update(({ log, pwd, conn }) => ({
+        log: [[state, timestamp], ...log],
+        pwd,
+        conn,
+      }));
+    },
+    auth(pwd) {
+      const msg = {
+        message_type: "Auth",
+        password: pwd,
+        id,
+      };
+      ws.send(JSON.stringify(msg));
+    },
+  };
+}
 
 function localStorageStore(key, initial) {
   const item = localStorage.getItem(key);

@@ -1,8 +1,12 @@
 <script>
+  export let meta;
   import day from "dayjs";
+  import { customAlphabet } from "nanoid";
   import relativeTime from "dayjs/plugin/relativeTime";
   import updateLocale from "dayjs/plugin/updateLocale";
   import utc from "dayjs/plugin/utc";
+  import { makeOvniStore, time } from "./stores";
+  const idgen = customAlphabet("qwertyuiopasdfghjklzxcvbnm", 6);
   day.extend(updateLocale);
   day.extend(utc);
   day.extend(relativeTime, {
@@ -38,51 +42,64 @@
       yy: "%d years",
     },
   });
-  import { time } from "./stores";
 
+  let id = meta.params.id;
+  if (!id) {
+    id = idgen();
+    history.pushState(null, "", `/ovnitimer/${id}`);
+  }
+
+  const store = makeOvniStore(id, meta.query.pwd);
   const states = {
-    ASLEEP: 0,
-    SPAWNED: 1,
-    KILLED: 2,
-    BLUE_SPAWNED: 3,
-    RED_SPAWNED: 4,
-    COOLDOWN: 5,
+    ASLEEP: "Asleep",
+    SPAWNED: "Spawned",
+    KILLED: "Killed",
+    BLUE_SPAWNED: "BluePortals",
+    RED_SPAWNED: "RedPortals",
+    COOLDOWN: "Cooldown",
   };
-  let cur = states.ASLEEP;
-  let log = [];
   let isIndeterminate = false;
   let timeout = null;
+  let pwd_field = "";
   let titleText = "Ovni Timer";
-  let plusMins = null;
   $: curTime = $time / (1440 / 70);
   $: {
-    if (plusMins) {
-      document.title = `${titleText} ${minDiff(plusMins, curTime)}`;
+    if ($store.log[0]) {
+      document.title = `${titleText} ${minDiff(curTime)}`;
     }
   }
 
-  function logState(newState, logText) {
+  function logState(newState) {
     const time = day();
-    log.unshift([logText, time]);
-    log = log;
-    cur = newState;
+    store.unshift([newState, time], $store.pwd);
     isIndeterminate = false;
     clearTimeout(timeout);
     switchIfNeeded(newState);
   }
 
-  function logIndeterminate(newState, logText) {
+  function logIndeterminate(newState) {
     const time = day();
-    log.unshift([`(?) ${logText}`, time]);
-    log = log;
-    cur = newState;
+    store.unshift([newState, time], $store.pwd);
     isIndeterminate = true;
     switchIfNeeded(newState);
   }
 
-  function minDiff(minutes, time) {
-    plusMins = minutes;
-    const plusTime = log[0][1].add(minutes, "minutes");
+  function minDiff(time) {
+    let plusMins;
+    switch ($store.log[0][0]) {
+      case states.KILLED:
+      case states.BLUE_SPAWNED:
+        plusMins = 3;
+        break;
+      case states.RED_SPAWNED:
+        plusMins = 4;
+        break;
+      case states.COOLDOWN:
+        plusMins = 20;
+        break;
+    }
+
+    const plusTime = $store.log[0][1].add(plusMins, "minutes");
     const secs = plusTime.diff(day(time), "s");
     const mins = Math.floor(secs / 60);
     return `${String(mins).padStart(2, "0")}:${String(
@@ -94,19 +111,19 @@
     switch (newState) {
       case states.BLUE_SPAWNED:
         titleText = "Red portals spawn in";
-        switchIn(states.RED_SPAWNED, "Red portals have spawned!", 3);
+        switchIn(states.RED_SPAWNED, 3);
         break;
       case states.RED_SPAWNED:
         titleText = "Ovni weather ends in";
-        switchIn(states.COOLDOWN, "The weather has returned to normal.", 4);
+        switchIn(states.COOLDOWN, 4);
         break;
       case states.KILLED:
         titleText = "Blue portals spawn in";
-        switchIn(states.BLUE_SPAWNED, "Blue portals have spawned!", 3);
+        switchIn(states.BLUE_SPAWNED, 3);
         break;
       case states.COOLDOWN:
         titleText = "Ovni spawns in";
-        switchIn(states.SPAWNED, "Ovni has spawned!", 20);
+        switchIn(states.SPAWNED, 20);
         break;
       default:
         titleText = "Ovni Timer - Eurekan Bestiary";
@@ -114,22 +131,74 @@
     }
   }
 
-  function switchIn(newState, logText, time) {
+  function getStateText(state) {
+    switch (state) {
+      case states.BLUE_SPAWNED:
+        return "Blue portals spawned!";
+      case states.RED_SPAWNED:
+        return "Red portals spawned!";
+      case states.COOLDOWN:
+        return "The weather returned to normal.";
+      case states.KILLED:
+        return "Ovni has been defeated!";
+      case states.SPAWNED:
+        return "Ovni has spawned!";
+    }
+  }
+
+  function switchIn(newState, time) {
     timeout = setTimeout(() => {
-      logState(newState, logText);
+      logState(newState);
     }, time * 60 * 1000);
   }
 
-  function reset() {
-    log = [];
-    plusMins = null;
-    document.title = "Ovni Timer - Eurekan Bestiary";
-    isIndeterminate = false;
-    cur = states.ASLEEP;
+  function sendPassword() {
+    store.auth(pwd_field);
   }
 </script>
 
 <div class="row mt-10">
+  <div class="col-3 m-0 mr-20 card">
+    {#if $store.conn}
+      <div class="badge badge-pill badge-success">Connected!</div>
+
+      <p class="mt-10">
+        Your state is synchronized with anyone else who has this URL.
+      </p>
+
+      <p class="mt-10">
+        <strong>Share:</strong>
+        <input
+          type="text"
+          class="form-control"
+          readonly
+          value={`https://ovni.cool/${id}`}
+        />
+      </p>
+
+      {#if !$store.pwd}
+        <p class="mt-10">Enter the tracker password to make changes:</p>
+        <div class="input-group">
+          <input type="text" class="form-control" bind:value={pwd_field} />
+          <div class="input-group-append">
+            <button class="btn btn-secondary" on:click={() => sendPassword()}
+              >Send</button
+            >
+          </div>
+        </div>
+      {:else}
+        <div class="mt-10">
+          <strong>Password: </strong>
+          <div class="badge">{$store.pwd}</div>
+        </div>
+        <div class="font-size-12 text-muted">
+          Share this password to let other people control the tracker.
+        </div>
+      {/if}
+    {:else}
+      <div class="badge badge-pill badge-danger">Not connected!</div>
+    {/if}
+  </div>
   <div class="col">
     {#if isIndeterminate}
       <div
@@ -141,67 +210,83 @@
         Indeterminate mode
       </div>
     {/if}
-    {#if cur === states.ASLEEP}
+    {#if !$store.log[0]}
       <div class="font-size-34">Ovni is currently <strong>asleep</strong>!</div>
-      <p>
-        The tracker doesn't know when Ovni last spawned! You'll need to put it
-        in manually.
-      </p>
+      {#if $store.pwd}
+        <p>
+          The tracker doesn't know when Ovni last spawned! You'll need to put it
+          in manually.
+        </p>
 
-      <div class="mt-10">
-        What's currently happening in the instance?
-        <div class="flex justify-content-center mt-5">
-          <button
-            class="btn flex-fill mx-2"
-            on:click={() => logState(states.SPAWNED, "Ovni has spawned!")}
-          >
-            Ovni is up!
-          </button>
-          <button
-            class="btn flex-fill mx-2"
-            on:click={() =>
-              logIndeterminate(
-                states.BLUE_SPAWNED,
-                "Blue portals have spawned!"
-              )}
-          >
-            I see blue portals!
-          </button>
-          <button
-            class="btn flex-fill mx-2"
-            on:click={() =>
-              logIndeterminate(states.RED_SPAWNED, "Red portals have spawned!")}
-          >
-            I see red portals!
-          </button>
+        <div class="mt-10">
+          What's currently happening in the instance?
+          <div class="flex justify-content-center mt-5">
+            <button
+              class="btn flex-fill mx-2"
+              on:click={() => logState(states.SPAWNED, "Ovni has spawned!")}
+            >
+              Ovni is up!
+            </button>
+            <button
+              class="btn flex-fill mx-2"
+              on:click={() =>
+                logIndeterminate(
+                  states.BLUE_SPAWNED,
+                  "Blue portals have spawned!"
+                )}
+            >
+              I see blue portals!
+            </button>
+            <button
+              class="btn flex-fill mx-2"
+              on:click={() =>
+                logIndeterminate(
+                  states.RED_SPAWNED,
+                  "Red portals have spawned!"
+                )}
+            >
+              I see red portals!
+            </button>
+          </div>
+          <div class="mt-5">
+            If none of those things are true, but it's still Umbral Turbulence,
+            wait until blue portals have spawned or the weather changes back, in
+            which case you can use the following button:
+            <button
+              class="btn btn-block mt-5"
+              on:click={() =>
+                logState(
+                  states.COOLDOWN,
+                  "The weather has returned to normal."
+                )}
+            >
+              The weather has returned to normal.
+            </button>
+          </div>
         </div>
-        <div class="mt-5">
-          If none of those things are true, but it's still Umbral Turbulence,
-          wait until blue portals have spawned or the weather changes back, in
-          which case you can use the following button:
-          <button
-            class="btn btn-block mt-5"
-            on:click={() =>
-              logState(states.COOLDOWN, "The weather has returned to normal.")}
-          >
-            The weather has returned to normal.
-          </button>
-        </div>
-      </div>
+      {:else}
+        <p>
+          The tracker doesn't know when Ovni last spawned. To update this
+          tracker, please enter the password.
+        </p>
+        <p class="text-muted mt-10">
+          Do you want to <a href="/ovnitimer">open a new tracker?</a>
+        </p>
+      {/if}
     {/if}
-    {#if cur === states.SPAWNED}
+    {#if $store.log[0] && $store.log[0][0] === states.SPAWNED}
       <div class="font-size-34">Ovni is currently <strong>up</strong>!</div>
       <p>The next Ovni will spawn in at least 20 minutes.</p>
     {/if}
-    {#if cur === states.COOLDOWN}
+    {#if $store.log[0] && $store.log[0][0] === states.COOLDOWN}
       <div class="font-size-34">
         The next Ovni will spawn in
-        <strong>{minDiff(20, curTime)}</strong>.
+        <strong>{minDiff(curTime)}</strong>.
       </div>
     {/if}
-    {#if cur === states.KILLED}
+    {#if $store.log[0] && $store.log[0][0] === states.KILLED}
       <div class="font-size-34">
-        Blue portals will spawn in <strong>{minDiff(3, curTime)}</strong>.
+        Blue portals will spawn in <strong>{minDiff(curTime)}</strong>.
       </div>
 
       <p>
@@ -211,14 +296,14 @@
         and an <em>Aetheric Stabilizer</em>.
       </p>
       <p>
-        Ovni will respawn in approximately {log[0][1]
+        Ovni will respawn in approximately {$store.log[0][1]
           .add(30, "minutes")
           .from(day(curTime), true)}.
       </p>
     {/if}
-    {#if cur === states.BLUE_SPAWNED}
+    {#if $store.log[0] && $store.log[0][0] === states.BLUE_SPAWNED}
       <div class="font-size-34">
-        Red portals will spawn in <strong>{minDiff(3, curTime)}</strong>.
+        Red portals will spawn in <strong>{minDiff(curTime)}</strong>.
       </div>
 
       <p>
@@ -226,30 +311,30 @@
         <em>Ovni FATE buff</em>. You do not need a stabilizer.
       </p>
       <p>
-        Ovni will respawn in approximately {log[0][1]
+        Ovni will respawn in approximately {$store.log[0][1]
           .add(27, "minutes")
           .from(day(curTime), true)}.
       </p>
     {/if}
-    {#if cur === states.RED_SPAWNED}
+    {#if $store.log[0] && $store.log[0][0] === states.RED_SPAWNED}
       <div class="font-size-34">
-        Red portals will be up for <strong>{minDiff(4, curTime)}</strong>.
+        Red portals will be up for <strong>{minDiff(curTime)}</strong>.
       </div>
 
       <p>After this time, the Ovni FATE buff will expire.</p>
       <p>
-        Ovni will respawn in approximately {log[0][1]
+        Ovni will respawn in approximately {$store.log[0][1]
           .add(24, "minutes")
           .from(day(curTime), true)}.
       </p>
     {/if}
 
-    {#if log.length > 0}
+    {#if $store.log.length > 0}
       <h2 class="font-size-20 mt-15">Log</h2>
       <ul style="list-style: inside;">
-        {#each log as entry}
+        {#each $store.log as entry}
           <li class="m-0">
-            {entry[0]}
+            {getStateText(entry[0])}
             <span class="text-muted"
               >{day(entry[1]).utc().format("HH:mm ST")}</span
             >
@@ -257,75 +342,72 @@
         {/each}
       </ul>
     {/if}
-
-    <div class="mt-20">
-      New instance? The timing is off?
-      <button class="btn btn-sm" on:click={() => reset()}>Reset timer</button>
+  </div>
+  {#if $store.pwd}
+    <div class="col-3 mt-5 ml-10 p-10">
+      {#if !$store.log[0]}
+        <button
+          class="btn btn-success btn-block btn-lg"
+          on:click={() => logState(states.SPAWNED, "Ovni has spawned!")}
+        >
+          Ovni has spawned!
+        </button>
+      {/if}
+      {#if $store.log[0] && $store.log[0][0] === states.SPAWNED}
+        <button
+          class="btn btn-secondary btn-block btn-lg"
+          on:click={() => logState(states.KILLED, "Ovni has been defeated!")}
+        >
+          Ovni has been defeated!
+        </button>
+        <button
+          class="btn btn-block btn-lg mt-5"
+          on:click={() => logState(states.COOLDOWN, "Ovni despawned...")}
+        >
+          Ovni despawned...
+        </button>
+      {/if}
+      {#if $store.log[0] && $store.log[0][0] === states.COOLDOWN}
+        <button
+          disabled={day(curTime).isBefore($store.log[0][1].add(18, "minutes"))}
+          class="btn btn-success btn-block btn-lg"
+          on:click={() => logState(states.SPAWNED, "Ovni has spawned!")}
+        >
+          Ovni has spawned!
+        </button>
+      {/if}
+      {#if $store.log[0] && $store.log[0][0] === states.KILLED}
+        <button
+          disabled={day(curTime).isBefore($store.log[0][1].add(1, "minutes"))}
+          class="btn btn-primary btn-block btn-lg"
+          on:click={() =>
+            logState(states.BLUE_SPAWNED, "Blue portals have spawned!")}
+        >
+          Blue portals have spawned!
+        </button>
+      {/if}
+      {#if $store.log[0] && $store.log[0][0] === states.BLUE_SPAWNED}
+        <button
+          disabled={!isIndeterminate &&
+            day(curTime).isBefore($store.log[0][1].add(1, "minutes"))}
+          class="btn btn-danger btn-block btn-lg"
+          on:click={() =>
+            logState(states.RED_SPAWNED, "Red portals have spawned!")}
+        >
+          Red portals have spawned!
+        </button>
+      {/if}
+      {#if $store.log[0] && $store.log[0][0] === states.RED_SPAWNED}
+        <button
+          disabled={!isIndeterminate &&
+            day(curTime).isBefore($store.log[0][1].add(2, "minutes"))}
+          class="btn btn-success btn-block btn-lg"
+          on:click={() =>
+            logState(states.COOLDOWN, "The weather has returned to normal.")}
+        >
+          The weather has returned to normal.
+        </button>
+      {/if}
     </div>
-  </div>
-  <div class="col mt-5">
-    {#if cur === states.ASLEEP}
-      <button
-        class="btn btn-success btn-block btn-lg"
-        on:click={() => logState(states.SPAWNED, "Ovni has spawned!")}
-      >
-        Ovni has spawned!
-      </button>
-    {/if}
-    {#if cur === states.SPAWNED}
-      <button
-        class="btn btn-secondary btn-block btn-lg"
-        on:click={() => logState(states.KILLED, "Ovni has been defeated!")}
-      >
-        Ovni has been defeated!
-      </button>
-      <button
-        class="btn btn-block btn-lg mt-5"
-        on:click={() => logState(states.COOLDOWN, "Ovni despawned...")}
-      >
-        Ovni despawned...
-      </button>
-    {/if}
-    {#if cur === states.COOLDOWN}
-      <button
-        disabled={day(curTime).isBefore(log[0][1].add(18, "minutes"))}
-        class="btn btn-success btn-block btn-lg"
-        on:click={() => logState(states.SPAWNED, "Ovni has spawned!")}
-      >
-        Ovni has spawned!
-      </button>
-    {/if}
-    {#if cur === states.KILLED}
-      <button
-        disabled={day(curTime).isBefore(log[0][1].add(1, "minutes"))}
-        class="btn btn-primary btn-block btn-lg"
-        on:click={() =>
-          logState(states.BLUE_SPAWNED, "Blue portals have spawned!")}
-      >
-        Blue portals have spawned!
-      </button>
-    {/if}
-    {#if cur === states.BLUE_SPAWNED}
-      <button
-        disabled={!isIndeterminate &&
-          day(curTime).isBefore(log[0][1].add(1, "minutes"))}
-        class="btn btn-danger btn-block btn-lg"
-        on:click={() =>
-          logState(states.RED_SPAWNED, "Red portals have spawned!")}
-      >
-        Red portals have spawned!
-      </button>
-    {/if}
-    {#if cur === states.RED_SPAWNED}
-      <button
-        disabled={!isIndeterminate &&
-          day(curTime).isBefore(log[0][1].add(2, "minutes"))}
-        class="btn btn-success btn-block btn-lg"
-        on:click={() =>
-          logState(states.COOLDOWN, "The weather has returned to normal.")}
-      >
-        The weather has returned to normal.
-      </button>
-    {/if}
-  </div>
+  {/if}
 </div>
