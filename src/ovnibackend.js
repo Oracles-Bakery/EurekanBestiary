@@ -27,6 +27,8 @@ wss.on("connection", (ws, req) => {
   ws.on("message", (data, isBinary) => {
     if (isBinary) return;
     const json = JSON.parse(data);
+    if (!data.id || data.id.length !== 6 || !/^[a-zA-Z]+$/.test(data.id))
+      return;
     switch (json.message_type) {
       case "Join":
         handle_join(json, ws, req);
