@@ -7,6 +7,17 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 The site always runs on the latest released version.
 
+## [2.6.0] - 2022-05-04
+
+## Added
+
+- The ovni tracker now has a functioning backend that syncs state persistently
+  using Redis, and communicates with the frontend using WebSockets.
+- This allows people to make persistent trackers, and share them with other people.
+- Two levels of permissions to a tracker were added, each tracker has a password,
+  which allows people to advance the tracker state. By default, without the password,
+  the tracker is read-only.
+
 ## [2.5.0] - 2022-04-28
 
 ## Added
