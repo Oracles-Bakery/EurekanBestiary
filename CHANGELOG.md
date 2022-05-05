@@ -7,6 +7,12 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 The site always runs on the latest released version.
 
+## Unreleased
+
+## Fixed
+
+- Removed some unused code.
+
 ## [2.6.1] - 2022-05-05
 
 ## Fixed
