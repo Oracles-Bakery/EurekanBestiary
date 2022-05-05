@@ -9,7 +9,7 @@ The site always runs on the latest released version.
 
 ## Unreleased
 
-## Fixed
+## [2.6.2] - 2022-05-05
 
 - Removed some unused code.
 - Reworked how page titles are set.
