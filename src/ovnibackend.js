@@ -48,8 +48,9 @@ wss.on("connection", (ws, req) => {
 });
 
 async function handle_join(msg, ws, req) {
-  if (clientMap[req.socket.remoteAddress]) return;
-  clientMap[req.socket.remoteAddress] = msg.id;
+  if (!clientMap[req.socket.remoteAddress]) {
+    clientMap[req.socket.remoteAddress] = msg.id;
+  }
   const potentialPwd = await client.get(`ovni:${msg.id}:pwd`);
   if (potentialPwd) {
     const log = await client.lRange(`ovni:${msg.id}:log`, 0, -1);

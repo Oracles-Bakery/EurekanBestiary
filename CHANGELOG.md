@@ -12,6 +12,7 @@ The site always runs on the latest released version.
 ## Fixed
 
 - The WebSocket URL is correctly being set.
+- Join requests aren't being randomly dropped anymore.
 
 ## [2.6.0] - 2022-05-04
 
