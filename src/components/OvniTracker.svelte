@@ -9,14 +9,6 @@
   day.extend(utc);
   day.extend(relativeTime);
 
-  let isIndeterminate = false;
-  let timeout = null;
-  let titleText = "Ovni Timer";
-  $: {
-    if ($store.log[0]) {
-      document.title = `${titleText} ${minDiff(curTime)}`;
-    }
-  }
   const states = {
     ASLEEP: "Asleep",
     SPAWNED: "Spawned",
@@ -25,6 +17,21 @@
     RED_SPAWNED: "RedPortals",
     COOLDOWN: "Cooldown",
   };
+  let isIndeterminate = false;
+  let timeout = null;
+  $: isTimeInTitle =
+    $store.log[0] &&
+    ($store.log[0][0] === states.BLUE_SPAWNED ||
+      $store.log[0][0] === states.RED_SPAWNED ||
+      $store.log[0][0] === states.COOLDOWN ||
+      $store.log[0][0] === states.KILLED);
+  $: {
+    if ($store.log[0]) {
+      document.title = `${getTitleText($store.log[0][0])} ${
+        isTimeInTitle ? minDiff(curTime) : ""
+      }`;
+    }
+  }
 
   function logState(newState) {
     const time = day();
@@ -67,23 +74,23 @@
   function switchIfNeeded(newState) {
     switch (newState) {
       case states.BLUE_SPAWNED:
-        titleText = "Red portals spawn in";
+        isTimeInTitle = true;
         switchIn(states.RED_SPAWNED, 3);
         break;
       case states.RED_SPAWNED:
-        titleText = "Ovni weather ends in";
+        isTimeInTitle = true;
         switchIn(states.COOLDOWN, 4);
         break;
       case states.KILLED:
-        titleText = "Blue portals spawn in";
+        isTimeInTitle = true;
         switchIn(states.BLUE_SPAWNED, 3);
         break;
       case states.COOLDOWN:
-        titleText = "Ovni spawns in";
+        isTimeInTitle = true;
         switchIn(states.SPAWNED, 20);
         break;
       default:
-        titleText = "Ovni Timer - Eurekan Bestiary";
+        isTimeInTitle = false;
         break;
     }
   }
@@ -100,6 +107,23 @@
         return "Ovni has been defeated!";
       case states.SPAWNED:
         return "Ovni has spawned!";
+      default:
+        return "Ovni Timer - Eurekan Bestiary";
+    }
+  }
+
+  function getTitleText(state) {
+    switch (state) {
+      case states.BLUE_SPAWNED:
+        return "Red portals spawn in";
+      case states.RED_SPAWNED:
+        return "Ovni weather ends in";
+      case states.COOLDOWN:
+        return "Ovni spawns in";
+      case states.KILLED:
+        return "Blue portals spawn in";
+      case states.SPAWNED:
+        return "Ovni is up!";
     }
   }
 

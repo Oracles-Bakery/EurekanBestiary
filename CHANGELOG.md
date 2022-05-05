@@ -12,6 +12,7 @@ The site always runs on the latest released version.
 ## Fixed
 
 - Removed some unused code.
+- Reworked how page titles are set.
 
 ## [2.6.1] - 2022-05-05
 
