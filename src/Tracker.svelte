@@ -7,7 +7,7 @@
     filters,
     sort,
     hasSeenIntro,
-    search,
+    search
   } from "./stores";
   import isBetween from "dayjs/plugin/isBetween";
   import { convert } from "url-slug";
@@ -73,14 +73,14 @@
       .map((entry) => {
         return {
           spawns: $weather[entry.area].map((w) => isUp(entry, w)),
-          ...entry,
+          ...entry
         };
       });
     if (!$search || $search.length === 0) {
       return filtered;
     }
     const fuse = new Fuse(filtered, {
-      keys: ["name"],
+      keys: ["name"]
     });
     return fuse.search($search).map((r) => r.item);
   }
@@ -242,8 +242,10 @@
 
         <button
           class="btn block mt-5 btn-sm"
-          on:click={() => hasSeenIntro.set(true)}>Dismiss</button
+          on:click={() => hasSeenIntro.set(true)}
         >
+          Dismiss
+        </button>
       </div>
     {/if}
     <ul>
@@ -299,8 +301,8 @@
                   {#if isChanging(match)}
                     <div class="badge badge-success">
                       Stops changing {day(
-                        getNextChangeTime(match, false) / (1440 / 70)
-                      ).fromNow()}
+                      getNextChangeTime(match, false) / (1440 / 70)
+                    ).fromNow()}
                     </div>
                   {:else}
                     <div class="badge border-success">
@@ -345,15 +347,19 @@
           <button
             class="btn btn-block"
             class:btn-primary={$sort.level === "asc"}
-            on:click={setSort("level", "asc")}>Asc</button
+            on:click={setSort("level", "asc")}
           >
+            Asc
+          </button>
         </div>
         <div class="input-group-append flex-grow-1">
           <button
             class="btn btn-block"
             class:btn-primary={$sort.level === "desc"}
-            on:click={setSort("level", "desc")}>Desc</button
+            on:click={setSort("level", "desc")}
           >
+            Desc
+          </button>
         </div>
       </div>
       <div class="input-group">
@@ -364,15 +370,19 @@
           <button
             class="btn btn-block"
             class:btn-primary={$sort.name === "asc"}
-            on:click={setSort("name", "asc")}>Asc</button
+            on:click={setSort("name", "asc")}
           >
+            Asc
+          </button>
         </div>
         <div class="input-group-append flex-grow-1">
           <button
             class="btn btn-block"
             class:btn-primary={$sort.name === "desc"}
-            on:click={setSort("name", "desc")}>Desc</button
+            on:click={setSort("name", "desc")}
           >
+            Desc
+          </button>
         </div>
       </div>
       <div class="my-2">
@@ -410,9 +420,9 @@
       </button>
 
       <div class="mt-2">
-        <label for="level" class="font-size-18 font-weight-bold"
-          >Your Level</label
-        >
+        <label for="level" class="font-size-18 font-weight-bold">
+          Your Level
+        </label>
         <input
           type="number"
           min="1"

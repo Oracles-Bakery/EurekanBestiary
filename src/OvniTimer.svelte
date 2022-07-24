@@ -3,6 +3,7 @@
   import { customAlphabet } from "nanoid";
   import OvniTracker from "./components/OvniTracker.svelte";
   import { makeOvniStore, time } from "./stores";
+
   const idgen = customAlphabet("qwertyuiopasdfghjklzxcvbnm", 6);
 
   let id = meta.params.id;
@@ -45,9 +46,9 @@
         <div class="input-group">
           <input type="text" class="form-control" bind:value={pwd_field} />
           <div class="input-group-append">
-            <button class="btn btn-secondary" on:click={() => sendPassword()}
-              >Send</button
-            >
+            <button class="btn btn-secondary" on:click={() => sendPassword()}>
+              Send
+            </button>
           </div>
         </div>
       {:else}

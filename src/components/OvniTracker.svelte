@@ -5,6 +5,7 @@
   import relativeTime from "dayjs/plugin/relativeTime";
   import updateLocale from "dayjs/plugin/updateLocale";
   import utc from "dayjs/plugin/utc";
+
   day.extend(updateLocale);
   day.extend(utc);
   day.extend(relativeTime);
@@ -15,7 +16,7 @@
     KILLED: "Killed",
     BLUE_SPAWNED: "BluePortals",
     RED_SPAWNED: "RedPortals",
-    COOLDOWN: "Cooldown",
+    COOLDOWN: "Cooldown"
   };
   let isIndeterminate = false;
   let timeout = null;
@@ -225,8 +226,8 @@
     </p>
     <p>
       Ovni will respawn in approximately {$store.log[0][1]
-        .add(30, "minutes")
-        .from(day(curTime), true)}.
+      .add(30, "minutes")
+      .from(day(curTime), true)}.
     </p>
   {/if}
   {#if $store.log[0] && $store.log[0][0] === states.BLUE_SPAWNED}
@@ -240,8 +241,8 @@
     </p>
     <p>
       Ovni will respawn in approximately {$store.log[0][1]
-        .add(27, "minutes")
-        .from(day(curTime), true)}.
+      .add(27, "minutes")
+      .from(day(curTime), true)}.
     </p>
   {/if}
   {#if $store.log[0] && $store.log[0][0] === states.RED_SPAWNED}
@@ -252,8 +253,8 @@
     <p>After this time, the Ovni FATE buff will expire.</p>
     <p>
       Ovni will respawn in approximately {$store.log[0][1]
-        .add(24, "minutes")
-        .from(day(curTime), true)}.
+      .add(24, "minutes")
+      .from(day(curTime), true)}.
     </p>
   {/if}
 
@@ -264,7 +265,7 @@
         <li class="m-0">
           {getStateText(entry[0])}
           <span class="text-muted"
-            >{day(entry[1]).utc().format("HH:mm ST")}</span
+          >{day(entry[1]).utc().format("HH:mm ST")}</span
           >
         </li>
       {/each}

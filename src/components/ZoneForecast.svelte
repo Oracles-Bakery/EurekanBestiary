@@ -6,6 +6,7 @@
   import clsx from "clsx";
   import day from "dayjs";
   import relativeTime from "dayjs/plugin/relativeTime";
+
   day.extend(relativeTime);
 
   export let zone = "";
@@ -18,7 +19,7 @@
     "bg-success text-dark-dm": zone === "anemos",
     "bg-secondary text-dark-dm": zone === "pagos",
     "bg-danger text-white": zone === "pyros",
-    "bg-primary text-white": zone === "hydatos",
+    "bg-primary text-white": zone === "hydatos"
   });
 
   function recalcPercent(weather, time) {
@@ -55,17 +56,17 @@
           })}
         >
           <div class="font-size-20">
-            <span class="inline-block"
-              ><Icon name={getWeatherName(zoneWeather).toLowerCase()} /></span
-            >
+            <span class="inline-block">
+              <Icon name={getWeatherName(zoneWeather).toLowerCase()} />
+            </span>
             {getWeatherName(zoneWeather)}
           </div>
           {#if $weather[zone][0].currWeather === zoneWeather}
             Happening now!
           {:else if $weather[zone].find((f) => f.currWeather === zoneWeather)}
             Next in {day(
-              $weather[zone].find((f) => f.currWeather === zoneWeather).date
-            ).fromNow(true)}
+            $weather[zone].find((f) => f.currWeather === zoneWeather).date
+          ).fromNow(true)}
             <span class="block text-muted font-size-14">
               {day(
                 $weather[zone].find((f) => f.currWeather === zoneWeather).date

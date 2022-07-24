@@ -27,8 +27,10 @@
   {#if entry.accuracy === "1"}
     <div class="alert mb-10" role="alert">
       <h4 class="alert-heading">Note</h4>
-      Some details about this enemy have been confirmed, but there may be discrepancies
-      between the catalogued state and how it behaves in the game. Corrections and
+      Some details about this enemy have been confirmed, but there may be
+      discrepancies
+      between the catalogued state and how it behaves in the game. Corrections
+      and
       further review may be required.
     </div>
   {/if}
