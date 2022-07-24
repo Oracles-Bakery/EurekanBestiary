@@ -62,22 +62,23 @@ export const data = readable([], (set) => {
       set(data);
     });
 
-  return function stop() {};
+  return function stop() {
+  };
 });
 
 export function makeOvniStore(id, pwd = null) {
-  const { subscribe, update } = writable({ conn: false, pwd, log: [] });
+  const {subscribe, update} = writable({conn: false, pwd, log: []});
   const ws = new WebSocket(wsUrl);
-  ws.addEventListener("open", (evt) => {
+  ws.addEventListener("open", () => {
     console.log("DEBUG: Connection opened!");
     const msg = {
-      message_type: "Join",
+      message_type: "OvniJoin",
       id,
     };
     ws.send(JSON.stringify(msg));
     if (pwd) {
       const msg = {
-        message_type: "Auth",
+        message_type: "OvniAuth",
         password: pwd,
         id,
       };
@@ -87,32 +88,32 @@ export function makeOvniStore(id, pwd = null) {
   ws.addEventListener("message", (evt) => {
     const msg = JSON.parse(evt.data);
     if (!msg.ok) return;
-    update(({ pwd, log }) => ({ conn: true, pwd, log }));
+    update(({pwd, log}) => ({conn: true, pwd, log}));
     console.log("DEBUG: New message: ", msg);
     if (msg.data) {
       let chunked = chunk(msg.data, 2);
-      update(({ pwd, conn }) => ({
+      update(({pwd, conn}) => ({
         log: chunked.map((c) => [c[0], day(Number(c[1]))]),
         pwd,
         conn,
       }));
     }
     if (msg.new_password) {
-      update(({ log, conn }) => ({ pwd: msg.new_password, log, conn }));
+      update(({log, conn}) => ({pwd: msg.new_password, log, conn}));
     }
   });
   return {
     subscribe,
     unshift([state, timestamp], password) {
       const msg = {
-        message_type: "Update",
+        message_type: "OvniUpdate",
         password,
         id,
         update_state: state,
         timestamp: timestamp.valueOf(),
       };
       ws.send(JSON.stringify(msg));
-      update(({ log, pwd, conn }) => ({
+      update(({log, pwd, conn}) => ({
         log: [[state, timestamp], ...log],
         pwd,
         conn,
@@ -120,7 +121,7 @@ export function makeOvniStore(id, pwd = null) {
     },
     auth(pwd) {
       const msg = {
-        message_type: "Auth",
+        message_type: "OvniAuth",
         password: pwd,
         id,
       };
@@ -131,7 +132,7 @@ export function makeOvniStore(id, pwd = null) {
 
 function localStorageStore(key, initial) {
   const item = localStorage.getItem(key);
-  const { subscribe, set } = writable(JSON.parse(item) || initial || null);
+  const {subscribe, set} = writable(JSON.parse(item) || initial || null);
   if (!item && initial) {
     localStorage.setItem(key, JSON.stringify(initial));
   }

@@ -1,7 +1,7 @@
-import App from "./NewApp.svelte";
+import App from "./App.svelte";
 import halfmoon from "halfmoon";
 
-let app = new App({
+new App({
   target: document.body,
 });
 

@@ -1,6 +1,6 @@
-const { WebSocketServer, WebSocket } = require("ws");
-const { createClient } = require("redis");
-const { customAlphabet } = require("nanoid");
+const {WebSocketServer, WebSocket} = require("ws");
+const {createClient} = require("redis");
+const {customAlphabet} = require("nanoid");
 const args = require("minimist")(process.argv.slice(2));
 const fs = require("fs");
 const https = require("https");
@@ -15,9 +15,9 @@ if (args.https) {
     cert: fs.readFileSync(args.certFile),
     key: fs.readFileSync(args.keyFile),
   });
-  wss = new WebSocketServer({ server, clientTracking: true });
+  wss = new WebSocketServer({server, clientTracking: true});
 } else {
-  wss = new WebSocketServer({ port: "8344", clientTracking: true });
+  wss = new WebSocketServer({port: "8344", clientTracking: true});
 }
 const client = createClient();
 const clientMap = {};
@@ -30,13 +30,13 @@ wss.on("connection", (ws, req) => {
     if (!json.id || json.id.length !== 6 || !/^[a-zA-Z]+$/.test(json.id))
       return;
     switch (json.message_type) {
-      case "Join":
+      case "OvniJoin":
         handle_join(json, ws, req);
         break;
-      case "Auth":
-        handle_auth(json, ws, req);
+      case "OvniAuth":
+        handle_auth(json, ws);
         break;
-      case "Update":
+      case "OvniUpdate":
         handle_update(json, ws, req, wss);
         break;
     }
@@ -58,7 +58,7 @@ async function handle_join(msg, ws, req) {
       JSON.stringify({
         ok: true,
         data: log,
-      })
+      }),
     );
   } else {
     const new_password = customAlphabet("0123456789ABCDEF", 4)();
@@ -69,12 +69,12 @@ async function handle_join(msg, ws, req) {
       JSON.stringify({
         ok: true,
         new_password,
-      })
+      }),
     );
   }
 }
 
-async function handle_auth(msg, ws, req) {
+async function handle_auth(msg, ws) {
   const potentialPwd = await client.get(`ovni:${msg.id}:pwd`);
   if (
     potentialPwd &&
@@ -84,7 +84,7 @@ async function handle_auth(msg, ws, req) {
       JSON.stringify({
         ok: true,
         new_password: potentialPwd,
-      })
+      }),
     );
   }
 }
@@ -106,7 +106,7 @@ async function handle_update(msg, ws, req, wss) {
       JSON.stringify({
         ok: true,
         data: newData,
-      })
+      }),
     );
 
     wss.clients.forEach((client) => {
@@ -119,7 +119,7 @@ async function handle_update(msg, ws, req, wss) {
           JSON.stringify({
             ok: true,
             data: newData,
-          })
+          }),
         );
       }
     });

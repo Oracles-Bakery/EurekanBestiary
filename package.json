@@ -4,8 +4,8 @@
     "build": "snowpack build",
     "test": "echo \"This template does not include a test runner by default.\" && exit 1",
     "dev": "run-p start ob:watch",
-    "ob:run": "node src/ovnibackend.js",
-    "ob:watch": "watchexec -rw src/ovnibackend.js 'npm run ob:run'"
+    "ob:run": "node src/backend.js",
+    "ob:watch": "watchexec -rw src/backend.js 'npm run ob:run'"
   },
   "prettier": {
     "singleAttributePerLine": false

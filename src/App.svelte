@@ -2,7 +2,7 @@
   import { Route, active } from "tinro";
   import halfmoon from "halfmoon";
   import Entry from "./Entry.svelte";
-  import { time, weather } from "./stores.js";
+  import { time } from "./stores.js";
   import Tracker from "./Tracker.svelte";
   import Forecast from "./Forecast.svelte";
   import OvniTimer from "./OvniTimer.svelte";
@@ -22,7 +22,7 @@
 <div class="page-wrapper with-navbar">
   <nav class="navbar">
     <a href="/" class="navbar-brand">
-      <img src="/logoicon.png" alt="logo icon" />
+      <img src="/logoicon.png" alt="logo icon"/>
       Eurekan Bestiary
     </a>
     <div class="navbar-content">
@@ -43,13 +43,13 @@
     </div>
     <div class="navbar-content ml-auto">
       <div class="d-none d-lg-block">
-        <ZoneWeather zone="anemos" />
-        <ZoneWeather zone="pagos" extraClasses="ml-5" />
-        <ZoneWeather zone="pyros" extraClasses="ml-5" />
-        <ZoneWeather zone="hydatos" extraClasses="ml-5" />
+        <ZoneWeather zone="anemos"/>
+        <ZoneWeather zone="pagos" extraClasses="ml-5"/>
+        <ZoneWeather zone="pyros" extraClasses="ml-5"/>
+        <ZoneWeather zone="hydatos" extraClasses="ml-5"/>
       </div>
       <div class="btn ml-5" on:click={() => halfmoon.toggleDarkMode()}>
-        <Icon name="moon" extraClasses="inline-block" />
+        <Icon name="moon" extraClasses="inline-block"/>
       </div>
     </div>
   </nav>
@@ -68,25 +68,25 @@
     {/if}
     <div class="container">
       <Route path="/">
-        <Tracker />
+        <Tracker/>
       </Route>
       <Route path="/forecast">
-        <Forecast />
+        <Forecast/>
       </Route>
       <Route path="/:zone/:slug" let:meta>
-        <Entry {meta} />
+        <Entry {meta}/>
       </Route>
       <Route path="/ovnitimer" let:meta>
-        <OvniTimer {meta} />
+        <OvniTimer {meta}/>
       </Route>
       <Route path="/ovnitimer/:id" let:meta>
-        <OvniTimer {meta} />
+        <OvniTimer {meta}/>
       </Route>
     </div>
     <footer class="my-15">
       <div class="container text-muted">
         <div class="mt-2">
-          Created by Raiah Belse (Zodiark).<br />
+          Created by Raiah Belse (Zodiark).<br/>
           <a
             href="https://src.orran.net/eurekan-bestiary"
             class="underline text-blue-600"
