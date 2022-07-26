@@ -34,6 +34,8 @@
     matches = newMatches($data);
   });
 
+  document.title = "Eurekan Bestiary";
+
   function newMatches(data) {
     const filtered = data
       .filter((entry) => {

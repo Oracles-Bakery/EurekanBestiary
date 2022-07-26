@@ -1,5 +1,7 @@
 <script>
   import ZoneForecast from "./components/ZoneForecast.svelte";
+
+  document.title = "Eureka Weather Forecast";
 </script>
 
 <h1 class="font-size-24 font-weight-bold">Forecast for Eureka</h1>

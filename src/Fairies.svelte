@@ -6,6 +6,7 @@
   import { makeFairyStore } from "./stores";
 
   export let meta;
+  document.title = "Eureka Fairy Tracker";
 
   const idgen = customAlphabet("qwertyuiopasdfghjklzxcvbnm", 6);
   let pwdInUrl = false;
