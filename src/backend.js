@@ -33,6 +33,7 @@ wss.on("connection", (ws, req) => {
     const json = JSON.parse(data);
     if (!json.id || json.id.length !== 6 || !/^[a-zA-Z]+$/.test(json.id))
       return;
+    console.log("DEBUG: ", json);
     switch (json.message_type) {
       case "OvniJoin":
         handle_ovni_join(json, ws, name);
@@ -54,6 +55,9 @@ wss.on("connection", (ws, req) => {
         break;
       case "FairySuggest":
         handle_fairy_suggest(json, ws, name, wss);
+        break;
+      case "FairyDel":
+        handle_fairy_del(json, ws, name, wss);
         break;
     }
   });
@@ -112,6 +116,7 @@ async function handle_fairy_join(msg, ws, name) {
     await client.expire(`fairy:${msg.id}:pwd`, 60 * 120);
     await client.del(`fairy:${msg.id}:fairies`);
     await client.del(`fairy:${msg.id}:suggestions`);
+    await client.del(`fairy:${msg.id}:zone`);
     ws.send(
       JSON.stringify({
         ok: true,
@@ -187,11 +192,11 @@ async function handle_fairy_set(msg, ws, name, wss) {
   if (pwd && msg.password.toLowerCase() === pwd.toLowerCase()) {
     await client.hSet(
       `fairy:${msg.id}:fairies`,
-      msg.label,
-      `${msg.coords.x},${msg.coords.y}`
+      msg.marker,
+      `${msg.x},${msg.y},${Date.now()},${msg.marker}`
     );
     await reset_fairy_exp(msg.id);
-    let new_fairies = await get_fairies();
+    let new_fairies = await get_fairies(msg.id);
     ws.send(
       JSON.stringify({
         ok: true,
@@ -214,10 +219,10 @@ async function handle_fairy_suggest(msg, ws, name, wss) {
   await client.hSet(
     `fairy:${msg.id}:suggestions`,
     name,
-    `${msg.coords.x},${msg.coords.y}`
+    `${msg.x},${msg.y},${Date.now()},${msg.marker}`
   );
   await reset_fairy_exp(msg.id);
-  let new_suggestions = await get_suggestions();
+  let new_suggestions = await get_suggestions(msg.id);
   ws.send(
     JSON.stringify({
       ok: true,
@@ -233,6 +238,20 @@ async function handle_fairy_suggest(msg, ws, name, wss) {
       })
     );
   });
+}
+
+async function handle_fairy_del(msg, ws, name, wss) {
+  const pwd = await client.get(`fairy:${msg.id}:pwd`);
+  if (pwd && msg.password.toLowerCase() === pwd.toLowerCase()) {
+    await client.hDel(`fairy:${msg.id}:fairies`, msg.marker);
+    await reset_fairy_exp(msg.id);
+    let new_fairies = await get_fairies(msg.id);
+    ws.send(JSON.stringify({ ok: true, fairies: new_fairies }));
+
+    broadcast(msg.id, ws, name, wss, fairyMap, (client) => {
+      client.send(JSON.stringify({ ok: true, fairies: new_fairies }));
+    });
+  }
 }
 
 function broadcast(comparator, ws, addr, wss, map, cb) {
@@ -262,16 +281,16 @@ async function reset_fairy_exp(id) {
 async function get_fairies(id) {
   let map = await client.hGetAll(`fairy:${id}:fairies`);
   return mapValues(map, (v) => {
-    let [x, y] = v.split(",");
-    return { x, y };
+    let [x, y, ts, marker] = v.split(",");
+    return { x, y, timestamp: ts, marker };
   });
 }
 
 async function get_suggestions(id) {
   let map = await client.hGetAll(`fairy:${id}:suggestions`);
   return mapValues(map, (v) => {
-    let [x, y] = v.split(",");
-    return { x, y };
+    let [x, y, ts, marker] = v.split(",");
+    return { x, y, timestamp: ts, marker };
   });
 }
 

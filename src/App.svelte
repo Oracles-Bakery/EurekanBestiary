@@ -2,6 +2,7 @@
   import { Route, active } from "tinro";
   import halfmoon from "halfmoon";
   import Entry from "./Entry.svelte";
+  import Fairies from "./Fairies.svelte";
   import { time } from "./stores.js";
   import Tracker from "./Tracker.svelte";
   import Forecast from "./Forecast.svelte";
@@ -39,6 +40,9 @@
       </a>
       <a href="/ovnitimer" use:active class="nav-item text-decoration-none">
         <a href="/ovnitimer" class="nav-link">Ovni Timer</a>
+      </a>
+      <a href="/fairies" use:active class="nav-item text-decoration-none">
+        <a href="/fairies" class="nav-link">Fairy Tracker</a>
       </a>
     </div>
     <div class="navbar-content ml-auto">
@@ -81,6 +85,12 @@
       </Route>
       <Route path="/ovnitimer/:id" let:meta>
         <OvniTimer {meta} />
+      </Route>
+      <Route path="/fairies" let:meta>
+        <Fairies {meta} />
+      </Route>
+      <Route path="/fairies/:id" let:meta>
+        <Fairies {meta} />
       </Route>
     </div>
     <footer class="my-15">
