@@ -98,7 +98,7 @@
         <div class="mt-2">
           Created by Raiah Belse (Zodiark).<br />
           <a
-            href="https://src.orran.net/eurekan-bestiary"
+            href="https://src.orran.net/ferne/eurekan-bestiary"
             class="underline text-blue-600"
           >
             Website Source
