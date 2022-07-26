@@ -49,9 +49,9 @@
          data-toggle="tooltip"
          data-title={`x${Object.values(store.fairies)[i].x}, y${Object.values(store.fairies)[i].y}`}
     >
-      <img width={25}
-           height={25}
-           src={`/waymarks/${pos.marker}.png`}
+      <img width={30}
+           height={30}
+           src={`/waymarks/map/${pos.marker}.png`}
            alt={`${pos.marker} marker`} />
     </div>
   {/each}
@@ -60,9 +60,9 @@
          data-toggle="tooltip"
          data-title={`Suggestion: x${Object.values(store.suggestions)[i].x}, y${Object.values(store.suggestions)[i].y}`}
     >
-      <img width={25}
-           height={25}
-           src={`/waymarks/${pos.marker}.png`}
+      <img width={30}
+           height={30}
+           src={`/waymarks/map/${pos.marker}.png`}
            alt={`${pos.marker} marker`}
            style="filter: grayscale(100%);"
       />
