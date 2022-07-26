@@ -78,7 +78,7 @@
                     suggest={store.suggest}
                     acceptSuggestion={store.acceptSuggestion}
                     delSuggestion={store.delSuggestion} />
-      <div class="card">
+      <div class="card mt-20">
         {#if $store.conn}
           <div class="badge badge-pill badge-success">Connected!</div>
 

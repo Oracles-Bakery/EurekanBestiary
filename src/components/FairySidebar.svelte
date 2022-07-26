@@ -98,6 +98,12 @@
   </div>
 </div>
 
+{#if Object.keys(store.fairies).length === 0}
+  <div class="text-center text-muted mt-20">Waiting for the first marker to be
+    placed!
+  </div>
+{/if}
+
 {#each Object.values(store.fairies) as fairy}
   <div class="content my-0 d-flex p-10 rounded justify-content-between">
     <div>
