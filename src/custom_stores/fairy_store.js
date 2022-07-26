@@ -22,7 +22,7 @@ export function makeFairyStore(id, password = null) {
       id,
     };
     ws.send(JSON.stringify(msg));
-    if (!password) {
+    if (password) {
       const msg = {
         message_type: "FairyAuth",
         password,
@@ -37,9 +37,10 @@ export function makeFairyStore(id, password = null) {
     if (!msg.ok) return;
     update(({ password, fairies, suggestions, zone }) => {
       usedMarkers.set(Object.keys(msg.fairies || fairies));
+      console.log(msg.new_password);
       return {
         conn: true,
-        password: msg.new_password || password,
+        password: getCorrectPassword(msg.new_password, password),
         fairies: msg.fairies || fairies,
         suggestions: msg.suggestions || suggestions,
         zone: msg.zone || zone,
@@ -116,4 +117,14 @@ export function makeFairyStore(id, password = null) {
       ws.send(JSON.stringify(msg));
     },
   };
+}
+
+function getCorrectPassword(newPwd, oldPwd) {
+  if (newPwd === null) {
+    return null;
+  }
+  if (newPwd === undefined) {
+    return oldPwd;
+  }
+  return newPwd;
 }

@@ -165,6 +165,13 @@ async function handle_fairy_auth(msg, ws) {
         new_password: potentialPwd,
       })
     );
+  } else {
+    ws.send(
+      JSON.stringify({
+        ok: true,
+        new_password: null,
+      })
+    );
   }
 }
 

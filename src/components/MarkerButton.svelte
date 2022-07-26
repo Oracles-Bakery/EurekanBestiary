@@ -1,8 +1,6 @@
 <script>
   export let marker;
   import { currentMarker, usedMarkers } from "../stores";
-
-  console.log($usedMarkers);
 </script>
 
 <div class="btn btn-square btn-lg flex-grow-1 h-50"
