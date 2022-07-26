@@ -7,6 +7,7 @@
   export let meta;
 
   const idgen = customAlphabet("qwertyuiopasdfghjklzxcvbnm", 6);
+  let pwdInUrl = false;
 
   let id = meta?.params?.id;
   if (!id) {
@@ -85,15 +86,24 @@
             Your state is synchronized with anyone else who has this URL.
           </p>
 
-          <p class="mt-10">
+          <div class="mt-10">
             <strong>Share:</strong>
             <input
               type="text"
               class="form-control"
               readonly
-              value={`https://ovni.cool/f/${id}`}
+              value={pwdInUrl ? `https://ovni.cool/f/${id}?pwd=${$store.password}` : `https://ovni.cool/f/${id}`}
             />
-          </p>
+
+            {#if $store.password}
+              <div class="custom-checkbox mt-5">
+                <input type="checkbox"
+                       bind:checked={pwdInUrl}
+                       id="showPassword" />
+                <label for="showPassword">Copy password in URL?</label>
+              </div>
+            {/if}
+          </div>
 
           {#if !$store.password}
             <p class="mt-10">Enter the tracker password to make changes:</p>
