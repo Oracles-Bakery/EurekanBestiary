@@ -12,6 +12,7 @@ export function makeFairyStore(id, password = null) {
     password,
     fairies: {},
     suggestions: {},
+    zone: "anemos",
   });
   const ws = new WebSocket(wsUrl);
   ws.addEventListener("open", () => {
@@ -34,13 +35,14 @@ export function makeFairyStore(id, password = null) {
   ws.addEventListener("message", (evt) => {
     const msg = JSON.parse(evt.data);
     if (!msg.ok) return;
-    update(({ password, fairies, suggestions }) => {
+    update(({ password, fairies, suggestions, zone }) => {
       usedMarkers.set(Object.keys(msg.fairies || fairies));
       return {
         conn: true,
         password: msg.new_password || password,
         fairies: msg.fairies || fairies,
         suggestions: msg.suggestions || suggestions,
+        zone: msg.zone || zone,
       };
     });
     console.log("DEBUG: New message: ", msg);
@@ -100,6 +102,15 @@ export function makeFairyStore(id, password = null) {
         message_type: "FairyDelSuggestion",
         id,
         name,
+        password,
+      };
+      ws.send(JSON.stringify(msg));
+    },
+    setZone(zone, password) {
+      const msg = {
+        message_type: "FairySetZone",
+        id,
+        zone,
         password,
       };
       ws.send(JSON.stringify(msg));

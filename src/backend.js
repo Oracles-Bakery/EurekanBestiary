@@ -65,6 +65,9 @@ wss.on("connection", (ws, req) => {
       case "FairyDelSuggestion":
         handle_fairy_del_suggestion(json, ws, name, wss);
         break;
+      case "FairySetZone":
+        handle_fairy_set_zone(json, ws, name, wss);
+        break;
     }
   });
 
@@ -109,20 +112,23 @@ async function handle_fairy_join(msg, ws, name) {
   if (potentialPwd) {
     const fairies = await get_fairies(msg.id);
     const suggestions = await get_suggestions(msg.id);
+    const zone = await client.get(`fairy:${msg.id}:zone`);
     ws.send(
       JSON.stringify({
         ok: true,
         fairies,
         suggestions,
+        zone,
       })
     );
   } else {
     const new_password = customAlphabet("0123456789ABCDEF", 4)();
     await client.set(`fairy:${msg.id}:pwd`, new_password);
-    await client.expire(`fairy:${msg.id}:pwd`, 60 * 120);
+    await client.set(`fairy:${msg.id}:zone`, "anemos");
     await client.del(`fairy:${msg.id}:fairies`);
     await client.del(`fairy:${msg.id}:suggestions`);
     await client.del(`fairy:${msg.id}:zone`);
+    await reset_fairy_exp(msg.id);
     ws.send(
       JSON.stringify({
         ok: true,
@@ -320,6 +326,29 @@ async function handle_fairy_del_suggestion(msg, ws, name, wss) {
   }
 }
 
+async function handle_fairy_set_zone(msg, ws, name, wss) {
+  const pwd = await client.get(`fairy:${msg.id}:pwd`);
+  if (pwd && msg.password?.toLowerCase() === pwd.toLowerCase()) {
+    await client.set(`fairy:${msg.id}:zone`, msg.zone);
+    await reset_fairy_exp(msg.id);
+    ws.send(
+      JSON.stringify({
+        ok: true,
+        zone: msg.zone,
+      })
+    );
+
+    broadcast(msg.id, ws, name, wss, fairyMap, (client) => {
+      client.send(
+        JSON.stringify({
+          ok: true,
+          zone: msg.zone,
+        })
+      );
+    });
+  }
+}
+
 function broadcast(comparator, ws, addr, wss, map, cb) {
   wss.clients.forEach((client) => {
     if (
@@ -342,6 +371,7 @@ async function reset_fairy_exp(id) {
   await client.expire(`fairy:${id}:pwd`, 60 * 120);
   await client.expire(`fairy:${id}:fairies`, 60 * 120);
   await client.expire(`fairy:${id}:suggestions`, 60 * 120);
+  await client.expire(`fairy:${id}:zone`, 60 * 120);
 }
 
 async function get_fairies(id) {

@@ -1,5 +1,4 @@
 <script>
-  export let zone;
   export let store;
   export let set;
   export let suggest;
@@ -10,12 +9,11 @@
   let scaledSuggestions = [];
 
   function handleClick(evt) {
-    if ($currentMarker) {
-      if (store.password) {
-        set(unscale(evt.layerX), unscale(evt.layerY), $currentMarker, store.password);
-      } else {
-        suggest(unscale(evt.layerX), unscale(evt.layerY), $currentMarker);
-      }
+    if (!$currentMarker) return;
+    if (store.password) {
+      set(unscale(evt.layerX), unscale(evt.layerY), $currentMarker, store.password);
+    } else {
+      suggest(unscale(evt.layerX), unscale(evt.layerY), $currentMarker);
     }
   }
 
@@ -42,8 +40,8 @@
 
 <div bind:clientWidth={mapWidth} class="mx-20">
   <img on:click={handleClick}
-       src={`/maps/${zone}.jpeg`}
-       alt={`Map of Eureka ${zone}`} />
+       src={`/maps/${store.zone}.jpeg`}
+       alt={`Map of Eureka ${store.zone}`} />
   {#each scaledPos as pos, i}
     <div style={`position: absolute; left: ${pos.x - 15}px; top: ${pos.y - 10}px;`}
          data-toggle="tooltip"

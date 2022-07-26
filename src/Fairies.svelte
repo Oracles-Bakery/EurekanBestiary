@@ -21,9 +21,46 @@
   function sendPassword() {
     store.auth(pwd_field);
   }
+
+  const switchZone = (zone) => () => {
+    store.setZone(zone, $store.password);
+  };
 </script>
 
 <div class="container-fluid">
+  {#if $store.password}
+    <div class="row my-10">
+      <div class="col-12">
+        <div class="btn-group w-full">
+          <button
+            class="btn btn-sm"
+            class:btn-success={$store.zone === "anemos"}
+            on:click={switchZone("anemos")}
+          >Anemos
+          </button>
+          <button
+            class="btn btn-sm"
+            class:btn-secondary={$store.zone === "pagos"}
+            on:click={switchZone("pagos")}
+          >Pagos
+          </button>
+          <button
+            class="btn btn-sm"
+            class:btn-danger={$store.zone === "pyros"}
+            on:click={switchZone("pyros")}
+          >
+            Pyros
+          </button>
+          <button
+            class="btn btn-sm"
+            class:btn-primary={$store.zone === "hydatos"}
+            on:click={switchZone("hydatos")}
+          >Hydatos
+          </button>
+        </div>
+      </div>
+    </div>
+  {/if}
   <div class="row">
     <div class="col-md-8">
       <FairyMap
@@ -36,6 +73,8 @@
     <div class="col-md-4">
       <FairySidebar store={$store}
                     del={store.del}
+                    set={store.set}
+                    suggest={store.suggest}
                     acceptSuggestion={store.acceptSuggestion}
                     delSuggestion={store.delSuggestion} />
       <div class="card">
@@ -52,7 +91,7 @@
               type="text"
               class="form-control"
               readonly
-              value={`https://ovni.cool/${id}`}
+              value={`https://ovni.cool/f/${id}`}
             />
           </p>
 

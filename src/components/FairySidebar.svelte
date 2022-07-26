@@ -1,13 +1,18 @@
 <script>
   export let store;
+  export let set;
+  export let suggest;
   export let acceptSuggestion;
   export let delSuggestion;
   export let del;
+
+  let x, y;
 
   import day from "dayjs";
   import relativeTime from "dayjs/plugin/relativeTime";
   import toPairs from "lodash.topairs";
   import Icon from "./Icon.svelte";
+  import { currentMarker } from "../stores";
 
   day.extend(relativeTime);
   import MarkerButton from "./MarkerButton.svelte";
@@ -32,6 +37,17 @@
         return "D";
     }
   }
+
+  function setViaForm() {
+    if (!$currentMarker) return;
+    if (store.password) {
+      set(x, y, $currentMarker, store.password);
+    } else {
+      suggest(x, y, $currentMarker);
+    }
+    x = null;
+    y = null;
+  }
 </script>
 
 <div class="card my-0 mb-10">
@@ -54,6 +70,31 @@
     <MarkerButton marker="letterb" />
     <MarkerButton marker="letterc" />
     <MarkerButton marker="letterd" />
+  </div>
+
+  <div class="mt-10 mb-5 form-row row-eq-spacing">
+    <div class="col-6">
+      <input type="text"
+             class="form-control"
+             bind:value={x}
+             placeholder="X coordinate" />
+    </div>
+    <div class="col-6">
+      <input type="text"
+             class="form-control"
+             bind:value={y}
+             placeholder="Y coordinate" />
+    </div>
+  </div>
+  <div class="form-row mb-0 row-eq-spacing">
+    <div class="col-6">
+      <button class="btn btn-primary btn-block" on:click={setViaForm}>Add
+      </button>
+    </div>
+    <div class="col-6 align-middle text-muted font-size-12">...or click on the
+      map to place
+      the marker!
+    </div>
   </div>
 </div>
 
