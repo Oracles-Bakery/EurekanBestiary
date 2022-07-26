@@ -27,6 +27,7 @@
     "halfmoon": "~1.1.1",
     "lodash.chunk": "~4.2.0",
     "lodash.mapvalues": "~4.6.0",
+    "lodash.topairs": "~4.3.0",
     "minimist": "~1.2.6",
     "nanoid": "~3.3.3",
     "redis": "~4.1.0",

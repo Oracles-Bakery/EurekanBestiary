@@ -68,5 +68,41 @@ export function makeFairyStore(id, password = null) {
       };
       ws.send(JSON.stringify(msg));
     },
+    auth(pwd) {
+      const msg = {
+        message_type: "FairyAuth",
+        password: pwd,
+        id,
+      };
+      ws.send(JSON.stringify(msg));
+    },
+    suggest(x, y, marker) {
+      const msg = {
+        message_type: "FairySuggest",
+        id,
+        x,
+        y,
+        marker,
+      };
+      ws.send(JSON.stringify(msg));
+    },
+    acceptSuggestion(name, password) {
+      const msg = {
+        message_type: "FairyAcceptSuggestion",
+        id,
+        name,
+        password,
+      };
+      ws.send(JSON.stringify(msg));
+    },
+    delSuggestion(name, password) {
+      const msg = {
+        message_type: "FairyDelSuggestion",
+        id,
+        name,
+        password,
+      };
+      ws.send(JSON.stringify(msg));
+    },
   };
 }

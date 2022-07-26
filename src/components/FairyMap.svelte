@@ -2,14 +2,20 @@
   export let zone;
   export let store;
   export let set;
+  export let suggest;
   import { currentMarker } from "../stores";
 
   let mapWidth = 0;
   let scaledPos = [];
+  let scaledSuggestions = [];
 
   function handleClick(evt) {
     if ($currentMarker) {
-      set(unscale(evt.layerX), unscale(evt.layerY), $currentMarker, store.password);
+      if (store.password) {
+        set(unscale(evt.layerX), unscale(evt.layerY), $currentMarker, store.password);
+      } else {
+        suggest(unscale(evt.layerX), unscale(evt.layerY), $currentMarker);
+      }
     }
   }
 
@@ -18,7 +24,12 @@
       return { x: scale(Number(x)), y: scale(Number(y)), ...rest };
     });
   }
-  console.log(scaledPos);
+  $: if (store?.suggestions) {
+    scaledSuggestions = Object.values(store?.suggestions)
+      .map(({ x, y, ...rest }) => {
+        return { x: scale(Number(x)), y: scale(Number(y)), ...rest };
+      });
+  }
 
   function scale(point) {
     return (point / 42) * mapWidth;
@@ -42,6 +53,19 @@
            height={25}
            src={`/waymarks/${pos.marker}.png`}
            alt={`${pos.marker} marker`} />
+    </div>
+  {/each}
+  {#each scaledSuggestions as pos, i}
+    <div style={`position: absolute; left: ${pos.x - 15}px; top: ${pos.y - 10}px;`}
+         data-toggle="tooltip"
+         data-title={`Suggestion: x${Object.values(store.suggestions)[i].x}, y${Object.values(store.suggestions)[i].y}`}
+    >
+      <img width={25}
+           height={25}
+           src={`/waymarks/${pos.marker}.png`}
+           alt={`${pos.marker} marker`}
+           style="filter: grayscale(100%);"
+      />
     </div>
   {/each}
 </div>

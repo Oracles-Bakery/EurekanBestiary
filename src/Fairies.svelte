@@ -30,10 +30,14 @@
         zone="anemos"
         store={$store}
         set={store.set}
+        suggest={store.suggest}
       />
     </div>
     <div class="col-md-4">
-      <FairySidebar store={$store} del={store.del} />
+      <FairySidebar store={$store}
+                    del={store.del}
+                    acceptSuggestion={store.acceptSuggestion}
+                    delSuggestion={store.delSuggestion} />
       <div class="card">
         {#if $store.conn}
           <div class="badge badge-pill badge-success">Connected!</div>

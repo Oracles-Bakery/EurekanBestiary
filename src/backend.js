@@ -59,6 +59,12 @@ wss.on("connection", (ws, req) => {
       case "FairyDel":
         handle_fairy_del(json, ws, name, wss);
         break;
+      case "FairyAcceptSuggestion":
+        handle_fairy_accept_suggestion(json, ws, name, wss);
+        break;
+      case "FairyDelSuggestion":
+        handle_fairy_del_suggestion(json, ws, name, wss);
+        break;
     }
   });
 
@@ -130,7 +136,7 @@ async function handle_ovni_auth(msg, ws) {
   const potentialPwd = await client.get(`ovni:${msg.id}:pwd`);
   if (
     potentialPwd &&
-    msg.password.toLowerCase() === potentialPwd.toLowerCase()
+    msg.password?.toLowerCase() === potentialPwd.toLowerCase()
   ) {
     ws.send(
       JSON.stringify({
@@ -145,7 +151,7 @@ async function handle_fairy_auth(msg, ws) {
   const potentialPwd = await client.get(`fairy:${msg.id}:pwd`);
   if (
     potentialPwd &&
-    msg.password.toLowerCase() === potentialPwd.toLowerCase()
+    msg.password?.toLowerCase() === potentialPwd.toLowerCase()
   ) {
     ws.send(
       JSON.stringify({
@@ -189,7 +195,7 @@ async function handle_ovni_update(msg, ws, name, wss) {
 
 async function handle_fairy_set(msg, ws, name, wss) {
   const pwd = await client.get(`fairy:${msg.id}:pwd`);
-  if (pwd && msg.password.toLowerCase() === pwd.toLowerCase()) {
+  if (pwd && msg.password?.toLowerCase() === pwd.toLowerCase()) {
     await client.hSet(
       `fairy:${msg.id}:fairies`,
       msg.marker,
@@ -242,7 +248,7 @@ async function handle_fairy_suggest(msg, ws, name, wss) {
 
 async function handle_fairy_del(msg, ws, name, wss) {
   const pwd = await client.get(`fairy:${msg.id}:pwd`);
-  if (pwd && msg.password.toLowerCase() === pwd.toLowerCase()) {
+  if (pwd && msg.password?.toLowerCase() === pwd.toLowerCase()) {
     await client.hDel(`fairy:${msg.id}:fairies`, msg.marker);
     await reset_fairy_exp(msg.id);
     let new_fairies = await get_fairies(msg.id);
@@ -250,6 +256,66 @@ async function handle_fairy_del(msg, ws, name, wss) {
 
     broadcast(msg.id, ws, name, wss, fairyMap, (client) => {
       client.send(JSON.stringify({ ok: true, fairies: new_fairies }));
+    });
+  }
+}
+
+async function handle_fairy_accept_suggestion(msg, ws, name, wss) {
+  const pwd = await client.get(`fairy:${msg.id}:pwd`);
+  if (pwd && msg.password?.toLowerCase() === pwd.toLowerCase()) {
+    const suggestion = await client.hGet(
+      `fairy:${msg.id}:suggestions`,
+      msg.name
+    );
+    await client.hSet(
+      `fairy:${msg.id}:fairies`,
+      suggestion.split(",")[3],
+      suggestion
+    );
+    await client.hDel(`fairy:${msg.id}:suggestions`, msg.name);
+    await reset_fairy_exp(msg.id);
+    let new_fairies = await get_fairies(msg.id);
+    let new_suggestions = await get_suggestions(msg.id);
+    ws.send(
+      JSON.stringify({
+        ok: true,
+        fairies: new_fairies,
+        suggestions: new_suggestions,
+      })
+    );
+
+    broadcast(msg.id, ws, name, wss, fairyMap, (client) => {
+      client.send(
+        JSON.stringify({
+          ok: true,
+          fairies: new_fairies,
+          suggestions: new_suggestions,
+        })
+      );
+    });
+  }
+}
+
+async function handle_fairy_del_suggestion(msg, ws, name, wss) {
+  const pwd = await client.get(`fairy:${msg.id}:pwd`);
+  if (pwd && msg.password?.toLowerCase() === pwd.toLowerCase()) {
+    await client.hDel(`fairy:${msg.id}:suggestions`, msg.name);
+    await reset_fairy_exp(msg.id);
+    let new_suggestions = await get_suggestions(msg.id);
+    ws.send(
+      JSON.stringify({
+        ok: true,
+        suggestions: new_suggestions,
+      })
+    );
+
+    broadcast(msg.id, ws, name, wss, fairyMap, (client) => {
+      client.send(
+        JSON.stringify({
+          ok: true,
+          suggestions: new_suggestions,
+        })
+      );
     });
   }
 }
@@ -269,7 +335,7 @@ function broadcast(comparator, ws, addr, wss, map, cb) {
 function hash(str) {
   const hash = crypto.createHash("sha256");
   hash.update(str);
-  return hash.digest();
+  return hash.digest("hex");
 }
 
 async function reset_fairy_exp(id) {
