@@ -13,30 +13,10 @@
   import toPairs from "lodash.topairs";
   import Icon from "./Icon.svelte";
   import { currentMarker } from "../stores";
+  import { getMarkerName } from "../util";
 
   day.extend(relativeTime);
   import MarkerButton from "./MarkerButton.svelte";
-
-  function getMarkerName(marker) {
-    switch (marker) {
-      case "one":
-        return "1";
-      case "two":
-        return "2";
-      case "three":
-        return "3";
-      case "four":
-        return "4";
-      case "lettera":
-        return "A";
-      case "letterb":
-        return "B";
-      case "letterc":
-        return "C";
-      case "letterd":
-        return "D";
-    }
-  }
 
   function setViaForm() {
     if (!$currentMarker) return;

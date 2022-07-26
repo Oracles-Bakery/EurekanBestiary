@@ -1,5 +1,6 @@
 <script>
   import { customAlphabet } from "nanoid";
+  import FairyClippy from "./components/FairyClippy.svelte";
   import FairyMap from "./components/FairyMap.svelte";
   import FairySidebar from "./components/FairySidebar.svelte";
   import { makeFairyStore } from "./stores";
@@ -131,6 +132,7 @@
           <div class="badge badge-pill badge-danger">Not connected!</div>
         {/if}
       </div>
+      <FairyClippy store={$store} />
     </div>
   </div>
 </div>

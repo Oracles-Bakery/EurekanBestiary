@@ -34,3 +34,24 @@ export function findOffensiveElement(element) {
       return "water";
   }
 }
+
+export function getMarkerName(marker) {
+  switch (marker) {
+    case "one":
+      return "1";
+    case "two":
+      return "2";
+    case "three":
+      return "3";
+    case "four":
+      return "4";
+    case "lettera":
+      return "A";
+    case "letterb":
+      return "B";
+    case "letterc":
+      return "C";
+    case "letterd":
+      return "D";
+  }
+}
