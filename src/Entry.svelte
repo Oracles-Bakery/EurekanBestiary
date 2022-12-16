@@ -11,6 +11,10 @@
   export let meta;
   $: entry = $data.find((d) => {
     const { zone, slug } = meta.params;
+    // Eo'ghrah is the only enemy that has apostrophes in its name (thanks Square!)
+    if (slug === "eo-ghrah") {
+      return "eo'ghrah" === d.name.toLowerCase();
+    }
     return (
       d.area === zone && revert(slug).toLowerCase() === d.name.toLowerCase()
     );
@@ -27,10 +31,8 @@
   {#if entry.accuracy === "1"}
     <div class="alert mb-10" role="alert">
       <h4 class="alert-heading">Note</h4>
-      Some details about this enemy have been confirmed, but there may be
-      discrepancies
-      between the catalogued state and how it behaves in the game. Corrections
-      and
+      Some details about this enemy have been confirmed, but there may be discrepancies
+      between the catalogued state and how it behaves in the game. Corrections and
       further review may be required.
     </div>
   {/if}

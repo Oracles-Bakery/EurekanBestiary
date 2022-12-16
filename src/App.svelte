@@ -15,7 +15,7 @@
 
   day.extend(relativeTime);
 
-  const VERSION = "2.7.0";
+  const VERSION = "2.7.1";
   const isRedirected = window.location.hash === "#redirect";
   $: ezTime = formatUtc($time);
 </script>
@@ -98,7 +98,7 @@
         <div class="mt-2">
           Created by Raiah Belse (Zodiark).<br />
           <a
-            href="https://src.orran.net/ferne/eurekan-bestiary"
+            href="https://git.trinkets.moe/ferne/eurekan-bestiary"
             class="underline text-blue-600"
           >
             Website Source
