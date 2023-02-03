@@ -96,9 +96,9 @@
     <footer class="my-15">
       <div class="container text-muted">
         <div class="mt-2">
-          Created by Raiah Belse (Zodiark).<br />
+          Created by Tewa Orai (Zodiark).<br />
           <a
-            href="https://git.trinkets.moe/ferne/eurekan-bestiary"
+            href="https://codeberg.org/fernehalwes/eurekan-bestiary"
             class="underline text-blue-600"
           >
             Website Source
