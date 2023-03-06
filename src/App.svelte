@@ -38,12 +38,6 @@
       <a href="/forecast" use:active class="nav-item text-decoration-none">
         <a href="/forecast" class="nav-link">Forecast</a>
       </a>
-      <a href="/ovnitimer" use:active class="nav-item text-decoration-none">
-        <a href="/ovnitimer" class="nav-link">Ovni Timer</a>
-      </a>
-      <a href="/fairies" use:active class="nav-item text-decoration-none">
-        <a href="/fairies" class="nav-link">Fairy Tracker</a>
-      </a>
     </div>
     <div class="navbar-content ml-auto">
       <div class="d-none d-lg-block">
